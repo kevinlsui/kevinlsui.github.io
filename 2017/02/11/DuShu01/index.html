@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="kevinlsui">
+
+
+
+<meta name="description" content="Java多线程技能
+进程是操作系统结构的基础，是一次程序的执行，是一个程序及其数据在处理机上顺序执行时所发生的活动，是程序在一个数据集合上运行的过程，他是系统进行资源分配和调度的一个独立单位。
+生活中，我们可以简单的把一个运行中的exe程序理解成“进程”
+线程是在进程中独立运行的子任务，一个进程正在运行时至少会有一个线程。
+关于进程与线程的解释，可以看这篇文章
+疑问：一个jvm进程中有多个线程，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程编程核心技术——读书笔记">
+<meta property="og:url" content="http://kevinlsui.github.io/2017/02/11/DuShu01/index.html">
+<meta property="og:site_name" content="Kevinlsui Code">
+<meta property="og:description" content="Java多线程技能
+进程是操作系统结构的基础，是一次程序的执行，是一个程序及其数据在处理机上顺序执行时所发生的活动，是程序在一个数据集合上运行的过程，他是系统进行资源分配和调度的一个独立单位。
+生活中，我们可以简单的把一个运行中的exe程序理解成“进程”
+线程是在进程中独立运行的子任务，一个进程正在运行时至少会有一个线程。
+关于进程与线程的解释，可以看这篇文章
+疑问：一个jvm进程中有多个线程，">
+<meta property="og:updated_time" content="2017-05-01T02:53:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java多线程编程核心技术——读书笔记">
+<meta name="twitter:description" content="Java多线程技能
+进程是操作系统结构的基础，是一次程序的执行，是一个程序及其数据在处理机上顺序执行时所发生的活动，是程序在一个数据集合上运行的过程，他是系统进行资源分配和调度的一个独立单位。
+生活中，我们可以简单的把一个运行中的exe程序理解成“进程”
+线程是在进程中独立运行的子任务，一个进程正在运行时至少会有一个线程。
+关于进程与线程的解释，可以看这篇文章
+疑问：一个jvm进程中有多个线程，">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+
+
+    <link rel="shortcut icon" href="/apple-touch-icon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Java多线程编程核心技术——读书笔记 | Kevinlsui Code</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">kevinlsui</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">学习、总结、分享、进步</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">归档</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/book/">书籍推荐</a></li>
+                        
+                            <li><a href="/todolist/">todoList</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java高级/">java高级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk源码/">jdk源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大话数据结构/">大话数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小技巧/">小技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记/">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决/">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Java后台开发工程师</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">kevinlsui</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">kevinlsui</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">学习、总结、分享、进步</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">归档</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/book/">书籍推荐</a></li>
+                
+                    <li><a href="/todolist/">todoList</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
+</nav>
+      <div class="body-wrap"><article id="post-DuShu01" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/11/DuShu01/" class="article-date">
+      <time datetime="2017-02-11T14:02:30.000Z" itemprop="datePublished">2017-02-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      Java多线程编程核心技术——读书笔记
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/读书笔记/">读书笔记</a>
+    </div>
+        <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+    </div>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <a id="more"></a>
+<h2 id="Java多线程技能"><a href="#Java多线程技能" class="headerlink" title="Java多线程技能"></a>Java多线程技能</h2><ul>
+<li><strong>进程</strong>是操作系统结构的基础，是一次程序的执行，是一个程序及其数据在处理机上顺序执行时所发生的活动，是程序在一个数据集合上运行的过程，他是系统进行资源分配和调度的一个独立单位。</li>
+<li>生活中，我们可以简单的把一个运行中的exe程序理解成“进程”</li>
+<li><strong>线程</strong>是在进程中独立运行的子任务，一个进程正在运行时至少会有一个线程。</li>
+<li>关于进程与线程的解释，可以看<a href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html" target="_blank" rel="external">这篇文章</a></li>
+<li>疑问：一个jvm进程中有多个线程，多核的cpu，某一个时刻，某一cpu可以运行某一进程，是不是说这多个线程只能在某一个核的该jvm进程的时间片内运行？<a href="http://blog.csdn.net/maosijunzi/article/details/42527553" target="_blank" rel="external">网友解释</a></li>
+<li>Thread.currentThread().getName();当前线程名</li>
+<li>实现线程，1.继承Thread 2.实现Runnable,java单继承的原因，优先考虑实现接口</li>
+<li>public class Thread implements Runnable ; 类Thread源码中继承了Runnable接口</li>
+<li>使用多线程时，代码顺序并不是实际执行顺序，启动多个线程（start方法），cpu空闲时会随机选取一个准备好的线程运行。</li>
+<li>启动线程，必须调用start(),如果直接thread.run(),则不会开一个新的线程，直接是在main线程中运行</li>
+<li>Thread类的构造方法，Thread(Runnable target),不光可以传入Runnable接口的对象，也可以传入一个Thread类的对象，这样做是相当于将一个Thread对象中的run方法交由其他的线程进行调度。</li>
+<li>普通方法加synchronized关键字，提供是一个对象锁</li>
+<li>static方法加synchronized关键字，提供的是class锁</li>
+<li>isAlive()判断当前线程是否存活</li>
+<li>sleep(s)的作用是让当前正在执行的线程休眠s秒，不交出所获得的锁。</li>
+<li>getId()是去的线程的唯一标识</li>
+<li>停止线程。方法一：Thread.stop()方法已经被废弃，最好不用，原因是暴力停止的不安全，可能导致一些资源没有释放，带来死锁。并且，调用stop(),会产生ThreadDeath异常。方法二：Thread.interrupt()方法，推荐方法。方法三：设置退出标志，使得正常退出，也就是当run方法运行完后线程终止</li>
+<li>thread.interrupt()将某个线程终止，含义是：将这个线程的中断标志设置为true,具体去终止线程，需要在该线程中去判断这个中断标志，然后结束代码</li>
+<li>判断线程是否中断，static interrupted(),静态方法，无论调用者是谁，都返回的是<strong>当前线程</strong>的中断状态，具体表现是，在main方法中，thread.interrupted(),具体线程thread是已经调用中断的，返回false,即返回是main线程的中断状态；另外一个特点是，调用一次本方法，中断标志会复位为false</li>
+<li>isInterrupted(),不是static,调用者的中断状态，也没有擦除效果，一般使用这个方法。</li>
+<li>在线程内部，通过查看中断标志为true后，可以抛出一个异常，达到后续代码不运行的目的</li>
+<li>同上，可以使用return达到同样目的</li>
+<li>在线程sleep状态下中断，会进入catch语句，并清除中断标志，变为false</li>
+<li>线程中断后，再遇到sleep方法，会进入异常代码</li>
+<li>suspend()暂停，resume()恢复。均废弃</li>
+<li>yield(),放弃cpu资源，时间未知。</li>
+<li>setPriority()设置线程优先级，优先级具有随机性</li>
+<li>thread.setDaemon(true),将thread设置为守护线程，从而main结束时thread也结束</li>
+</ul>
+<h2 id="对象及变量的并发访问"><a href="#对象及变量的并发访问" class="headerlink" title="对象及变量的并发访问"></a>对象及变量的并发访问</h2><ul>
+<li>方法内部的变量，是线程安全的。因为每个线程调用这个方法时都会创建一份私有变量。</li>
+<li>多个线程访问同一个对象的实例变量（属性），则存在“非线程安全”问题。</li>
+<li>多个线程访问多个对象（同一个class的对象）的static(静态)变量，则存在“非线程安全”问题。</li>
+<li>多个线程，访问同一个对象的同步（synchronized）普通方法，同一时间，只有一个线程可以执行该方法，是同步的，是线程安全的</li>
+<li>多个线程，访问多个对象（同class）的同一个同步（synchronized）方法,是异步的，由于每个对象一个同步锁。即同步普通方法锁的对象。</li>
+<li>多线程环境，某一线程获取同步方法的锁（对象锁），其它线程可以访问该对象的非同步方法。</li>
+<li>多线程环境，某一线程获取某一同步方法的锁（对象锁），其它线程不能访问该对象的其它同步方法。即同一个对象，多个同步方法是用的同一个对象锁。</li>
+<li>关键字synchronized拥有锁重入的功能：当一个线程获取到该对象的锁，执行代码过程中，再次获取锁是可以的，即一个同步方法中再去调用该对象其它同步方法，是可以的。自己可以获取自己内部的锁</li>
+<li>如果关键字synchronized不具备锁重入功能，则可能造成 <strong>死锁</strong>。</li>
+<li>当存在父子类继承关系时，子类是完全可以通过“可重入锁”调用父类的同步方法，这是由于java的继承特性。</li>
+<li>当一个线程执行的代码出现异常，其所持有的锁会自动释放。</li>
+<li>synchronized同步代码块（同步语句块），相比同步方法，会灵活点</li>
+<li>synchronized(this){//coding};也是对象锁</li>
+<li>synchronized(任意对象非this){//coding}；锁的是（）中的对象，多线程竞争同一个对象，则同步。</li>
+<li>synchronized(任意对象非this){//coding}；解决了前两种，同一对象只用一个锁的问题，增加了灵活性</li>
+<li>静态同步方法（static synchronized）、synchronized(Class.class),锁的是class,与普通同步方法的对象锁不是同一个，即同一对象的静态同步方法和普通同步方法是异步的。</li>
+<li>多线程，多个对象，如果是锁的class,则是同步</li>
+<li>JVM有一个String常量池，使用synchronized(String str){}可能带来一些例外，需要注意。</li>
+<li><strong>使用jdk自带工具检查死锁情况</strong>，cmd,jps(查看进程id列表),jstack pid (查看该进程的情况)</li>
+<li>内部类，静态内部类的synchronized用法与常规的基本相同</li>
+<li>synchronized(任意对象){}，当这个对象改变了，会出现异步的可能（比如字符串对象，赋新值），但是只是改这个对象的属性，还是同步的</li>
+<li>关键字volatile，作用一：使变量在多个线程间可见；作用二：禁止指令重排。</li>
+<li>作用一解释：关键字volatile会强制从公共堆栈中取得变量的值，而不是从线程私有数据栈中取得变量的值。</li>
+<li>volatile的缺点是：不支持原子性</li>
+<li>可以使用volatile加上原子类，保证多线程安全问题</li>
+<li>原子类 AtomicInteger…</li>
+<li>关键字synchronized可以使得多线程访问同一资源具有同步性，而且它还具有将线程工作内存中的私有变量与公共内存中的变量同步的功能，也就是保证了可见性。</li>
+</ul>
+<h2 id="等待-通知机制"><a href="#等待-通知机制" class="headerlink" title="等待/通知机制"></a>等待/通知机制</h2><ul>
+<li>多线程之间可以通过共享变量，来实现通信，但是不够灵活。</li>
+<li>等待/通知机制，wait(),notify()…</li>
+<li>wait(),是object的方法，该方法用来将<strong>当前线程</strong>置入“预执行队列”，并且在调用wait的代码行处停止执行，直到接到通知或者被中断。</li>
+<li>调用wait前必须获取到该对象的对象级别锁，调用时会释放该锁，若无锁调用，会抛出异常，IllegalMonitorStateException。</li>
+<li>notify()也是object的方法，如果有多个线程等待，则由线程规划器随机挑选其中一个呈现wait的线程，对其发出notify通知，使其可以进去等待锁的状态。</li>
+<li>notify调用前，线程也必须获取该对象的对象级别的锁，否则抛出IllegalMonitorStateException。</li>
+<li>调用notify后，不能及时释放锁，必须等该线程执行完。</li>
+<li>notifyAll(),唤醒所有等待这一共享资源的线程。</li>
+<li>wait状态的线程，被中断interrupt(),会抛出异常</li>
+<li>wait(long),等待long指定的时间，如果期间没有被唤醒，则超出这个时间自动唤醒</li>
+<li>消费者和生产者问题</li>
+<li>通过管道进行线程间的通信：PipedInputStream PipedInputStream PipedReader PipedWriter</li>
+<li>join()方法</li>
+<li>ThreadLocal的使用</li>
+</ul>
+<h2 id="Lock的使用"><a href="#Lock的使用" class="headerlink" title="Lock的使用"></a>Lock的使用</h2><h2 id="定时器的使用"><a href="#定时器的使用" class="headerlink" title="定时器的使用"></a>定时器的使用</h2><h2 id="单例模式与多线程"><a href="#单例模式与多线程" class="headerlink" title="单例模式与多线程"></a>单例模式与多线程</h2><h2 id="拾遗增补"><a href="#拾遗增补" class="headerlink" title="拾遗增补"></a>拾遗增补</h2>
+      
+    </div>
+    
+  </div>
+  
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2017/02/11/DuShu01/">Java多线程编程核心技术——读书笔记</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">kevinlsui</a></p>
+        <p><span>Created:</span>2017-02-11, 22:02:30</p>
+        <p><span>Updated:</span>2017-05-01, 10:53:21</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2017/02/11/DuShu01/" title="Java多线程编程核心技术——读书笔记">http://kevinlsui.github.io/2017/02/11/DuShu01/</a>
+            <span class="copy-path" data-clipboard-text="From http://kevinlsui.github.io/2017/02/11/DuShu01/　　By kevinlsui" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/03/01/DuShu02/">
+                    Java并发编程的艺术——读书笔记
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/01/10/DahuaJS/">
+                    《大话数据结构》算法js实现
+                </a>
+            </div>
+        
+    </nav>
+  
+</article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java多线程技能"><span class="toc-number">1.</span> <span class="toc-text">Java多线程技能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象及变量的并发访问"><span class="toc-number">2.</span> <span class="toc-text">对象及变量的并发访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#等待-通知机制"><span class="toc-number">3.</span> <span class="toc-text">等待/通知机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lock的使用"><span class="toc-number">4.</span> <span class="toc-text">Lock的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定时器的使用"><span class="toc-number">5.</span> <span class="toc-text">定时器的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单例模式与多线程"><span class="toc-number">6.</span> <span class="toc-text">单例模式与多线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拾遗增补"><span class="toc-number">7.</span> <span class="toc-text">拾遗增补</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide" title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+
+    
+
+
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/03/01/DuShu02/" title="Pre: Java并发编程的艺术——读书笔记">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/01/10/DahuaJS/" title="Next: 《大话数据结构》算法js实现">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/05/29/MyTodoList/">一个实用的小工具——TodoList</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/JvmArea/">jvm——运行时数据区域</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/JS_OOP/">JS高级知识——面向对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/11/JvmGC/">jvm——垃圾回收机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/JvmTools/">jvm——调优工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/01/Bloom/">布隆过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/02/ConCAS/">concurrent包的基础：CAS</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ThreadState/">线程的状态Thread.State</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ConcurrentTools/">concurrent包下的并发工具类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/Cglib/">CGLIB动态代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/Css3Rem/">使用css3:rem,让屏幕适配变得简单起来</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/DynamicProxy/">jdk动态代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/01/">动态规划——01背包问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/AboutHandlerbarsjs/">Handlerbars.js中if-else对字符串'NULL'不起作用问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/01/DuShu02/">Java并发编程的艺术——读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/DuShu01/">Java多线程编程核心技术——读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/10/DahuaJS/">《大话数据结构》算法js实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/05/DaHuaSort/">大话数据结构_排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/24/Timu02/">两数互换</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/21/Singleton/">单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/13/SpringSetValue/">使用spring注入项目的配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/03/MyBatisStart/">Mybatis使用总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/17/MethodArgs/">一道面试题，加深了我对java参数传递的理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/04/InnerClass/">java基础知识——内部类</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/11/Enum/">java基础知识——枚举</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/FanXing/">java基础知识——泛型</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/21/Annotation/">Java基础知识——注解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/25/ListRemoveElement/">ArrayList删除元素的正确姿势</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/KMP/">字符串匹配模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/JiSuan/">逆波兰式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Timu01/">8个小球，找出其中一个次品</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/18/SqlRule/">简单解释下数据库三大范式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/11/SqlScript/">一个简单的mysql建库脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/15/DesignPattern/">设计模式学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/11/Object/">Java源码-Object.java</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/05/Regular/">正则表达式学习整理</a></li></ul>
+
+
+    <script>
+        
+    </script></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 kevinlsui
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+             post: ".article-entry a[href], .copyright a[href]", 
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>

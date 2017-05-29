@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="kevinlsui">
+
+
+
+<meta name="description" content="博客推荐
+前言网上很多文章讲线程状态的，但是多数为了好理解，进行了一定的改变，使得准确性不够。本文根据Thread类中的枚举类State为切入点，对这一知识点进行总结，通过理解这个知识点，为以后的系统故障排查，JVM调优打下坚实的基础。在阅读以下内容时，需要了解两个jdk自带的小工具，jps,jstack（后续补充一篇jdk工具的备忘）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程的状态Thread.State">
+<meta property="og:url" content="http://kevinlsui.github.io/2017/04/01/ThreadState/index.html">
+<meta property="og:site_name" content="Kevinlsui Code">
+<meta property="og:description" content="博客推荐
+前言网上很多文章讲线程状态的，但是多数为了好理解，进行了一定的改变，使得准确性不够。本文根据Thread类中的枚举类State为切入点，对这一知识点进行总结，通过理解这个知识点，为以后的系统故障排查，JVM调优打下坚实的基础。在阅读以下内容时，需要了解两个jdk自带的小工具，jps,jstack（后续补充一篇jdk工具的备忘）。">
+<meta property="og:image" content="http://kevinlsui.github.io/2017/04/01/ThreadState/threadstate.png">
+<meta property="og:updated_time" content="2017-05-01T02:53:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线程的状态Thread.State">
+<meta name="twitter:description" content="博客推荐
+前言网上很多文章讲线程状态的，但是多数为了好理解，进行了一定的改变，使得准确性不够。本文根据Thread类中的枚举类State为切入点，对这一知识点进行总结，通过理解这个知识点，为以后的系统故障排查，JVM调优打下坚实的基础。在阅读以下内容时，需要了解两个jdk自带的小工具，jps,jstack（后续补充一篇jdk工具的备忘）。">
+<meta name="twitter:image" content="http://kevinlsui.github.io/2017/04/01/ThreadState/threadstate.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+
+
+    <link rel="shortcut icon" href="/apple-touch-icon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>线程的状态Thread.State | Kevinlsui Code</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">kevinlsui</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">学习、总结、分享、进步</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">归档</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/book/">书籍推荐</a></li>
+                        
+                            <li><a href="/todolist/">todoList</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java高级/">java高级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk源码/">jdk源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大话数据结构/">大话数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小技巧/">小技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记/">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决/">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Java后台开发工程师</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">kevinlsui</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">kevinlsui</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">学习、总结、分享、进步</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">归档</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/book/">书籍推荐</a></li>
+                
+                    <li><a href="/todolist/">todoList</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
+</nav>
+      <div class="body-wrap"><article id="post-ThreadState" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/01/ThreadState/" class="article-date">
+      <time datetime="2017-04-01T12:17:30.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      线程的状态Thread.State
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/thread/">thread</a>
+    </div>
+        <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java基础/">java基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jdk源码/">jdk源码</a></li></ul>
+    </div>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="http://www.jiacheo.org/blog/338" target="_blank" rel="external">博客推荐</a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>网上很多文章讲线程状态的，但是多数为了好理解，进行了一定的改变，使得准确性不够。<br>本文根据<strong>Thread类</strong>中的<strong>枚举类State</strong>为切入点，对这一知识点进行总结，通过理解这个知识点，为以后的系统故障排查，JVM调优打下坚实的基础。<br>在阅读以下内容时，需要了解两个jdk自带的小工具，jps,jstack（<a href="">后续补充一篇jdk工具的备忘</a>）。</p>
+<a id="more"></a>
+<h2 id="5种状态"><a href="#5种状态" class="headerlink" title="5种状态"></a>5种状态</h2><ul>
+<li>State.NEW : <strong>初始状态</strong>，线程已构建，但start()还未调用</li>
+<li>State.RUNABLE : <strong>运行状态</strong>，对应于常说的<strong>就绪</strong>状态和<strong>运行</strong>状态的合集</li>
+<li>State.BLOCKED : <strong>阻塞状态</strong>，阻塞于锁（注意，阻塞于Lock锁不属于这个状态，仅仅限于synchronized锁）</li>
+<li>State.WAITING : <strong>等待状态</strong>，等待一些特定动作来打破这一状态（比如通知、中断）</li>
+<li>State.TIMED_WAITING : <strong>超时等待状态</strong>，两种情况打破该状态，1.超过指定时间；2.一些特定动作</li>
+<li>State.TERMINATED : <strong>终止状态</strong>，表示线程死亡</li>
+</ul>
+<p>注意：</p>
+<ol>
+<li>java将操作系统中的运行和就绪两个状态合并称为运行状态</li>
+<li>阻塞状态时线程阻塞在进入synchronized关键字修饰的方法或代码块时的状态</li>
+<li>java.concurrent包中的Lock接口的线程状态是等待状态（超时等待状态），因为该接口对于阻塞的实现均使用了LockSupport类中的相关方法</li>
+</ol>
+<h2 id="相关方法"><a href="#相关方法" class="headerlink" title="相关方法"></a>相关方法</h2><ul>
+<li>thread.start() : 由初始状态转为运行状态（就绪状态）</li>
+<li>thread.yield()：仍处于RUNNABLE状态，从操作系统的线程角度，仅仅交出cpu使用权，由运行状态转为就绪状态，优先级比较高的情况下，会立马再次获取cpu。</li>
+<li>Object.wait()/Object.join()/LockSupport.park():由运行状态转为等待状态</li>
+<li>thread.sleep(long)/Object.wait(long)/Object.join(long)/LockSupport.parkNanos()/LockSupport.parkUntil():由运行状态转为超时等待状态</li>
+<li>Object.notify()/Object.notifyAll()/LockSupport.unpark(thread):由等待状态（超时等待状态）转为运行状态</li>
+</ul>
+<h2 id="状态装换示意图"><a href="#状态装换示意图" class="headerlink" title="状态装换示意图"></a>状态装换示意图</h2><blockquote>
+<p>摘自《Java并发编程的艺术》</p>
+</blockquote>
+<img src="/2017/04/01/ThreadState/threadstate.png" alt="[thread状态转换]" title="[thread状态转换]">
+<h2 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h2><ul>
+<li>State.NEW : </li>
+<li>State.RUNABLE :</li>
+<li><p>State.TERMINATED :</p>
+<pre><code>public static void main(String[] args) throws InterruptedException {
+    Thread t = new Thread(){
+        @Override
+        public void run() {
+            for(int i = 0 ; i &lt; 100000 ; i++){}
+        }
+    };
+    t.setName(&quot;test&quot;);
+    System.out.println(&quot;第一处打印，线程状态：&quot; + t.getState());
+    t.start();
+    System.out.println(&quot;第二处打印，线程状态：&quot; + t.getState());
+    Thread.currentThread().sleep(2000);
+    System.out.println(&quot;第三处打印，线程状态：&quot; + t.getState());
+
+}
+//控制台
+第一处打印，线程状态：NEW
+第二处打印，线程状态：RUNNABLE
+第三处打印，线程状态：TERMINATED
+</code></pre></li>
+</ul>
+<ul>
+<li><p>State.BLOCKED :</p>
+<pre><code>Thread t1 = new Thread(){
+        @Override
+        public void run() {
+            synchronized(ThreadStateTest.class){
+                while(true){}
+            }
+        }
+    };
+    Thread t2 = new Thread(){
+        @Override
+        public void run() {
+            synchronized(ThreadStateTest.class){
+
+            }
+        }
+    };
+    t1.setName(&quot;t1&quot;);
+    t2.setName(&quot;t2&quot;);
+    t1.start();
+    t2.start();
+    Thread.currentThread().sleep(1000);
+    System.out.println(&quot;第四处打印，线程状态：&quot; + t1.getState());//第四处打印，线程状态：RUNNABLE
+    System.out.println(&quot;第五处打印，线程状态：&quot; + t2.getState());//第五处打印，线程状态：BLOCKED
+}
+</code></pre></li>
+<li><p>State.WAITING :</p>
+<pre><code>//===============WAITING===================//
+    Thread t3 = new Thread(){
+        @Override
+        public void run() {
+            synchronized(this){
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+</code></pre></li>
+</ul>
+<pre><code>};
+t3.setName(&quot;t3&quot;);
+t3.start();
+Thread.currentThread().sleep(1000);
+System.out.println(&quot;第六处打印，线程状态：&quot; + t3.getState());//第六处打印，线程状态：WAITING
+
+//===============WAITING===================//
+/*Thread t3_1 = new Thread(){
+    @Override
+    public void run() {
+        while(true){}
+    }
+
+
+};
+t3_1.setName(&quot;t3_1&quot;);
+t3_1.start();
+Thread.currentThread().sleep(1000);
+Thread.currentThread().setName(&quot;main&quot;);
+t3_1.join();*/
+//使用jps，jstack工具查看,结果如下：
+
+&quot;t3_1&quot; prio=6 tid=0x49e1f000 nid=0x242c runnable [0x4a25f000]
+java.lang.Thread.State: RUNNABLE
+at com.kevinlsui.multithread.Test2$1.run(Test2.java:25)
+
+&quot;main&quot; prio=6 tid=0x002acc00 nid=0x2408 in Object.wait() [0x01abf000]
+java.lang.Thread.State: WAITING (on object monitor)
+at java.lang.Object.wait(Native Method)
+- waiting on &lt;0x03c9b190&gt; (a com.kevinlsui.multithread.Test2$1)
+at java.lang.Thread.join(Thread.java:1281)
+- locked &lt;0x03c9b190&gt; (a com.kevinlsui.multithread.Test2$1)
+at java.lang.Thread.join(Thread.java:1355)
+at com.kevinlsui.multithread.Test2.main(Test2.java:35)
+
+//LockSupport相关，暂无研究
+</code></pre><ul>
+<li><p>State.TIMED_WAITING</p>
+<pre><code>//===============TIMED_WAITING===================//
+    Thread t4 = new Thread(){
+        @Override
+        public void run() {
+            synchronized(this){
+                try {
+                    this.wait(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                /*try {
+                    sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }*/
+            }
+        }
+</code></pre></li>
+</ul>
+<pre><code>};
+t4.setName(&quot;t4&quot;);
+t4.start();
+Thread.currentThread().sleep(1000);
+System.out.println(&quot;第七处打印，线程状态：&quot; + t4.getState());//第七处打印，线程状态：TIMED_WAITING
+
+//join(1000)测试需要使用jps,jstack查看，同上t3_1案例
+//LockSupport相关，暂无研究
+</code></pre><h2 id="State源码"><a href="#State源码" class="headerlink" title="State源码"></a>State源码</h2><pre><code>//jdk7
+ public enum State {
+    /**
+     * Thread state for a thread which has not yet started.
+     */
+    NEW,
+
+    /**
+     * Thread state for a runnable thread.  A thread in the runnable
+     * state is executing in the Java virtual machine but it may
+     * be waiting for other resources from the operating system
+     * such as processor.
+     */
+    RUNNABLE,
+
+    /**
+     * Thread state for a thread blocked waiting for a monitor lock.
+     * A thread in the blocked state is waiting for a monitor lock
+     * to enter a synchronized block/method or
+     * reenter a synchronized block/method after calling
+     * {@link Object#wait() Object.wait}.
+     */
+    BLOCKED,
+
+    /**
+     * Thread state for a waiting thread.
+     * A thread is in the waiting state due to calling one of the
+     * following methods:
+     * &lt;ul&gt;
+     *   &lt;li&gt;{@link Object#wait() Object.wait} with no timeout&lt;/li&gt;
+     *   &lt;li&gt;{@link #join() Thread.join} with no timeout&lt;/li&gt;
+     *   &lt;li&gt;{@link LockSupport#park() LockSupport.park}&lt;/li&gt;
+     * &lt;/ul&gt;
+     *
+     * &lt;p&gt;A thread in the waiting state is waiting for another thread to
+     * perform a particular action.
+     *
+     * For example, a thread that has called &lt;tt&gt;Object.wait()&lt;/tt&gt;
+     * on an object is waiting for another thread to call
+     * &lt;tt&gt;Object.notify()&lt;/tt&gt; or &lt;tt&gt;Object.notifyAll()&lt;/tt&gt; on
+     * that object. A thread that has called &lt;tt&gt;Thread.join()&lt;/tt&gt;
+     * is waiting for a specified thread to terminate.
+     */
+    WAITING,
+
+    /**
+     * Thread state for a waiting thread with a specified waiting time.
+     * A thread is in the timed waiting state due to calling one of
+     * the following methods with a specified positive waiting time:
+     * &lt;ul&gt;
+     *   &lt;li&gt;{@link #sleep Thread.sleep}&lt;/li&gt;
+     *   &lt;li&gt;{@link Object#wait(long) Object.wait} with timeout&lt;/li&gt;
+     *   &lt;li&gt;{@link #join(long) Thread.join} with timeout&lt;/li&gt;
+     *   &lt;li&gt;{@link LockSupport#parkNanos LockSupport.parkNanos}&lt;/li&gt;
+     *   &lt;li&gt;{@link LockSupport#parkUntil LockSupport.parkUntil}&lt;/li&gt;
+     * &lt;/ul&gt;
+     */
+    TIMED_WAITING,
+
+    /**
+     * Thread state for a terminated thread.
+     * The thread has completed execution.
+     */
+    TERMINATED;
+}
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2017/04/01/ThreadState/">线程的状态Thread.State</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">kevinlsui</a></p>
+        <p><span>Created:</span>2017-04-01, 20:17:30</p>
+        <p><span>Updated:</span>2017-05-01, 10:53:21</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2017/04/01/ThreadState/" title="线程的状态Thread.State">http://kevinlsui.github.io/2017/04/01/ThreadState/</a>
+            <span class="copy-path" data-clipboard-text="From http://kevinlsui.github.io/2017/04/01/ThreadState/　　By kevinlsui" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/04/02/ConCAS/">
+                    concurrent包的基础：CAS
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/04/01/ConcurrentTools/">
+                    concurrent包下的并发工具类
+                </a>
+            </div>
+        
+    </nav>
+  
+</article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5种状态"><span class="toc-number">2.</span> <span class="toc-text">5种状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关方法"><span class="toc-number">3.</span> <span class="toc-text">相关方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#状态装换示意图"><span class="toc-number">4.</span> <span class="toc-text">状态装换示意图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码演示"><span class="toc-number">5.</span> <span class="toc-text">代码演示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#State源码"><span class="toc-number">6.</span> <span class="toc-text">State源码</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide" title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+
+    
+
+
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/04/02/ConCAS/" title="Pre: concurrent包的基础：CAS">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/04/01/ConcurrentTools/" title="Next: concurrent包下的并发工具类">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/05/29/MyTodoList/">一个实用的小工具——TodoList</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/JvmArea/">jvm——运行时数据区域</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/JS_OOP/">JS高级知识——面向对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/11/JvmGC/">jvm——垃圾回收机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/JvmTools/">jvm——调优工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/01/Bloom/">布隆过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/02/ConCAS/">concurrent包的基础：CAS</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ThreadState/">线程的状态Thread.State</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ConcurrentTools/">concurrent包下的并发工具类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/Cglib/">CGLIB动态代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/Css3Rem/">使用css3:rem,让屏幕适配变得简单起来</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/DynamicProxy/">jdk动态代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/01/">动态规划——01背包问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/AboutHandlerbarsjs/">Handlerbars.js中if-else对字符串'NULL'不起作用问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/01/DuShu02/">Java并发编程的艺术——读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/DuShu01/">Java多线程编程核心技术——读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/10/DahuaJS/">《大话数据结构》算法js实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/05/DaHuaSort/">大话数据结构_排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/24/Timu02/">两数互换</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/21/Singleton/">单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/13/SpringSetValue/">使用spring注入项目的配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/03/MyBatisStart/">Mybatis使用总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/17/MethodArgs/">一道面试题，加深了我对java参数传递的理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/04/InnerClass/">java基础知识——内部类</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/11/Enum/">java基础知识——枚举</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/FanXing/">java基础知识——泛型</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/21/Annotation/">Java基础知识——注解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/25/ListRemoveElement/">ArrayList删除元素的正确姿势</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/KMP/">字符串匹配模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/JiSuan/">逆波兰式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Timu01/">8个小球，找出其中一个次品</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/18/SqlRule/">简单解释下数据库三大范式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/11/SqlScript/">一个简单的mysql建库脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/15/DesignPattern/">设计模式学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/11/Object/">Java源码-Object.java</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/05/Regular/">正则表达式学习整理</a></li></ul>
+
+
+    <script>
+        
+    </script></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 kevinlsui
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+             post: ".article-entry a[href], .copyright a[href]", 
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>

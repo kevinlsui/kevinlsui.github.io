@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="kevinlsui">
+
+
+    
+    
+
+
+<meta name="description" content="kevinlsui,java,blog,hexo,github,yelee,js,前端,学习总结,分享,技术博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kevinlsui Code">
+<meta property="og:url" content="http://kevinlsui.github.io/page/4/index.html">
+<meta property="og:site_name" content="Kevinlsui Code">
+<meta property="og:description" content="kevinlsui,java,blog,hexo,github,yelee,js,前端,学习总结,分享,技术博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kevinlsui Code">
+<meta name="twitter:description" content="kevinlsui,java,blog,hexo,github,yelee,js,前端,学习总结,分享,技术博客">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+
+
+    <link rel="shortcut icon" href="/apple-touch-icon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <style> .article { opacity: 0;} </style>
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Kevinlsui Code</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">kevinlsui</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">学习、总结、分享、进步</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">归档</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/book/">书籍推荐</a></li>
+                        
+                            <li><a href="/todolist/">todoList</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java高级/">java高级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk源码/">jdk源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大话数据结构/">大话数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小技巧/">小技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记/">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决/">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Java后台开发工程师</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">kevinlsui</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">kevinlsui</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">学习、总结、分享、进步</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">归档</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/book/">书籍推荐</a></li>
+                
+                    <li><a href="/todolist/">todoList</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
+</nav>
+      <div class="body-wrap"><article id="post-Timu01" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/21/Timu01/" class="article-date">
+      <time datetime="2016-03-21T11:17:30.000Z" itemprop="datePublished">2016-03-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/21/Timu01/">8个小球，找出其中一个次品</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <pre><code>第一次称重：8个球，分为3:3:2，分别3:3放到天平两侧
+1.平衡；则表示有问题的球在2中，进行第二次称重
+    第二次称重：2中随意取一个球，与正常的球分别放于天平两侧
+        1.1 若不平衡，则选中的2中的球有问题，根据天平，可知是偏轻，还是偏重【两次完成】
+        1.2 若平衡，则第三次称重
+            第三次称重：2中剩下的一个球，与正常球放于天平两侧，根据天平，可知是偏轻，还是偏重【三次完成】
+
+2.不平衡：则表示有问题的球在3:3中，进行第二次称重
+    第二次称重：天平较重端(命名为B)，选走2个球，将天平较轻端(命名为A)取出一个球，放于较重端，
+                此时2（A中两个）:2（B中一个+A中一个）:2（B中两个），将前两组放于天平两侧，进行第二次称重
+        2.1 若平衡，则有问题的球在第三份中，并且有问题的球是B中的，可推断有问题的球是偏重的，进行第三次称重
+            第三次称重：将第3份中的球任意取一个，和正常的球放于天平两侧
+                2.1.1 平衡，则有问题的是第三份球中未取走的那个，且偏重【三次完成】
+                2.1.2 不平衡，则有问题的是第三份球中取走的那个，且偏重【三次完成】
+
+        2.2 若不平衡，则有问题的是在2（A中两个）:2（B中一个+A中一个）中，此时，要么3个A中有一个球轻，要么B中那个球重
+            2.2.1 前端翘起，有两种可能，第一种，前两个A中球有问题，有一个较轻；第二种，B中原本的那个球有问题，较重，
+                  而由A放入B的那个球肯定是正常的，进行第三次称重
+
+                第三次称重：分别将A中的球放入天平两侧
+                    2.2.1.1 ；平衡，则B中的那个球有问题，较重【三次完成】
+                    2.2.1.2 ；不平衡，上翘那端的球有问题，较轻【三次完成】
+
+            2.2.2 后端翘起，表示有问题的球是放于B端的那个A中的球，较轻【两次完成】
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/小技巧/">小技巧</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小技巧/">小技巧</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-SqlRule" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/18/SqlRule/" class="article-date">
+      <time datetime="2016-02-18T10:17:30.000Z" itemprop="datePublished">2016-02-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/18/SqlRule/">简单解释下数据库三大范式</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>数据库三大范式，是后端人员设计表要遵守的<strong>最基本准则</strong>。（现实中，时间换空间，可能会做数据冗余，没有遵守部分准则，但是只有在理解这个三大范式基础上，才能艺高人胆大的去做这类处理，否则会把数据库弄的一团糟）<br>很多书和博客上的专业术语让人不知所云。这里用通俗的语言介绍下，可能不太准确，权当辅助理解那些专业术语。</p>
+<h2 id="第一范式"><a href="#第一范式" class="headerlink" title="第一范式"></a>第一范式</h2><blockquote>
+<p>1.确保每列的原子性<br>  2.如果一个关系模式R的所有属性都是不可分的基本数据项，则R∈1NF。</p>
+</blockquote>
+<p>简单的说，第一范式就是每一个属性（每一列）都不可再分的。</p>
+<h2 id="第二范式"><a href="#第二范式" class="headerlink" title="第二范式"></a>第二范式</h2><blockquote>
+<p>1.在第一范式的基础上，确保每列和主键相关<br>  2.若关系模式R∈1NF，并且每一个非主属性都完全函数依赖于R的码，则R∈2NF</p>
+</blockquote>
+<p>首先，要符合第一范式。<br>有的表，可能是联合主键（多个列构成一个主键），这时其他的非主键列，必须完全依赖于全部主键，不是依赖部分主键。<br>比如：一个表（学生id,课程id,课程姓名），这里联合主键（学生id，课程id），这里的‘课程姓名’就是不遵守第二范式的，因为他只是依赖部分主键（课程id）。换个角度想，一个课程有多个学生选择，就是在这个表，某一个课程的名字会出现多次，应该只用课程id,新建一个课程表，记录（课程id，课程名）</p>
+<p>如果表的主键只有一列属性，则非主键列依赖主键列即可</p>
+<h2 id="第三范式"><a href="#第三范式" class="headerlink" title="第三范式"></a>第三范式</h2><blockquote>
+<ol>
+<li>在第二范式的基础上，确保每列都和主键直接相关，而不是间接相关<br>2.关系模式R 中若不存在这样的码X、属性组Y及非主属性Z, 使得Z→Y，Y→X，成立，则称R ∈ 3NF。</li>
+</ol>
+</blockquote>
+<p>首先，满足第一范式，第二范式<br>第三范式是为了消除数据库中关键字之间的依赖关系<br>比如表（用户id[主键]、角色id、角色职责），这里角色id依赖用户id,角色职责依赖角色id,造成了传递依赖，所以不符合第三范式</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-SqlScript" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/11/SqlScript/" class="article-date">
+      <time datetime="2016-02-11T15:55:30.000Z" itemprop="datePublished">2016-02-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/11/SqlScript/">一个简单的mysql建库脚本</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <pre><code>create database springtest;
+use springtest;
+
+drop table if exists  student;
+create table student(
+    id int auto_increment primary key,
+    username varchar(100) not null comment &quot;用户名&quot;,
+    telephone varchar(11) comment &quot;电话号码&quot;,
+    myclassid int comment &quot;所属班级id&quot;
+
+)ENGINE = InnoDB auto_increment=10 charset = utf8;
+
+create table myclass(
+    id int auto_increment primary key,
+    classname varchar(100) not null,
+    headmasterid int
+
+)ENGINE = InnoDB auto_increment=0 charset = utf8;
+
+create table headmaster(
+    id int auto_increment primary key,
+    mastername varchar(100) not null,
+    telephone varchar(11)
+)ENGINE= InnoDB auto_increment=0 charset = utf8;
+
+create table course(
+    id int auto_increment primary key,
+    coursename varchar(100) not null
+
+)ENGINE = InnoDB auto_increment=0 charset = utf8;
+
+create table courseStudent(
+    courseStudentid int,
+    studentid int
+)ENGINE =  InnoDB auto_increment=0 charset = utf8;
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/sql/">sql</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-DesignPattern" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/15/DesignPattern/" class="article-date">
+      <time datetime="2015-11-15T01:17:30.000Z" itemprop="datePublished">2015-11-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/15/DesignPattern/">设计模式学习整理</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><blockquote>
+<p>设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的；设计模式使代码编写真正工程化；设计模式是软件工程的基石脉络，如同大厦的结构一样。</p>
+</blockquote>
+<p><a href="http://www.runoob.com/design-pattern/design-pattern-intro.html">更加全面的介绍！！！</a></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+      
+        <p class="article-more-link">
+          <a href="/2015/11/15/DesignPattern/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-Object" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/11/Object/" class="article-date">
+      <time datetime="2015-11-11T12:17:30.000Z" itemprop="datePublished">2015-11-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/11/Object/">Java源码-Object.java</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Object-java-jdk1-7"><a href="#Object-java-jdk1-7" class="headerlink" title="Object.java(jdk1.7)"></a>Object.java(jdk1.7)</h2><pre><code>package java.lang;
+
+/**
+ * Class {@code Object} is the root of the class hierarchy.
+ * Every class has {@code Object} as a superclass. All objects,
+ * including arrays, implement the methods of this class.
+ *
+ * @author  unascribed
+ * @see     java.lang.Class
+ * @since   JDK1.0
+ */
+public class Object {
+
+    //native修饰，本地方法，作用是注册该类中的本地方法
+    private static native void registerNatives();
+    static {
+        registerNatives();
+    }
+
+    /**
+     * 本地方法，返回一个对象的运行时类
+     */
+    public final native Class&lt;?&gt; getClass();
+
+    /**
+     *这也是一个本地方法，返回值是对象的一个哈希值。 
+     *在编写实现hashCode()方法时，我们需要遵守一些约定：
+     * 在应用程序执行期间，如果一个对象用于equals()方法的属性没有被修改的话，那么要保证对该对象多次返回的hashcode值要相等。
+    * 如果2个对象通过equals()方法判断的结果为true，那么要保证二者的hashcode值相等。
+    * 如果2个对象通过equals()方法判断的结果为false，那么对二者hashcode值是否相等并没有明确要求。如果不相**等，那么能够提升散列表的性能。
+     */
+    public native int hashCode();
+
+    /**
+     * 对象比较，注意String.java中的重写
+     */
+    public boolean equals(Object obj) {
+        return (this == obj);
+    }
+
+    /**
+     * 对象克隆（浅拷贝），子类需要深克隆，需要实现克隆接口，重写此方法（改为public）
+     */
+    protected native Object clone() throws CloneNotSupportedException;
+
+    /**
+    * tostring方法，经常需要重写
+     */
+    public String toString() {
+        return getClass().getName() + &quot;@&quot; + Integer.toHexString(hashCode());
+    }
+
+    /**
+     *唤醒一个在当前对象监视器上等待的线程
+     */
+    public final native void notify();
+
+    /**
+     *唤醒所有在当前对象监视器上等待的线程
+     */
+    public final native void notifyAll();
+
+    /**
+     * wait方法，会释放已经获取的锁
+     */
+    public final native void wait(long timeout) throws InterruptedException;
+
+    /**
+    *
+     */
+    public final void wait(long timeout, int nanos) throws InterruptedException {
+        if (timeout &lt; 0) {
+            throw new IllegalArgumentException(&quot;timeout value is negative&quot;);
+        }
+
+        if (nanos &lt; 0 || nanos &gt; 999999) {
+            throw new IllegalArgumentException(
+                                &quot;nanosecond timeout value out of range&quot;);
+        }
+        //四舍五入，nanos为
+        if (nanos &gt;= 500000 || (nanos != 0 &amp;&amp; timeout == 0)) {
+            timeout++;
+        }
+
+        wait(timeout);
+    }
+
+    /**
+    *
+     */
+    public final void wait() throws InterruptedException {
+        wait(0);
+    }
+
+    /**
+    *垃圾回收器在认为该对象是垃圾对象的时候会调用该方法。子类可以通过重写该方法来达到资源释放的目的。 
+    *在方法调用过程中出现的异常会被忽略且方法调用会被终止。 
+    *任何对象的该方法只会被调用一次。
+    * 不推荐使用：1.jvm不保证被执行;2.加长gc时间
+
+         */
+    protected void finalize() throws Throwable { }
+}
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/java基础/">java基础</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java基础/">java基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jdk源码/">jdk源码</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-Regular" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/05/Regular/" class="article-date">
+      <time datetime="2015-10-05T12:17:30.000Z" itemprop="datePublished">2015-10-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/05/Regular/">正则表达式学习整理</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="一些闲话"><a href="#一些闲话" class="headerlink" title="一些闲话"></a>一些闲话</h2><p>作为程序猿，工作中经常用到正则表达式，每次用时也都是网上去搜一些相关的东西，以解决问题为目的，这样做的效率很低。此次，趁有空好好整理一番。<br>参考文档：<a href="http://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="external">正则表达式30分钟入门教程</a></p>
+<h2 id="正则表达式学习"><a href="#正则表达式学习" class="headerlink" title="正则表达式学习"></a>正则表达式学习</h2><p>###定义</p>
+<blockquote>
+<p>正则表达式（regular expression）描述了一种字符串匹配的模式，可以用来检查一个串中是否包含某种子串、将匹配的子串做替换、从某个串中取出符合某个条件的子串等</p>
+</blockquote>
+<h3 id="常用元字符"><a href="#常用元字符" class="headerlink" title="常用元字符"></a>常用元字符</h3><ul>
+<li>. 匹配除了换行符以外的任意字符</li>
+<li>\w 匹配字母或者数字或者下划线或者汉字</li>
+<li>\s 匹配任意的空白符</li>
+<li>\d 匹配数字</li>
+<li>\b 匹配单词的开始或者结束</li>
+<li>^ 匹配字符串的开始</li>
+<li>$ 匹配字符串的结束</li>
+</ul>
+<p>如果想单纯的匹配这些元字符（下面的<em>、[]等等也是元字符），需要加<em>*转义符号”\”</em></em>。例如，kevinlsui\.com匹配的是kevinlsui.com。这里的.不是表示元字符。<br>“\”单纯作为斜杠去匹配，需要写成”\\“。</p>
+<h3 id="重复相关的元字符"><a href="#重复相关的元字符" class="headerlink" title="重复相关的元字符"></a>重复相关的元字符</h3><ul>
+<li>* 重复零次或者多次</li>
+<li>+ 重复一次或者多次</li>
+<li>？ 重复零次或者一次</li>
+<li>{n} 重复n次</li>
+<li>{n,} 重复n次或者更多次（大于等于n次）</li>
+<li>{n,m} 重复n到m次（大于等于n，小于等于m）</li>
+</ul>
+<h3 id="字符类中-的使用"><a href="#字符类中-的使用" class="headerlink" title="字符类中[]的使用"></a>字符类中[]的使用</h3><ol>
+<li>需要匹配某一些字符中的一个，可以使用[]。<br>例如：[aeiou]匹配任何一个元音字母，[.?!]匹配这三种符号中的一个（这里做为元字符，可以不加转义，即可匹配符号本身）。</li>
+<li>指定字符范围<br>例如：[0-9]代表0到9这十个数中的一个，[a-zA-Z]代表大写和小写24个字母中的一个</li>
+</ol>
+<h3 id="分枝条件"><a href="#分枝条件" class="headerlink" title="分枝条件"></a>分枝条件</h3><p>1.分枝条件使用符号”|”。例如：a|b,a或者b，满足一者即可<br>2.使用分支注意各个条件的顺序。原因是：匹配分枝条件时，会从左到右测试每一个分枝条件，如果有满足的，则后面的不再匹配。<br>例如：\d{5}|\d{5}-\d{4}的话，那么就只会匹配5位的邮编(以及9位邮编的前5位)。</p>
+<h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3><p>我们使用符号“()”，来进行分组。<br>例如：(\d{1,3}){3},对（）中的子表达式进行整体的3次重复</p>
+<h3 id="反义"><a href="#反义" class="headerlink" title="反义"></a>反义</h3><ul>
+<li>\W 大写的W，表示\w的反义，匹配任意不是字母，数字，下划线，汉字的字符</li>
+<li>\S 大写的S，表示\s的反义，匹配任意不是空白符的字符</li>
+<li>\D 大写的D，表示\d的反义，匹配任意不是数字的字符</li>
+<li>\B 大写的B，表示\b的反义，匹配不是单词开头或者结束的位置</li>
+<li>[^a] 匹配除了a以外的任意字符</li>
+<li>[^aeiou] 匹配除了这几个元音字符以外的任意字符</li>
+</ul>
+<h3 id="后向引用，零宽断言，负向零宽断言"><a href="#后向引用，零宽断言，负向零宽断言" class="headerlink" title="后向引用，零宽断言，负向零宽断言"></a>后向引用，零宽断言，负向零宽断言</h3><p>属于比较高级的应用了，这个用到相对较少。<br>几种常见的案例：</p>
+<ol>
+<li>\b(\w+)\b\s+\1\b，当需要使用已经匹配的子表达式（使用()的表达式），后面使用\1来引用</li>
+<li>2[0-4]\d(?#200-249)|25<a href="?#250-255">0-5</a>|[01]?\d\d?(?#0-199)，使用（？#comment）来注释</li>
+<li>\b\w+(?=ing\b)，匹配以ing结尾的单词的前面部分(除了ing以外的部分)，如查找I’m singing while you’re dancing.时，它会匹配sing和danc。<strong>零宽断言</strong></li>
+<li>(?&lt;=\bre)\w+\b会匹配以re开头的单词的后半部分(除了re以外的部分)，例如在查找reading a book时，它匹配ading。<strong>零宽断言</strong></li>
+<li>\b\w<em>q(?!u)\w</em>\b，<strong>负向零宽断言</strong></li>
+</ol>
+<h3 id="贪婪与懒惰"><a href="#贪婪与懒惰" class="headerlink" title="贪婪与懒惰"></a>贪婪与懒惰</h3><p>这个工作中多次遇到。<br>贪婪模式：尽可能多的匹配字符。【默认是贪婪模式】<br>例如：a.*b,对于字符串aababa,结果是aabab<br>懒惰模式：尽可能少的匹配字符，在重复符号后面加”?”<br>例如：a.*?b,对于字符串aababa,结果是aab,ab</p>
+<p>懒惰限定符</p>
+<ul>
+<li>*？ 重复任意次，但是尽可能少重复</li>
+<li>+？ 重复一次或者多次，但是尽可能少重复</li>
+<li>？？ 重复零次或者一次，但是尽可能少重复</li>
+<li>{n,m}? 重复n到m次，但是尽可能少重复</li>
+<li>{n,}? 重复n次及以上，但是尽可能少重复</li>
+</ul>
+<h3 id="平衡组-递归匹配"><a href="#平衡组-递归匹配" class="headerlink" title="平衡组/递归匹配"></a>平衡组/递归匹配</h3><p>高级用法。</p>
+<h2 id="java中正则的使用"><a href="#java中正则的使用" class="headerlink" title="java中正则的使用"></a>java中正则的使用</h2><p>java的正则表达式相关，均在java.util.regex 包中，主要包括以下三个类：</p>
+<ul>
+<li>Pattern 类：<br>pattern 对象是一个正则表达式的编译表示。Pattern 类没有公共构造方法。要创建一个 Pattern 对象，你必须首先调用其公共静态编译方法，它返回一个 Pattern 对象。该方法接受一个正则表达式作为它的第一个参数。</li>
+<li>Matcher 类：<br>Matcher 对象是对输入字符串进行解释和匹配操作的引擎。与Pattern 类一样，Matcher 也没有公共构造方法。你需要调用 Pattern 对象的 matcher 方法来获得一个 Matcher 对象。</li>
+<li>PatternSyntaxException：<br>PatternSyntaxException 是一个非强制异常类，它表示一个正则表达式模式中的语法错误。</li>
+</ul>
+<p>使用示例：</p>
+<pre><code>//字符串包含验证
+ Pattern pattern = Pattern.compile(&quot;^Java.*&quot;);
+ Matcher matcher = pattern.matcher(&quot;Java不是人&quot;);
+ boolean b= matcher.matches();//当条件满足时，将返回true，否则返回false
+ System.out.println(b);
+
+//字符串分割
+Pattern pattern = Pattern.compile(&quot;[, |]+&quot;);
+String[] strs = pattern.split(&quot;Java Hello World Java,Hello,,World|Sun&quot;);
+for (int i=0;i&lt;strs.length;i++) {
+    System.out.println(strs[i]);
+}
+
+//文本替换（替换首个，或者替换全部）
+Pattern pattern = Pattern.compile(&quot;正则表达式&quot;);
+Matcher matcher = pattern.matcher(&quot;正则表达式 Hello World,正则表达式 Hello World&quot;);
+//替换第一个符合正则的数据
+System.out.println(matcher.replaceFirst(&quot;Java&quot;));
+////替换全部符合正则的数据
+System.out.println(matcher.replaceAll(&quot;Java&quot;));
+
+//提取子串
+Pattern pattern = Pattern.compile(&quot;href=/&quot;(.+?)/&quot;&quot;);
+Matcher matcher = pattern.matcher(&quot;&lt;a href=/&quot;index.html/&quot;&gt;主页&lt;/a&gt;&quot;);
+if(matcher.find())
+     System.out.println(matcher.group(1));
+}
+</code></pre><h2 id="js中正则的使用"><a href="#js中正则的使用" class="headerlink" title="js中正则的使用"></a>js中正则的使用</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/正则表达式/">正则表达式</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    </nav></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 kevinlsui
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+             post: ".article-entry a[href], .copyright a[href]", 
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>

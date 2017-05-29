@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="kevinlsui">
+
+
+
+<meta name="description" content="列表：
+
+快速排序
+归并排序
+冒泡排序
+简单选择排序
+直接插入排序
+希尔排序
+堆排序
+字符串匹配的朴素算法
+kmp模式匹配算法
+逆波兰式运算
+逆波兰式生成
+斐波那契数列
+树的遍历（先序，中序，后序）
+图的遍历（BFS/DFS）
+
+//快速排序
+function quickSort(arr,min,max){
+    if(min &amp;lt; max){
+        var len1 = min;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《大话数据结构》算法js实现">
+<meta property="og:url" content="http://kevinlsui.github.io/2017/01/10/DahuaJS/index.html">
+<meta property="og:site_name" content="Kevinlsui Code">
+<meta property="og:description" content="列表：
+
+快速排序
+归并排序
+冒泡排序
+简单选择排序
+直接插入排序
+希尔排序
+堆排序
+字符串匹配的朴素算法
+kmp模式匹配算法
+逆波兰式运算
+逆波兰式生成
+斐波那契数列
+树的遍历（先序，中序，后序）
+图的遍历（BFS/DFS）
+
+//快速排序
+function quickSort(arr,min,max){
+    if(min &amp;lt; max){
+        var len1 = min;">
+<meta property="og:updated_time" content="2017-05-01T02:53:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《大话数据结构》算法js实现">
+<meta name="twitter:description" content="列表：
+
+快速排序
+归并排序
+冒泡排序
+简单选择排序
+直接插入排序
+希尔排序
+堆排序
+字符串匹配的朴素算法
+kmp模式匹配算法
+逆波兰式运算
+逆波兰式生成
+斐波那契数列
+树的遍历（先序，中序，后序）
+图的遍历（BFS/DFS）
+
+//快速排序
+function quickSort(arr,min,max){
+    if(min &amp;lt; max){
+        var len1 = min;">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+
+
+    <link rel="shortcut icon" href="/apple-touch-icon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>《大话数据结构》算法js实现 | Kevinlsui Code</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">kevinlsui</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">学习、总结、分享、进步</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">归档</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/book/">书籍推荐</a></li>
+                        
+                            <li><a href="/todolist/">todoList</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java高级/">java高级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk源码/">jdk源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大话数据结构/">大话数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小技巧/">小技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记/">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决/">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Java后台开发工程师</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">kevinlsui</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">kevinlsui</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">学习、总结、分享、进步</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">归档</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/book/">书籍推荐</a></li>
+                
+                    <li><a href="/todolist/">todoList</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
+</nav>
+      <div class="body-wrap"><article id="post-DahuaJS" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/01/10/DahuaJS/" class="article-date">
+      <time datetime="2017-01-10T12:17:30.000Z" itemprop="datePublished">2017-01-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      《大话数据结构》算法js实现
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+    </div>
+        <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大话数据结构/">大话数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>列表：</p>
+<ol>
+<li>快速排序</li>
+<li>归并排序</li>
+<li>冒泡排序</li>
+<li>简单选择排序</li>
+<li>直接插入排序</li>
+<li>希尔排序</li>
+<li>堆排序</li>
+<li>字符串匹配的朴素算法</li>
+<li>kmp模式匹配算法</li>
+<li>逆波兰式运算</li>
+<li>逆波兰式生成</li>
+<li>斐波那契数列</li>
+<li>树的遍历（先序，中序，后序）</li>
+<li>图的遍历（BFS/DFS）</li>
+</ol>
+<pre><code>//快速排序
+function quickSort(arr,min,max){
+    if(min &lt; max){
+        var len1 = min;
+        var len2 = max;
+
+        //选取基数优化（首尾中间值，取中间大小的值）
+        var mid = min + Math.floor((max-min)/2)
+        if(arr[mid] &gt; arr[max]){
+            arr[max] = arr[mid]+arr[max];
+            arr[mid] = arr[max]-arr[mid];
+            arr[max] = arr[max]-arr[mid];
+        }
+        if(arr[min] &gt; arr[max]){
+            arr[max] = arr[min]+arr[max];
+            arr[min] = arr[max]-arr[min];
+            arr[max] = arr[max]-arr[min];
+        }
+        if(arr[mid] &gt; arr[min]){
+            arr[min] = arr[mid]+arr[min];
+            arr[mid] = arr[min]-arr[mid];
+            arr[min] = arr[min]-arr[mid];
+        }
+
+        //基数左右两侧排序
+        var temp = arr[min];
+        while(min&lt;max){
+
+            while(min &lt; max &amp;&amp; arr[max] &gt;= temp){
+                max--;
+            }
+            arr[min] = arr[max];
+
+            while(min&lt;max &amp;&amp; arr[min] &lt;= temp){
+                min++;
+            }
+            arr[max] = arr[min];
+
+
+        }
+        arr[min] = temp;
+
+        //递归
+        quickSort(arr,len1,min-1);
+        quickSort(arr,min+1,len2);
+    }
+
+}
+
+var a = [12,2,69,1,27,111,19,15,100,1];
+quickSort(a,0,a.length-1);
+for(var i in a){
+console.log(a[i]);
+}
+
+//归并排序
+
+function mergeSort(arr,min,max){
+    if(min &lt; max){//临界条件
+        var mid = min+Math.floor((max-min)/2);
+        mergeSort(arr,min,mid);
+        mergeSort(arr,mid+1,max);
+        merge(arr,min,mid,max);
+
+    }
+
+}
+function merge(arr,min,mid,max){
+    var temparr = [];
+    var tempindex = min;
+    var min2 = min;
+    var right = mid+1;
+    while(min&lt;=mid &amp;&amp; right &lt;= max){
+        if(arr[min]&lt;=arr[right]){
+            temparr[tempindex++] = arr[min++];
+        }else{
+            temparr[tempindex++] = arr[right++];
+        }
+    }
+
+    while(min &lt;= mid){
+        temparr[tempindex++] = arr[min++];
+    }
+    while(right &lt;= max){
+        temparr[tempindex++] = arr[right++];
+    }
+
+    while(min2&lt;= max){
+        arr[min2] = temparr[min2++];
+    }
+
+}
+
+var a = [12,2,69,1,27,111,19,15,100,1];
+mergeSort(a,0,a.length-1);
+for(var i in a){
+console.log(a[i]);
+}
+
+//冒泡排序
+function Sort1(arr){
+    var len = arr.length;
+    if(len &gt; 1){
+        var flag = true; //优化
+        for(var i = 0 ; i &lt; len &amp;&amp; flag;i++){
+            flag = false;
+            for(var j = 0 ; j &lt; len-i-1;j++){
+
+                if(arr[j] &gt; arr[j+1]){
+                    arr[j] = arr[j]^arr[j+1];
+                    arr[j+1] = arr[j]^arr[j+1];
+                    arr[j] = arr[j]^arr[j+1];
+                    flag = true;
+
+                }
+            }
+        }
+
+    }
+
+}
+var a = [12,2,69,1,27,111,19,15,100,1];
+Sort1(a);
+for(var i in a){
+console.log(a[i]);
+}
+
+//简单选择排序
+
+function Sort2(arr){
+    var len = arr.length;
+    if(len &gt; 1){
+        for(var i = 0 ; i &lt; len-1; i++){
+            var k = i;
+            for(var j = i+1; j &lt; len ; j++){
+                if(arr[j] &lt; arr[k]){
+                    k = j;
+                }
+
+            }
+
+            if(i != k){
+                arr[i]  = arr[k]^arr[i];
+                arr[k]  = arr[k]^arr[i];
+                arr[i]  = arr[k]^arr[i];
+            }
+
+
+        }
+    }
+}
+var a = [12,2,69,1,27,111,19,15,100,1];
+Sort2(a);
+for(var i in a){
+console.log(a[i]);
+}
+
+//直接插入排序
+function Sort3(arr){
+    var len = arr.length;
+    if(len &gt; 1){
+        var j ;
+        for(var i = 1;i&lt;len;i++){
+            var temp = arr[i];
+
+            for(j = i-1;j &gt;= 0; j--){
+                if(arr[j] &gt; temp){
+                    arr[j+1] = arr[j];
+                }else{
+                    bleak;
+                }
+            }
+            if((j+1) != i){
+
+                arr[j+1] = temp;
+            }
+
+        }
+
+
+    }
+
+}
+
+var a = [12,2,69,1,27,111,19,15,100,1];
+Sort3(a);
+for(var i in a){
+console.log(a[i]);
+}
+
+//希尔排序
+function shellSort(arr){
+    var len = arr.length;
+    if(len &gt; 1){
+        var gap = 1;
+        while(gap &lt; len/5){
+            gap = gap*5 +1;
+        }
+
+        for(gap;gap&gt;0;gap = Math.floor(gap/5)){
+            for(var i = gap;i&lt;len;i++){
+                var temp = arr[i];
+                var j;
+                for(j=i-gap;j&gt;=0;j-=gap){
+                    if(arr[j]&gt;temp){
+                        arr[j+gap] = arr[j];
+                    }else{
+                        break;
+                    }
+
+                }
+                if(j+1 != i){
+                    arr[j+gap] = temp;
+                }
+
+            }
+
+        }
+
+    }
+
+}
+var a = [12,2,69,1,27,111,19,15,100,1];
+shellSort(a);
+for(var i in a){
+console.log(a[i]);
+}
+
+//堆排序
+
+function HeapSort(arr){
+    var len = arr.length;
+    if(len &gt; 1){
+        //构建最大堆,完全二叉树的性质，这里是遍历所有的含有子结点的结点，从最低层，最右边开//始，直到根结点。
+        for( var i = Math.floor(len/2)-1;i&gt;=0;i--){
+            heapify(arr,i,len);
+        }
+
+        //排序
+        for(var j = len-1 ; j &gt; 0 ; j--){
+            //已有的最大堆，把最大点（根节点）和最后的一个结点互换
+            var temp = arr[j];
+            arr[j] = arr[0];
+            arr[0] = temp;
+
+            //此时，最后的节点换到根节点位置，需要调整最大堆
+            heapify(arr,0,--len);
+        }
+    }
+}
+
+function heapify(arr,i,len){
+    var left = 2*i+1,right = 2*i+2,largest = i,temp;
+
+    //下标为i的节点，比较他本身，左孩子，右孩子，如果孩子比父节点的大，则交换，并对交换到下方的这个节点继续做判断（递归本方法）
+    if(left &lt; len &amp;&amp; arr[left] &gt; arr[i]){
+        largest = left;
+    }
+
+    if(right &lt; len &amp;&amp; arr[right] &gt; arr[largest]){
+        largest = right;
+    }
+
+    if(largest != i){
+        temp = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = temp;
+        heapify(arr,largest,len);
+    }
+}
+
+
+
+//字符串匹配的朴素算法
+//长字符串s，从下标pos处开始，查找后续是否存在字符串t(仅第一匹配成功的),返回匹配成功的下标，否则返回-1
+function indexof(s,t,pos){
+    var slen = s.length;
+    var tlen = t.length;
+    for(var i = pos;i&lt;=slen-tlen;i++){
+        var j ;
+        for(j=0;j&lt;tlen;j++){
+            if(s.charAt(i+j) != t.charAt(j)){
+                break;
+            }
+        }
+        if(j==tlen){
+            return i;
+        }
+
+    }
+    return -1;
+}
+indexof(&apos;ksdfnnksf&apos;,&apos;nk&apos;,0);
+
+//第二种写法，便于后续理解kmp匹配算法
+function indexof2(s,t,pos){
+    var slen = s.length;
+    var tlen = t.length;
+    var i = pos;
+    var j = 0;
+    while(i &lt; slen &amp;&amp; j &lt; tlen){
+
+        if(s.charAt(i) == t.charAt(j)){
+            i++;
+            j++;
+        }else{
+            i = i-j+1;
+            j = 0;
+
+        }
+
+    }
+    if(j&gt;=tlen){
+        return i-tlen;
+
+    }else{
+        return -1;
+    }
+}
+
+indexof2(&apos;ksdnfnksf&apos;,&apos;nk&apos;,0);
+
+
+//kmp模式匹配算法
+//相比较于朴素算法，减少不必要的重复比较，使得效率更高
+//核心：每轮比较后，使得i不回溯，j值取决于t串内部的重复程度。
+function getNext(t){
+    var next = [];
+
+
+}
+
+
+//逆波兰式运算
+//str 是右序表达式的数组
+function result(str){
+    var len = str.length;
+
+    var stack = [];//数值放入栈，遇到符号，出栈两个数字，计算
+    for(var i = 0;i&lt;len;i++){
+        if(str[i] != &apos;+&apos; &amp;&amp; str[i] != &apos;-&apos; &amp;&amp; str[i] != &apos;*&apos; &amp;&amp; str[i] != &apos;/&apos;){
+            stack.push(str[i]);
+        }else{
+            var p2 = stack.pop();//注意此处顺序，先pop是被操作数（被加减乘除）
+            var p1 = stack.pop();
+
+            switch(str[i]){
+                case &apos;+&apos;:
+                    p1 +=p2;
+                    break;
+                case &apos;-&apos;:
+                    p1 -=p2;
+                    break;
+                case &apos;*&apos;:
+                    p1 *=p2;
+                    break;
+                case &apos;+&apos;:
+                    p1 /=p2;
+                    break;
+
+            }
+            stack.push(p1);
+        }
+
+    }
+    return stack.pop();
+
+
+}
+var s = result([&quot;9&quot;, &quot;3&quot;, &quot;1&quot;, &quot;-&quot;, &quot;3&quot;, &quot;*&quot;, &quot;+&quot;, &quot;10&quot;, &quot;2&quot;, &quot;/&quot;, &quot;+&quot;]);//20
+var s1 = result([&quot;1&quot;, &quot;2&quot;, &quot;+&quot;, &quot;5&quot;, &quot;5&quot;, &quot;4&quot;, &quot;-&quot;, &quot;*&quot;, &quot;6&quot;, &quot;*&quot;, &quot;-&quot;, &quot;6&quot;, &quot;1&quot;, &quot;-&quot;, &quot;-&quot;]);//-32
+console.log(s+&quot;::::&quot;+s1);
+
+//逆波兰式生成
+//仅仅考虑+-*/()
+
+function create(arr){
+    var result = [];
+    var stack = [];
+
+    for(var i = 0 ; i &lt; arr.length;i++){
+        var now = arr[i];
+        if(isnum(now)){
+            result.push(now);//1.数字，直接放入结果数组
+        }else{
+
+            //2.符号相关处理
+            //2.1.左括号直接压入操作符号栈
+            if(now == &apos;(&apos;){
+                stack.push(now);
+            }
+
+            //2.2.右括号，将操作符号栈左括号‘(’之间操作符放入结果数组，抛弃左右括号&apos;(&apos;&apos;)&apos;
+            if(now == &apos;)&apos;){
+                var temp = stack.pop();
+                while(temp != &apos;(&apos;){
+                    result.push(temp);//把操作栈中左括号中间的符号输出
+                    temp = stack.pop();
+                }
+
+            }
+
+            //2.3.加号，减号,乘号，除号
+            //2.3.1.栈为空,或者栈顶为左括号‘(’,直接压入
+            //2.3.2.比较now和栈顶,当now优先级高于（不包括等于）栈顶，直接压入
+            //2.3.3.优先级小于等于栈顶，弹出栈顶压入结果数组，直至栈顶优先级低于（不包括等于）now,或者遇到左括号‘(’,或者操作栈空。此后，将now压入操作符号栈（不是结果数组）
+            //此处只考虑，加减乘除。
+            if(now == &apos;-&apos; || now == &apos;+&apos; || now == &apos;*&apos; || now == &apos;/&apos;){
+                if(stack.length == 0 || stack[stack.length-1] == &apos;(&apos;){
+                    stack.push(now);
+                }else{
+                    var temp2 = stack[stack.length-1];
+
+                    if(now == &apos;*&apos; || now == &apos;/&apos;){
+                        if(temp2 == &apos;*&apos; || temp2 == &apos;/&apos;){
+
+                        result.push(stack.pop());
+
+                        while(true){
+                            if(stack.length == 0){
+                                break;
+                            }
+                            temp2 = stack[stack.length-1];
+
+                            if(temp2 == &apos;(&apos; || temp2 == &apos;+&apos; || temp2 == &apos;-&apos;){
+                                break;
+                            }
+                            result.push(stack.pop());
+                        }
+                        //压入
+                        stack.push(now);
+
+                        }else{//加减，优先级低
+                            stack.push(now);
+                        }
+
+                    }
+
+                    if(now == &apos;+&apos; || now == &apos;-&apos;){
+                        result.push(stack.pop());
+                        while(true){
+                            if(stack.length == 0){
+                                break;
+                            }
+                            temp2 = stack[stack.length-1];
+
+                            if(temp2 == &apos;(&apos;){
+                                break;
+                            }
+                            result.push(stack.pop());
+                        }
+                        //压入
+                        stack.push(now);
+                    }
+
+                }
+            }
+
+
+
+
+        }
+
+    }
+    //stack中全部输出
+    while(stack.length&gt;0){
+        result.push(stack.pop());
+    }
+    return result;
+}
+
+//是不是数字
+function isnum(a){
+    if(a == &apos;(&apos; || a == &apos;)&apos; || a == &apos;+&apos; || a == &apos;-&apos; || a == &apos;*&apos; || a == &apos;/&apos;){
+
+        return false;
+    }
+    return true;
+}
+//测试
+//var h = create(&apos;9+(3-1)*3+10/2&apos;.split(&apos;&apos;));//数字10被分为1,0
+var h = create([&apos;9&apos;,&apos;+&apos;,&apos;(&apos;,&apos;3&apos;,&apos;-&apos;,&apos;1&apos;,&apos;)&apos;,&apos;*&apos;,&apos;3&apos;,&apos;+&apos;,&apos;10&apos;,&apos;/&apos;,&apos;2&apos;]);
+//h:9 3 1 - 3 * + 10 2 / +
+//[&quot;9&quot;, &quot;3&quot;, &quot;1&quot;, &quot;-&quot;, &quot;3&quot;, &quot;*&quot;, &quot;+&quot;, &quot;10&quot;, &quot;2&quot;, &quot;/&quot;, &quot;+&quot;]
+
+//var h = create(&apos;1+2-5*(5-4)*6-(6-1)&apos;.split(&apos;&apos;));
+//h:1 2 + 5 5 4 - * 6 * - 6 1 - -
+//[&quot;1&quot;, &quot;2&quot;, &quot;+&quot;, &quot;5&quot;, &quot;5&quot;, &quot;4&quot;, &quot;-&quot;, &quot;*&quot;, &quot;6&quot;, &quot;*&quot;, &quot;-&quot;, &quot;6&quot;, &quot;1&quot;, &quot;-&quot;, &quot;-&quot;]
+
+//斐波那契数列
+//递归
+function rabbit(n){
+    if(n&lt;0){
+        return &quot;error&quot;;
+    }else if(n&lt;=2){
+        return 1;
+
+    }
+    return rabbit(n-2)+rabbit(n-1);
+
+}
+//非递归
+function rabbit2(n){
+    if(n&lt;0){
+        return &quot;error&quot;;
+    }else if(n&lt;=2){
+        return 1;
+
+    }
+    var temp1 = 1;
+    var temp2 = 1;
+    for(var i = 4;i&lt;=n;i++){
+        var temp2 = temp1+temp2;//新的，两数之和
+        var temp1 = temp2-temp1;//原始temp2的值
+    }
+    return temp1+temp2;
+
+}
+
+//树的遍历
+
+//递归
+function print1(n){
+    console.log(&quot;先序遍历，此处对节点进行操作→→→&quot;+n.value);
+    print1(n.left);
+    //console.log(&quot;中序遍历，此处对节点进行操作→→→&quot;+n.value);
+    print1(n.right);
+    //console.log(&quot;后序遍历，此处对节点进行操作→→→&quot;+n.value);
+
+}
+//调用,root为根节点
+print1(root);
+
+//非递归
+function print2(n){
+    var arr = [];
+
+    while(n != null || arr.length &gt; 0){
+        if(n != null){
+            console.log(&quot;先序遍历，此处对节点进行操作→→→&quot;+n.value);
+            arr.push(n);
+            n = n.left;
+        }else{
+            n = arr.pop();
+            //console.log(&quot;中序遍历，此处对节点进行操作→→→&quot;+n.value);
+            n.right;
+        }
+    }
+
+}
+//先遍历根节点，然后遍历右孩子，最后遍历左孩子。
+function print3(n){
+    var arr = [];
+    var result = [];
+
+    while(n != null || arr.length &gt; 0){
+        if(n != null){
+            result.push(n);
+            arr.push(n);
+            n = n.right;
+        }else{
+            n = arr.pop();
+
+            n.left;
+        }
+    }
+
+    while(result.length &gt; 0 ){
+        console.log(&quot;后序遍历非递归操作：&quot;+result.pop());
+    }
+}
+
+//根据先序数组，生成二叉树，abdh##i##e##cf#j##g##
+
+function createTree(){
+
+    var value = &apos;用户依次输入字符&apos;;
+    if(value != &apos;#&apos;){
+        var node = node.value;
+        node.left = createTree();
+        node.right = createTree();
+    }
+}
+
+
+
+//图的遍历
+//邻接矩阵实现,无向图
+var vertexs = [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;];
+var flag = [false,false,false,false];
+var edges = [
+[0,1,1,0],
+[1,0,0,1],
+[1,0,0,1],
+[0,1,1,0]
+];
+
+//深度优先递归算法
+function DFSTraverse(){
+    for(var i = 0;i&lt;vertexs.length;i++){
+        if(flag[i] == false){
+            DFS(i);
+        }
+
+    }
+
+}
+
+function DFS(i){
+    flag[i] = true;
+
+    for(int j = 0 ;j&lt; vertexs.length ;j++){
+        if(flag[j] == false &amp;&amp; edges[i][j] == 1){
+            DFS(j);
+        }
+
+    }
+}
+
+//广度优先算法（队列）
+
+function BFS(){
+    var arr = [];//数组模拟队列
+    for(var i = 0 ; i &lt; vertexs.length;i++){
+        if(!flag[i]){
+            flag[i] = true;
+
+            arr.push(i);
+            while(arr.length &gt; 0){
+                int j = arr.shift();
+                for(var k = 0;k&lt;vertexs.length ;k++){
+                    if(edges[j][k] == 1 &amp;&amp; !flag[k]){
+                        flag[k] = true;
+                        arr.push(k);
+                    }
+                }
+
+            }
+        }
+
+    }
+}
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2017/01/10/DahuaJS/">《大话数据结构》算法js实现</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">kevinlsui</a></p>
+        <p><span>Created:</span>2017-01-10, 20:17:30</p>
+        <p><span>Updated:</span>2017-05-01, 10:53:21</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2017/01/10/DahuaJS/" title="《大话数据结构》算法js实现">http://kevinlsui.github.io/2017/01/10/DahuaJS/</a>
+            <span class="copy-path" data-clipboard-text="From http://kevinlsui.github.io/2017/01/10/DahuaJS/　　By kevinlsui" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2017/02/11/DuShu01/">
+                    Java多线程编程核心技术——读书笔记
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/01/05/DaHuaSort/">
+                    大话数据结构_排序
+                </a>
+            </div>
+        
+    </nav>
+  
+</article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide" title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+
+    
+
+
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/02/11/DuShu01/" title="Pre: Java多线程编程核心技术——读书笔记">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/01/05/DaHuaSort/" title="Next: 大话数据结构_排序">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/05/29/MyTodoList/">一个实用的小工具——TodoList</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/JvmArea/">jvm——运行时数据区域</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/JS_OOP/">JS高级知识——面向对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/11/JvmGC/">jvm——垃圾回收机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/JvmTools/">jvm——调优工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/01/Bloom/">布隆过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/02/ConCAS/">concurrent包的基础：CAS</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ThreadState/">线程的状态Thread.State</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ConcurrentTools/">concurrent包下的并发工具类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/Cglib/">CGLIB动态代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/Css3Rem/">使用css3:rem,让屏幕适配变得简单起来</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/DynamicProxy/">jdk动态代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/01/">动态规划——01背包问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/AboutHandlerbarsjs/">Handlerbars.js中if-else对字符串'NULL'不起作用问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/01/DuShu02/">Java并发编程的艺术——读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/DuShu01/">Java多线程编程核心技术——读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/10/DahuaJS/">《大话数据结构》算法js实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/05/DaHuaSort/">大话数据结构_排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/24/Timu02/">两数互换</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/21/Singleton/">单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/13/SpringSetValue/">使用spring注入项目的配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/03/MyBatisStart/">Mybatis使用总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/17/MethodArgs/">一道面试题，加深了我对java参数传递的理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/04/InnerClass/">java基础知识——内部类</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/11/Enum/">java基础知识——枚举</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/FanXing/">java基础知识——泛型</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/21/Annotation/">Java基础知识——注解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/25/ListRemoveElement/">ArrayList删除元素的正确姿势</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/KMP/">字符串匹配模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/JiSuan/">逆波兰式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Timu01/">8个小球，找出其中一个次品</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/18/SqlRule/">简单解释下数据库三大范式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/11/SqlScript/">一个简单的mysql建库脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/15/DesignPattern/">设计模式学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/11/Object/">Java源码-Object.java</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/05/Regular/">正则表达式学习整理</a></li></ul>
+
+
+    <script>
+        
+    </script></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 kevinlsui
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+             post: ".article-entry a[href], .copyright a[href]", 
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>

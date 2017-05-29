@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="kevinlsui">
+
+
+    
+    
+
+
+<meta name="description" content="kevinlsui,java,blog,hexo,github,yelee,js,前端,学习总结,分享,技术博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kevinlsui Code">
+<meta property="og:url" content="http://kevinlsui.github.io/page/3/index.html">
+<meta property="og:site_name" content="Kevinlsui Code">
+<meta property="og:description" content="kevinlsui,java,blog,hexo,github,yelee,js,前端,学习总结,分享,技术博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kevinlsui Code">
+<meta name="twitter:description" content="kevinlsui,java,blog,hexo,github,yelee,js,前端,学习总结,分享,技术博客">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+
+
+    <link rel="shortcut icon" href="/apple-touch-icon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <style> .article { opacity: 0;} </style>
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Kevinlsui Code</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">kevinlsui</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">学习、总结、分享、进步</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">归档</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/book/">书籍推荐</a></li>
+                        
+                            <li><a href="/todolist/">todoList</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java高级/">java高级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk源码/">jdk源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大话数据结构/">大话数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小技巧/">小技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记/">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决/">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Java后台开发工程师</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">kevinlsui</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">kevinlsui</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">学习、总结、分享、进步</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">归档</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/book/">书籍推荐</a></li>
+                
+                    <li><a href="/todolist/">todoList</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
+</nav>
+      <div class="body-wrap"><article id="post-SpringSetValue" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/11/13/SpringSetValue/" class="article-date">
+      <time datetime="2016-11-13T02:17:30.000Z" itemprop="datePublished">2016-11-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/13/SpringSetValue/">使用spring注入项目的配置文件</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>以前我们会写一个listener (implements ServletContextListener),在项目启动时，读取properties文件，存入一个全局对象中，以便后续使用。这样需要我们写很多的代码，有了spring，一切变得简单起来。<br>
+          
+      
+    </p></div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/spring/">spring</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+    </div>
+      
+        <p class="article-more-link">
+          <a href="/2016/11/13/SpringSetValue/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-MyBatisStart" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/11/03/MyBatisStart/" class="article-date">
+      <time datetime="2016-11-03T11:17:30.000Z" itemprop="datePublished">2016-11-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/03/MyBatisStart/">Mybatis使用总结</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="相关网址"><a href="#相关网址" class="headerlink" title="相关网址"></a>相关网址</h2><p><a href="http://www.mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="external">官方文档（中文）</a><br><a href="https://my.oschina.net/zudajun/blog/665956" target="_blank" rel="external">推荐博客</a></p>
+<h2 id="mybatis入门"><a href="#mybatis入门" class="headerlink" title="mybatis入门"></a>mybatis入门</h2><p>直接可见的内容：</p>
+<ol>
+<li>若干jar包</li>
+<li>一个配置文件</li>
+<li>一系列Mapper接口</li>
+<li>一系列Mapper.xml配置文件</li>
+<li>一个main方法</li>
+</ol>
+<h2 id="mybatis内部实现"><a href="#mybatis内部实现" class="headerlink" title="mybatis内部实现"></a>mybatis内部实现</h2><p>源码实现的内容：</p>
+<ol>
+<li>一个“ALL-IN-ONE”的对象：Configuration</li>
+<li>一个工厂：SqlSessionFactory</li>
+<li>多个会话：SqlSession</li>
+<li>一系列Mapper接口对应的代理类对象：</li>
+</ol>
+<h2 id="mybatis其他知识点"><a href="#mybatis其他知识点" class="headerlink" title="mybatis其他知识点"></a>mybatis其他知识点</h2><ol>
+<li>一级缓存、二级缓存</li>
+<li>事务</li>
+<li>动态sql</li>
+<li>查询结果的封装</li>
+<li>自定义插件</li>
+<li>控制台输出sql</li>
+<li>insert语句返回主键</li>
+<li>数据源</li>
+<li>mybatis与spring的整合</li>
+<li>mybatis日志系统选择</li>
+</ol>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/mybatis/">mybatis</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatis/">mybatis</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-MethodArgs" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/17/MethodArgs/" class="article-date">
+      <time datetime="2016-10-17T09:58:27.000Z" itemprop="datePublished">2016-10-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/17/MethodArgs/">一道面试题，加深了我对java参数传递的理解</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>一道面试题：</p>
+<pre><code>public class Test {
+    public static void main(String[] args) {
+        StringBuffer stringBuffer = new StringBuffer(&quot;A&quot;);
+        StringBuffer stringBuffer1 = new StringBuffer(&quot;B&quot;);
+        operator(stringBuffer,stringBuffer1);
+        System.out.println(stringBuffer+&quot;,&quot;+stringBuffer1);
+        //输出：AB,B
+    }
+
+    private static void operator(StringBuffer stringBuffer, StringBuffer stringBuffer1) {
+        stringBuffer.append(stringBuffer1);
+        stringBuffer1 = stringBuffer;
+    }
+
+
+}
+</code></pre><p>对于这个输出结果，我是一点准备都没有啊，我以为是AB,AB的。<br>
+          
+      
+    </p></div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/java基础/">java基础</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+    </div>
+      
+        <p class="article-more-link">
+          <a href="/2016/10/17/MethodArgs/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-InnerClass" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/04/InnerClass/" class="article-date">
+      <time datetime="2016-07-04T15:19:30.000Z" itemprop="datePublished">2016-07-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/04/InnerClass/">java基础知识——内部类</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="内部类分类"><a href="#内部类分类" class="headerlink" title="内部类分类"></a>内部类分类</h2><ol>
+<li>普通内部类</li>
+<li>静态内部类</li>
+<li>局部内部类</li>
+<li>匿名局部内部类（匿名内部类）
+          
+      
+    </li></ol></div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/java基础/">java基础</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java基础/">java基础</a></li></ul>
+    </div>
+      
+        <p class="article-more-link">
+          <a href="/2016/07/04/InnerClass/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-Enum" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/11/Enum/" class="article-date">
+      <time datetime="2016-06-11T13:17:30.000Z" itemprop="datePublished">2016-06-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/11/Enum/">java基础知识——枚举</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="http://blog.csdn.net/xyang81/article/details/7185428" target="_blank" rel="external">推荐博客一篇，看完基本都懂了</a></p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/java基础/">java基础</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java基础/">java基础</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-FanXing" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/06/FanXing/" class="article-date">
+      <time datetime="2016-06-06T09:17:30.000Z" itemprop="datePublished">2016-06-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/06/FanXing/">java基础知识——泛型</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <ol>
+<li>泛型实现方式有两种，一种是<strong>类型膨胀</strong>，属于真实泛型（C#实现）；另一种是<strong>类型擦除</strong>，称为伪泛型，java使用的是<strong>类型擦除</strong>，仅仅约束程序猿编码，编译后的class文件就替换回原生类型。</li>
+<li><p>反射操作可以绕过泛型限制。</p>
+<pre><code>package com.kevinlsui.base;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test_fanxing {
+
+public static void main(String[] args) throws Exception {
+    List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+    list.add(&quot;hahah&quot;);
+    //list.add(1);//出错
+
+    Class clazz = list.getClass();
+    //List obj = (List) clazz.newInstance();
+    Method m = clazz.getMethod(&quot;add&quot;,Object.class);
+    m.invoke(list, 12);
+
+    System.out.println(list);
+}
+</code></pre><p> } </p>
+</li>
+</ol>
+<ol>
+<li><p>泛型的弊端：在方法重载时，如果参数的区别仅仅是泛型，则无法重载，详细可见《Java虚拟机》相关章节。</p>
+<pre><code>package com.kevinlsui.base;
+
+public class Test_fanxing2 {
+
+    //方法重载
+    public void ha(){
+        System.out.println(&quot;method1...&quot;);
+    }
+    public void ha(String name){
+        System.out.println(&quot;method2...&quot;);
+    }
+
+    //报错，原因是方法3，和方法4，参数区别仅仅是泛型，而泛型是类型擦除，编译完后就消失，这两个方法就成相同的了。
+    /*public void ha(List&lt;String&gt; list){
+        System.out.println(&quot;method3...&quot;);
+    }*/
+
+    /*public void ha(List&lt;Integer&gt; list){
+        System.out.println(&quot;method4...&quot;);
+    }*/
+
+    //重载方法，加上返回值即可通过，但是方法重载仅仅与参数有关，与返回值无关的，此处为泛型的一个bug
+    //《Java虚拟机》上的解决方案，在此并未成功，可能使用的jdk版本已经修复此bug
+    /*public static Integer ha(List&lt;String&gt; list){
+        System.out.println(&quot;method3...&quot;);
+        return 1;
+    }
+    public static String ha(List&lt;Integer&gt; list){
+        System.out.println(&quot;method4...&quot;);
+        return &quot;ok&quot;;
+    }*/
+</code></pre><p> }</p>
+</li>
+</ol>
+<ol>
+<li>泛型的应用，在DbHelp类中，通过使用泛型，使得dbhelp得到通用。</li>
+</ol>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/java基础/">java基础</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java基础/">java基础</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-Annotation" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/21/Annotation/" class="article-date">
+      <time datetime="2016-05-21T15:11:30.000Z" itemprop="datePublished">2016-05-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/21/Annotation/">Java基础知识——注解</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <a id="more"></a>
+<h2 id="学习代码"><a href="#学习代码" class="headerlink" title="学习代码"></a>学习代码</h2><pre><code>package com.kevinlsui.base;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * 元注解：负责注解其它注解的注解
+ * @Target : Annotation所修饰的范围
+ *              ElementType.{CONSTRUCTOR,构造器(constructor)} 
+ *              ElementType.{FIELD,字段(field)} 
+ *              ElementType.{LOCAL_VARIABLE,局部变量(local_variable)} 
+ *              ElementType.{METHOD,方法(method)} 
+ *              ElementType.{PACKAGE,包(package)} 
+ *              ElementType.{PARAMETER,参数(parameter)} 
+ *              ElementType.{TYPE,包括类、接口、注解、枚举(type)} 
+ * @Retention : 用于标明生存时间
+ *                 RetentionPolicy.RUNTIME (运行时保留)
+ *                 RetentionPolicy.SOURCE (仅仅源码保留)
+ *                 RetentionPolicy.CLASS (编译后class文件中保留)
+ * @Documented : 生成javadoc时会包含注解
+ * @Inherited : 允许子类继承 
+ */
+
+@Target({ElementType.TYPE,ElementType.FIELD})//使用大括号，定义多个范围
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+public @interface MyAnnotation {
+    //返回值类型：基本数据类型（int/long/float/double/boolean/char/short/byte）、String、class、enum、annotation、以上类型的数组
+    //修饰符：public/（默认）
+    String name();
+    String alias() default &quot;&quot;; 
+}
+</code></pre><hr>
+<pre><code>package com.kevinlsui.base;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * 元注解：负责注解其它注解的注解
+ * @Target : Annotation所修饰的范围
+ *              ElementType.{CONSTRUCTOR,构造器(constructor)} 
+ *              ElementType.{FIELD,字段(field)} 
+ *              ElementType.{LOCAL_VARIABLE,局部变量(local_variable)} 
+ *              ElementType.{METHOD,方法(method)} 
+ *              ElementType.{PACKAGE,包(package)} 
+ *              ElementType.{PARAMETER,参数(parameter)} 
+ *              ElementType.{TYPE,包括类、接口、注解、枚举(type)} 
+ * @Retention : 用于标明生存时间
+ *                 RetentionPolicy.RUNTIME (运行时保留)
+ *                 RetentionPolicy.SOURCE (仅仅源码保留)
+ *                 RetentionPolicy.CLASS (编译后class文件中保留)
+ * @Documented : 生成javadoc时会包含注解
+ * @Inherited : 允许子类继承 
+ */
+
+@Target({ElementType.TYPE,ElementType.FIELD,ElementType.METHOD})
+@Retention(RetentionPolicy.CLASS)
+@Documented
+public @interface MyAnnotation2 {
+    //返回值类型：基本数据类型（int/long/float/double/boolean/char/short/byte）、String、class、enum、annotation、以上类型的数组
+    //修饰符：public/（默认）
+
+    String value() default &quot;222&quot;; 
+}
+</code></pre><hr>
+<pre><code>package com.kevinlsui.base;
+
+@MyAnnotation(name=&quot;people&quot;)
+@MyAnnotation2(&quot;mya2&quot;)
+public class People {
+    public void say(){
+
+    }
+    public void haha(){
+
+    }
+}
+</code></pre><hr>
+<pre><code>package com.kevinlsui.base;
+
+@MyAnnotation(name=&quot;kevinlsui&quot;,alias=&quot;ke&quot;)
+public class User extends People{
+
+    @MyAnnotation(name=&quot;haha&quot;)
+    private String friend;
+
+    @Override
+    @MyAnnotation2(&quot;2222&quot;)
+    public void say() {
+        System.out.println(&quot;haha&quot;);
+    }
+}
+</code></pre><hr>
+<pre><code>package com.kevinlsui.base;
+
+public class User2 extends People{
+
+}
+</code></pre><hr>
+<pre><code>package com.kevinlsui.base;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+public class Test {
+
+    public static void main(String[] args) {
+        //1.注解的继承性测试，@Inherited
+        User2 u = new User2();
+        MyAnnotation mya = u.getClass().getAnnotation(MyAnnotation.class);
+        if(mya != null){
+            System.out.println(&quot;name:&quot;+mya.name());
+            System.out.println(&quot;alias:&quot;+mya.alias());
+        }
+        //此时将myAnnotation2切换为runtime
+        MyAnnotation2 mya2 = u.getClass().getAnnotation(MyAnnotation2.class);
+        System.out.println(mya2 == null);
+
+        if(mya2 != null){
+            System.out.println(&quot;value:&quot;+mya2.value());
+        }
+        System.out.println(&quot;=======================&quot;);
+
+        //2.注解运行时获取值(一般使用的都是运行时注解，源码和class级的无法用代码控制)
+        //反射相关知识
+
+        Class clasz = new User().getClass();
+        //Class clasz = User.class;
+        //MyAnnotation[] myas = (MyAnnotation[]) clasz.getAnnotations();
+        if(clasz.isAnnotationPresent(MyAnnotation.class)){
+            MyAnnotation an = (MyAnnotation) clasz.getAnnotation(MyAnnotation.class);
+            System.out.println(&quot;name:&quot;+an.name());
+            System.out.println(&quot;alias:&quot;+an.alias());
+        }
+
+        System.out.println(&quot;====方法====&quot;);
+        Method[] me = clasz.getDeclaredMethods();//获取本类声明的方法，不分访问权限
+        //Method[] me = clasz.getMethods();//可能包括父类继承来的
+        for(Method m : me){
+            System.out.println(m.getName());
+            Annotation[] a = m.getAnnotations();
+            //@Override的作用范围不到运行期
+            //@MyAnotation2的作用域也不是运行期的
+            //所以获取不到注解，length=0
+            System.out.println(a.length);
+
+        }
+
+        System.out.println(&quot;====字段====&quot;);
+        Field[] f = clasz.getDeclaredFields();
+        //Field[] f = clasz.getFields();
+        for(Field fi : f){
+            System.out.println(fi.getName());
+            MyAnnotation a = fi.getAnnotation(MyAnnotation.class);
+            System.out.println(a.name());
+            System.out.println(a.alias());
+        }
+
+
+    }
+
+}
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/java基础/">java基础</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java基础/">java基础</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-ListRemoveElement" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/25/ListRemoveElement/" class="article-date">
+      <time datetime="2016-04-25T14:10:30.000Z" itemprop="datePublished">2016-04-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/25/ListRemoveElement/">ArrayList删除元素的正确姿势</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <pre><code>package com.kevinlsui.base;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Test_listRemove {
+
+    public static void main(String[] args) {
+        List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+        list.add(&quot;1&quot;);
+        list.add(&quot;2&quot;);
+        list.add(&quot;3&quot;);
+        list.add(&quot;4&quot;);
+        System.out.println(list);
+
+        /*for(String a : list){
+            // 报错。java.util.ConcurrentModificationException
+            list.remove(a);
+        }*/
+
+        /*for(Iterator&lt;String&gt; ti = list.iterator();ti.hasNext();){
+            System.out.println(ti.next());
+            //报错。java.util.ConcurrentModificationException
+            list.remove(ti.next());
+        }*/
+
+        //1.迭代器删除元素,ok
+        //2.只有内部实现迭代器的类（比如list），才可以使用foreach循环（本质是迭代器实现）
+        for(Iterator&lt;String&gt; ti = list.iterator();ti.hasNext();){
+            //System.out.println(ti.next());
+            //使用迭代器删除，ok
+            ti.remove();
+        }
+        System.out.println(list);
+    }
+
+}
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/集合框架/">集合框架</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java基础/">java基础</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-KMP" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/01/KMP/" class="article-date">
+      <time datetime="2016-04-01T12:17:30.000Z" itemprop="datePublished">2016-04-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/01/KMP/">字符串匹配模式</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><p><a href="http://blog.csdn.net/fightlei/article/details/52712461" target="_blank" rel="external">讲的最好的kmp原理篇</a><br><a href="http://blog.csdn.net/yearn520/article/details/6729426" target="_blank" rel="external">讲解next[]推导</a></p>
+<h2 id="朴素模式"><a href="#朴素模式" class="headerlink" title="朴素模式"></a>朴素模式</h2><pre><code>//字符串匹配的朴素算法
+//长字符串s，从下标pos处开始，查找后续是否存在字符串t(仅第一匹配成功的),返回匹配成功的下标，否则返回-1
+function indexof(s,t,pos){
+    var slen = s.length;
+    var tlen = t.length;
+    for(var i = pos;i&lt;=slen-tlen;i++){
+        var j ;
+        for(j=0;j&lt;tlen;j++){
+            if(s.charAt(i+j) != t.charAt(j)){
+                break;
+            }
+        }
+        if(j==tlen){
+            return i;
+        }
+
+    }
+    return -1;
+}
+indexof(&apos;ksdfnnksf&apos;,&apos;nk&apos;,0);
+
+//第二种写法，便于后续理解kmp匹配算法
+function indexof2(s,t,pos){
+    var slen = s.length;
+    var tlen = t.length;
+    var i = pos;
+    var j = 0;
+    while(i &lt; slen &amp;&amp; j &lt; tlen){
+
+        if(s.charAt(i) == t.charAt(j)){
+            i++;
+            j++;
+        }else{
+            i = i-j+1;
+            j = 0;
+
+        }
+
+    }
+    if(j&gt;=tlen){
+        return i-tlen;
+
+    }else{
+        return -1;
+    }
+}
+
+indexof2(&apos;ksdnfnksf&apos;,&apos;nk&apos;,0);
+</code></pre><h2 id="KMP模式"><a href="#KMP模式" class="headerlink" title="KMP模式"></a>KMP模式</h2><pre><code>//kmp模式匹配算法
+//相比较于朴素算法，减少不必要的重复比较，使得效率更高
+//核心：每轮比较后，使得i不回溯，j值取决于t串内部的重复程度。
+function getNext(t){
+    var next = [];
+    next[0] = -1;//当s[i] != t[j]时，j=0,则-1代表直接i+1,j=0,继续比较
+    var m = 0;//后缀
+    var n = -1;//前缀
+    while(m &lt; t.length-1){//每次算next[j]时，都是看的t[0]-t[j-1]中的最大前缀后缀子序列，这里j-1 = m
+        if(n == -1 || t.charAt(m) == t.charAt(n)){//表示前缀的单个字符等于后缀的单个字符
+            ++m;
+            ++n;
+
+            if(t.charAt(m) == t.charAt(n)){//改进的地方
+                next[m] = next[n];
+            }else{
+                next[m] = n;
+            }
+
+        }else{//若字符不等，则n回溯
+            n = next[n];
+        }
+
+    }
+    return next;
+}
+function indexof3(s,t,pos){
+    var slen = s.length;
+    var tlen = t.length;
+    var next = getNext(t);
+    var i = pos;
+    var j = 0;
+    while(i &lt; slen &amp;&amp; j &lt; tlen){
+
+        if(j == -1 ||s.charAt(i) == t.charAt(j)){
+            i++;
+            j++;
+        }else{
+            //j根据next数组回溯，i不回溯
+            j = next[j];
+
+        }
+
+    }
+    if(j&gt;=tlen){
+        return i-tlen;
+
+    }else{
+        return -1;
+    }
+}
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-JiSuan" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/01/JiSuan/" class="article-date">
+      <time datetime="2016-04-01T12:17:30.000Z" itemprop="datePublished">2016-04-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/01/JiSuan/">逆波兰式</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="逆波兰式"><a href="#逆波兰式" class="headerlink" title="逆波兰式"></a>逆波兰式</h2><p>逆波兰式，是计算机计算四则混合运算（括号优先，乘除优先加减）时，对我们常规表达式（符号在中间）的一种转换方式。主要用到<strong>栈</strong>这种数据结构。<br>除了这种方式，网上讲用二叉树也可以实现计算机的四则混合运算，后续研究。<a href="http://blog.csdn.net/iwillknow/article/details/11252619" target="_blank" rel="external">链接博客</a></p>
+<h2 id="生成逆波兰式"><a href="#生成逆波兰式" class="headerlink" title="生成逆波兰式"></a>生成逆波兰式</h2><ol>
+<li>一个栈存储符号，一个数组存储结果</li>
+<li>对常规表达式（中缀表达式）数组，从左往右遍历</li>
+<li>若是数字，直接放入结果数组</li>
+<li>若是符号，对符号进行操作如下。</li>
+<li>左括号，’(‘，直接压入操作符号栈</li>
+<li>右括号，’）’，则将距离栈顶的最近的’(‘之间的运算符，逐个出栈，依次放入结果数组，此时抛弃’(‘’)’；</li>
+<li>加减乘除，若栈为空，或者栈顶是左括号’(‘，直接入栈。否则与栈顶元素比较优先级，当前优先级大，则直接入栈。当前优先级小于或者等于，则将栈中元素依次弹出，存入结果数组，直至栈空，或者遇到栈顶为左括号’(‘，或者栈顶优先级小于（不包含等于）当前元素。此后再将当前运算符放入符号栈中（注意：不是结果数组）</li>
+<li>遍历完成后，判断符号存储栈中是否有元素，若有，依次弹出，并放入结果数组</li>
+</ol>
+<p><br></p>
+<pre><code>//逆波兰式生成
+//仅仅考虑+-*/()
+
+function create(arr){
+    var result = [];//结果数组
+    var stack = [];//操作符号栈
+
+    for(var i = 0 ; i &lt; arr.length;i++){
+        var now = arr[i];
+        if(isnum(now)){
+            result.push(now);//1.数字，直接放入结果数组
+        }else{
+
+            //2.符号相关处理
+            //2.1.左括号直接压入操作符号栈
+            if(now == &apos;(&apos;){
+                stack.push(now);
+            }
+
+            //2.2.右括号，将操作符号栈左括号‘(’之间操作符放入结果数组，并抛弃左右括号&apos;(&apos;&apos;)&apos;
+            if(now == &apos;)&apos;){
+                var temp = stack.pop();
+                while(temp != &apos;(&apos;){
+                    result.push(temp);//把操作栈中左括号中间的符号输出
+                    temp = stack.pop();
+                }
+
+            }
+            //2.3.加号，减号,乘号，除号
+            //2.3.1.栈为空,或者栈顶为左括号‘(’,直接压入
+            //2.3.2.比较now和栈顶,当now优先级高于（不包括等于）栈顶，直接压入
+            //2.3.3.优先级小于等于栈顶，弹出栈顶压入结果数组，直至栈顶优先级低于（不包括等于）now,或者遇到左括号‘(’,或者操作栈空。此后，将now压入操作符号栈（不是结果数组）
+            //此处只考虑，加减乘除。
+            if(now == &apos;-&apos; || now == &apos;+&apos; || now == &apos;*&apos; || now == &apos;/&apos;){
+                if(stack.length == 0 || stack[stack.length-1] == &apos;(&apos;){
+                    stack.push(now);
+                }else{
+                    var temp2 = stack[stack.length-1];
+
+                    if(now == &apos;*&apos; || now == &apos;/&apos;){
+                        if(temp2 == &apos;*&apos; || temp2 == &apos;/&apos;){
+
+                        result.push(stack.pop());
+
+                        while(true){
+                            if(stack.length == 0){
+                                break;
+                            }
+                            temp2 = stack[stack.length-1];
+
+                            if(temp2 == &apos;(&apos; || temp2 == &apos;+&apos; || temp2 == &apos;-&apos;){
+                                break;
+                            }
+                            result.push(stack.pop());
+                        }
+                        //压入
+                        stack.push(now);
+
+                        }else{//加减，优先级低
+                            stack.push(now);
+                        }
+
+                    }
+
+                    if(now == &apos;+&apos; || now == &apos;-&apos;){
+                        result.push(stack.pop());
+                        while(true){
+                            if(stack.length == 0){
+                                break;
+                            }
+                            temp2 = stack[stack.length-1];
+
+                            if(temp2 == &apos;(&apos;){
+                                break;
+                            }
+                            result.push(stack.pop());
+                        }
+                        //压入
+                        stack.push(now);
+                    }
+                }
+            }
+        }
+    }
+    //stack中全部输出
+    while(stack.length&gt;0){
+        result.push(stack.pop());
+    }
+    return result;
+}
+
+//是不是数字
+function isnum(a){
+    if(a == &apos;(&apos; || a == &apos;)&apos; || a == &apos;+&apos; || a == &apos;-&apos; || a == &apos;*&apos; || a == &apos;/&apos;){
+        return false;
+    }
+    return true;
+}
+//测试
+//var h = create(&apos;9+(3-1)*3+10/2&apos;.split(&apos;&apos;));//数字10被分为1,0
+var h = create([&apos;9&apos;,&apos;+&apos;,&apos;(&apos;,&apos;3&apos;,&apos;-&apos;,&apos;1&apos;,&apos;)&apos;,&apos;*&apos;,&apos;3&apos;,&apos;+&apos;,&apos;10&apos;,&apos;/&apos;,&apos;2&apos;]);
+//h:9 3 1 - 3 * + 10 2 / +
+//[&quot;9&quot;, &quot;3&quot;, &quot;1&quot;, &quot;-&quot;, &quot;3&quot;, &quot;*&quot;, &quot;+&quot;, &quot;10&quot;, &quot;2&quot;, &quot;/&quot;, &quot;+&quot;]
+
+//var h = create(&apos;1+2-5*(5-4)*6-(6-1)&apos;.split(&apos;&apos;));
+//h:1 2 + 5 5 4 - * 6 * - 6 1 - -
+//[&quot;1&quot;, &quot;2&quot;, &quot;+&quot;, &quot;5&quot;, &quot;5&quot;, &quot;4&quot;, &quot;-&quot;, &quot;*&quot;, &quot;6&quot;, &quot;*&quot;, &quot;-&quot;, &quot;6&quot;, &quot;1&quot;, &quot;-&quot;, &quot;-&quot;]
+</code></pre><h2 id="逆波兰式计算"><a href="#逆波兰式计算" class="headerlink" title="逆波兰式计算"></a>逆波兰式计算</h2><pre><code>//逆波兰式运算
+//str 是右序表达式的数组
+function result(str){
+var len = str.length;
+
+var stack = [];//数值放入栈，遇到符号，出栈两个数字，计算
+    for(var i = 0;i&lt;len;i++){
+        if(str[i] != &apos;+&apos; &amp;&amp; str[i] != &apos;-&apos; &amp;&amp; str[i] != &apos;*&apos; &amp;&amp; str[i] != &apos;/&apos;){
+            stack.push(str[i]);
+        }else{
+            //字符转数字
+            var p2 = Number(stack.pop());//注意此处顺序，先pop是被操作数（被加减乘除）
+            var p1 = Number(stack.pop());
+
+            switch(str[i]){
+                case &apos;+&apos;:
+                    p1 +=p2;
+                    break;
+                case &apos;-&apos;:
+                    p1 -=p2;
+                    break;
+                case &apos;*&apos;:
+                    p1 *=p2;
+                    break;
+                case &apos;/&apos;:
+                    p1 /=p2;
+                    break;
+
+            }
+            stack.push(p1);
+        }
+
+    }
+    return stack.pop();
+
+
+}
+var s = result([&quot;9&quot;, &quot;3&quot;, &quot;1&quot;, &quot;-&quot;, &quot;3&quot;, &quot;*&quot;, &quot;+&quot;, &quot;10&quot;, &quot;2&quot;, &quot;/&quot;, &quot;+&quot;]);//20
+var s1 = result([&quot;1&quot;, &quot;2&quot;, &quot;+&quot;, &quot;5&quot;, &quot;5&quot;, &quot;4&quot;, &quot;-&quot;, &quot;*&quot;, &quot;6&quot;, &quot;*&quot;, &quot;-&quot;, &quot;6&quot;, &quot;1&quot;, &quot;-&quot;,   &quot;-&quot;]);//-32
+console.log(s+&quot;::::&quot;+s1);
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+    </nav></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 kevinlsui
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+             post: ".article-entry a[href], .copyright a[href]", 
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>

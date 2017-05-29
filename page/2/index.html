@@ -1,0 +1,2182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="kevinlsui">
+
+
+    
+    
+
+
+<meta name="description" content="kevinlsui,java,blog,hexo,github,yelee,js,前端,学习总结,分享,技术博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kevinlsui Code">
+<meta property="og:url" content="http://kevinlsui.github.io/page/2/index.html">
+<meta property="og:site_name" content="Kevinlsui Code">
+<meta property="og:description" content="kevinlsui,java,blog,hexo,github,yelee,js,前端,学习总结,分享,技术博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kevinlsui Code">
+<meta name="twitter:description" content="kevinlsui,java,blog,hexo,github,yelee,js,前端,学习总结,分享,技术博客">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+
+
+    <link rel="shortcut icon" href="/apple-touch-icon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <style> .article { opacity: 0;} </style>
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Kevinlsui Code</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: true,
+        isPost: false,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">kevinlsui</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">学习、总结、分享、进步</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">归档</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/book/">书籍推荐</a></li>
+                        
+                            <li><a href="/todolist/">todoList</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java高级/">java高级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk源码/">jdk源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大话数据结构/">大话数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小技巧/">小技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记/">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决/">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Java后台开发工程师</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">kevinlsui</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">kevinlsui</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">学习、总结、分享、进步</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">归档</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/book/">书籍推荐</a></li>
+                
+                    <li><a href="/todolist/">todoList</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
+</nav>
+      <div class="body-wrap"><article id="post-Css3Rem" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/21/Css3Rem/" class="article-date">
+      <time datetime="2017-03-21T04:17:10.000Z" itemprop="datePublished">2017-03-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/21/Css3Rem/">使用css3:rem,让屏幕适配变得简单起来</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>最近写前端页面比较多，屏幕适配比较麻烦，写一堆的@media,min-width等，经同事指导，使用了css3的rem，感觉不能再爽了！！！<br>
+          
+      
+    </p></div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/css/">css</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+    </div>
+      
+        <p class="article-more-link">
+          <a href="/2017/03/21/Css3Rem/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-DynamicProxy" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/15/DynamicProxy/" class="article-date">
+      <time datetime="2017-03-15T13:17:30.000Z" itemprop="datePublished">2017-03-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/15/DynamicProxy/">jdk动态代理</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Java通过Proxy类实现的动态代理，使用上是比较简单的，但是内部实现比较复杂，这里是一个思路整理。</p>
+<pre><code>//1.真实对象
+RealSubject realSubject = new RealSubject();
+//handler对象
+InvocationHandler handler = new DynamicSubject(realSubject);
+//代理对象
+Subject subject = (Subject) Proxy.newProxyInstance(classType.getClassLoader(),
+                  realSubject.getClass().getInterfaces(),handler);
+//代理对象执行方法                  
+subject.work();
+</code></pre><p>（主要是针对网友博客的理解，后续自己深入研究源码）</p>
+<ul>
+<li>Proxy.newProxyInstance()方法，通过参数一（loader）,参数二（真实类的接口数组），动态生成一个代理类$Proxy0,继承了Proxy,实现Subject(真实类的接口数组)。</li>
+</ul>
+<blockquote>
+<p>public final class $Proxy0 extends Proxy implements Subject</p>
+</blockquote>
+<ul>
+<li><p>返回的代理对象subject是Subject接口类型的对象，该对象会有Subject接口中定义的work()方法，所以可以执行subject.work();</p>
+</li>
+<li><p>类$Proxy的work方法实现如下,调用了我们在Proxy.newProxyInstance()方法的第三个参数（handler）的invoke方法，至此，即是调用了我们在实现InvocationHandler接口时，自己写的逻辑（h.invoke()）。</p>
+</li>
+</ul>
+<blockquote>
+<p>super.h.invoke(this, m3, null); </p>
+</blockquote>
+<ul>
+<li>需要解释的是，$Proxy继承了Proxy，在调用Proxy.newProxyInstance()生成代理对象时，第三个参数会通过构造方法注入到代理对象中，从而会有上一步的h.invoke()执行。</li>
+</ul>
+<p>代码：</p>
+<pre><code>public $Proxy0(InvocationHandler invocationhandler)
+{
+  super(invocationhandler);
+}
+========================================================
+class Proxy
+{
+   protected InvocationHandler h;
+   protected Proxy(InvocationHandler h) 
+   {
+         this.h = h;
+   }
+}
+</code></pre><ul>
+<li>动态生成$Proxy0，这块应该是源码研究的难点，后续自己可以挑战下。</li>
+</ul>
+<h2 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h2><pre><code>package com.kevinlsui.proxy;
+
+public interface Subject {
+    void work();
+}
+</code></pre><hr>
+<pre><code>package com.kevinlsui.proxy;
+
+public class RealSubject implements Subject{
+    @Override
+    public void work() {
+        System.out.println(&quot;需要代理的方法...&quot;);
+
+    }
+}
+</code></pre><hr>
+<pre><code>package com.kevinlsui.proxy;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
+public class ProxyHandler implements InvocationHandler{
+
+    Object object ;
+    public Object blind(Object obj){
+        object = obj;
+        return Proxy.newProxyInstance(this.getClass().getClassLoader(), obj.getClass().getInterfaces(), this);
+    }
+
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args)
+            throws Throwable {
+        System.out.println(&quot;真正执行前，做一些处理，比如日志记录&quot;);
+        Object obj = method.invoke(object, args);//实际执行的方法
+        System.out.println(&quot;真正执行后，做一些处理&quot;);
+        return obj;
+    }
+
+}
+</code></pre><hr>
+<pre><code>package com.kevinlsui.proxy;
+
+public class ProxyTest {
+
+    public static void main(String[] args) {
+        RealSubject real = new RealSubject();//实际业务代码
+        ProxyHandler handler = new ProxyHandler();//帮助类，把切片方法写在这个类中
+        //代理类的对象，动态生成的代理类实现Subject接口，继承Proxy类，在生成对象时，把handler对象作为属性注入到代理对象
+        Subject proxy = (Subject) handler.blind(real);
+        //在代理对象执行对应方法时，实际是使用handler中的invoke方法，达到代理的效果。
+        proxy.work();
+    }
+
+}
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jdk源码/">jdk源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-01" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/11/01/" class="article-date">
+      <time datetime="2017-03-11T12:17:30.000Z" itemprop="datePublished">2017-03-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/11/01/">动态规划——01背包问题</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="入门博客"><a href="#入门博客" class="headerlink" title="入门博客"></a>入门博客</h2><p><a href="http://m.blog.csdn.net/article/details?id=7722810" target="_blank" rel="external">推荐博客1</a></p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><blockquote>
+<p>01背包是在M件物品取出若干件放在空间为W的背包里，每件物品的体积为C1，C2，…，Cn，与之相对应的价值为W1,W2，…，Wn.求解将那些物品装入背包可使总价值最大。</p>
+</blockquote>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code>package com.kevinlsui.dp;
+
+/*
+ * 动态规划：01背包问题
+ * 入门博客：http://m.blog.csdn.net/article/details?id=7722810
+ */
+public class DpTest {
+
+    public static void main(String[] args) {
+        int m = 10;//背包总容量10
+        int n = 3; //待选物品为3个
+        int[] w = {3,4,5}; //三个物品的容量数组
+        int[] p = {4,5,6};//三个物品的价值数组
+
+        int[][]  c = bulidArry(m,n,w,p);//c[n][m]表示n个物品，m容量的背包最大价值
+        System.out.println(&quot;最佳方案：&quot;+c[2][10]);//i下标从零开始的
+        System.out.println(&quot;数组展示：&quot;);
+        for(int i = 0;i&lt;n;i++){
+            for(int j = 0; j&lt;m ; j++){
+                System.out.print(c[i][j]+&quot; &quot;);
+            }
+            System.out.println();
+        }
+
+    }
+
+    /*
+     * c[n][m]表示n个物品，m容量的背包最大价值
+     * 
+     */
+    private static int[][] bulidArry(int m, int n, int[] w, int[] p) {
+
+
+        int[][] c = new int[n][m+1];//着重解释，此处必须是m+1，因为后续计算需要用到背包容量等于0时的数据,故有m+1列
+        for(int k = 0;k &lt; n;k++){
+            c[k][0] = 0;
+        }
+
+
+        /*
+         * 以下循环解释：
+         * 1.只有物品1，背包的容量从0到10，分别的最大价值（后面的计算会用到）
+         * 2.有物品1，物品2，背包的容量从0到10，分别的最大价值
+         * 3.物品1,2,3，背包的容量从0到10，分别的最大价值
+         * 其中，核心理解：
+         * 对于c[i][j]的最大价值，
+         * 我可以不放这物品，把资源（背包空间）留给(i-1)个物品，看下最大价值c[i-1][j]；
+         * 也可以放这个物品（如果能放下），获得价值p[i],但是占用资源w[i]，留给（i-1）个物品，资源剩下(j-w[i]),此时的最大价值为 p[i]+c[i-1][j-w[i]]
+         * 比较这两种方式哪一个更优
+         */
+        for(int i = 0;i &lt; n ;i++){
+            for(int j= 1;j &lt; m+1;j++){//j从1开始
+                if(i==0){//第一行
+                    if(w[i] &gt; j){
+                        c[i][j] = 0;
+                    }else{
+                        c[i][j] = p[i];
+                    }
+                }else{//从第二行开始
+                    if(w[i] &gt; j){//放不下物品i,此时直接就是：把资源（背包空间）留给(i-1)个物品，看下最大价值c[i-1][j]
+                        c[i][j] = c[i-1][j];
+                    }else{//两种情况比较
+                        c[i][j] = c[i-1][j] &gt; c[i-1][j-w[i]]+p[i] ? c[i-1][j]:c[i-1][j-w[i]]+p[i];
+                    }
+
+                }
+
+            }
+
+        }
+
+        return c;
+    }
+
+}
+</code></pre><h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><pre><code>最佳方案：11
+数组展示：
+0 0 0 4 4 4 4 4 4 4 4 
+0 0 0 4 5 5 5 9 9 9 9 
+0 0 0 4 5 6 6 9 10 11 11 
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态规划/">动态规划</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-AboutHandlerbarsjs" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/11/AboutHandlerbarsjs/" class="article-date">
+      <time datetime="2017-03-11T10:10:30.000Z" itemprop="datePublished">2017-03-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/11/AboutHandlerbarsjs/">Handlerbars.js中if-else对字符串&#39;NULL&#39;不起作用问题解决</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>这次解决问题，给我的启发：克服源码恐惧，代码都是人写出来的，敢于阅读源码，敢于修改源码。<br>
+          
+      
+    </p></div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/handlerbarsjs/">handlerbarsjs</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/问题解决/">问题解决</a></li></ul>
+    </div>
+      
+        <p class="article-more-link">
+          <a href="/2017/03/11/AboutHandlerbarsjs/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-DuShu02" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/01/DuShu02/" class="article-date">
+      <time datetime="2017-03-01T04:32:30.000Z" itemprop="datePublished">2017-03-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/01/DuShu02/">Java并发编程的艺术——读书笔记</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <a id="more"></a>
+<h2 id="Java内存模型的基础"><a href="#Java内存模型的基础" class="headerlink" title="Java内存模型的基础"></a>Java内存模型的基础</h2><h3 id="并发编程模型中的两个关键问题"><a href="#并发编程模型中的两个关键问题" class="headerlink" title="并发编程模型中的两个关键问题"></a>并发编程模型中的两个关键问题</h3><p>1.线程间如何通信？<br><strong>通信</strong>是指线程之间以何种机制来交换信息。<br>方法一：共享内存；线程间共享程序的公共状态，通过读写内存中的公共状态进行隐式通信。Java语言就是采用的共享内存模型。<br>方法二：消息传递。线程之间没有公共状态，线程之间必须通过发送消息来显示进行通信。</p>
+<p>2.线程间如何同步？<br><strong>同步</strong>是指程序中用于控制不同线程间操作发生相对顺序的机制。<br>共享内存并发模型中，同步是显式进行的，程序猿必须显式指定某个方法或者某段代码需要在线程之间互斥执行。<br>消息传递并发模型中，由于消息的发送必须在消息的接收之前，因此同步是隐式的。</p>
+<p>Java的并发是采用的共享内存模型，通信总是隐式进行的，整个通信过程对程序猿是完全透明的。</p>
+<h3 id="Java内存模型的抽象结构"><a href="#Java内存模型的抽象结构" class="headerlink" title="Java内存模型的抽象结构"></a>Java内存模型的抽象结构</h3><p>由上可知，Java采用的是共享内存模型，所以通信是由Java内存模型（JMM）控制，通过读写内存中的公共状态进行隐式通信，JMM决定一个线程对共享变量的写入何时对另外一个线程可见。</p>
+<p>注意：<strong>共享变量</strong>通常是指存放在堆内存中的实例域、静态域、数组元素。而局部变量、方法定义参数、异常处理参数是不会在线程之间共享的，也就不存在相应的线程安全问题。</p>
+<p>JMM定义了线程和主内存之间的抽象关系：<br>线程之间的共享变量存储在主内存中，每个线程都有各自的一个私有的本地内存，本地内存中存储了该线程用到的读写共享变量的副本。</p>
+<p>通信过程：线程A修改本地内存中的共享变量副本，同步到主内存中，线程B读取主内存中的共享变量到自己的本地内存，从而实现<strong>读写内存中的公共状态进行隐式通信</strong>。</p>
+<h3 id="从源代码到指令序列的重排序"><a href="#从源代码到指令序列的重排序" class="headerlink" title="从源代码到指令序列的重排序"></a>从源代码到指令序列的重排序</h3><p>在执行程序时，为了提高性能，编译器和处理器常常会对指令做重排序。</p>
+<ol>
+<li>编译器优化的重排序；编译器在<strong>不改变单线程程序语义</strong>的前提下，重新安排语句顺序</li>
+<li>指令级并行的重排序；</li>
+<li>内存系统的重排序。</li>
+</ol>
+<p>上述的1属于编译器重排序，23属于处理器重排序。<br>在多线程环境，重排序可能会导致内存可见性问题，也就是出现一些错误。<br>对于编译器重排序，JMM的编译器重排序规则会禁止特定类型的编译器重排序。<br>对于处理器重排序，JMM的处理器重排序规则会要求Java编译器在生成指令序列时，插入特定类型的<strong>内存屏障</strong>指令，通过该内存屏障来禁止特定类型的处理器重排序。</p>
+<p>注意：java是一次编译，到处运行的语言，所以对于JMM这一语言级别的内存模型，它确保在不同的编译器和不同的处理器平台上，通过禁止特定类型的编译器重排和处理器重排序，为程序猿提供一致的内存可见性保证。</p>
+<h3 id="并发编程模型的分类"><a href="#并发编程模型的分类" class="headerlink" title="并发编程模型的分类"></a>并发编程模型的分类</h3><p>现代的处理器，使用写缓冲区临时保存向内存写入的数据。写缓冲区可以保证指令流水线持续运行，避免由于处理器停顿下来等待向内存写入数据而产生的延迟。同时，通过以批处理的方式刷新写缓冲区，以及合并写缓冲区中对同一内存地址的多次写，减少对内存总线的占用。<br>虽然写缓冲区有这么多好处，但是每个处理器上的写缓冲区，仅仅对他所在的处理器可见，这一特性对内存操作的执行顺序产生重要的影响：处理器对内存的读、写操作的执行顺序，不一定与内存实际发生的读写操作顺序一致。<br>示例中的，由于存在以上特性，导致x=y=0。</p>
+<p>也是由于现代的处理器都会使用写缓冲区，因此现代的处理器都会允许对写-读操作进行重排序。（都不允许对存在数据依赖的操作做重排序。）</p>
+<p>为了保证内存的可见性，也就是不出现上述的重排序带来的不良影响，Java编译器在生成指令序列的适当位置会插入内存屏障指令来禁止特定类型的处理器重排序。<br>JMM把内存屏障指令分为4类，LoadLoad Barriers;StoreStore Barriers;LoadStore Barriers;StoreLoad Barriers。其中最后一个，StoreLoad Barriers 是一个全能的屏障，它同时支持其他三个屏障的效果，也是现在大多数处理器都支持的。<br>但是执行该屏障开销昂贵，因为当前处理器通常要把写缓冲区的数据全部刷新到内存中。</p>
+<h3 id="happens-before简介"><a href="#happens-before简介" class="headerlink" title="happens-before简介"></a>happens-before简介</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/读书笔记/">读书笔记</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-DuShu01" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/02/11/DuShu01/" class="article-date">
+      <time datetime="2017-02-11T14:02:30.000Z" itemprop="datePublished">2017-02-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/11/DuShu01/">Java多线程编程核心技术——读书笔记</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <a id="more"></a>
+<h2 id="Java多线程技能"><a href="#Java多线程技能" class="headerlink" title="Java多线程技能"></a>Java多线程技能</h2><ul>
+<li><strong>进程</strong>是操作系统结构的基础，是一次程序的执行，是一个程序及其数据在处理机上顺序执行时所发生的活动，是程序在一个数据集合上运行的过程，他是系统进行资源分配和调度的一个独立单位。</li>
+<li>生活中，我们可以简单的把一个运行中的exe程序理解成“进程”</li>
+<li><strong>线程</strong>是在进程中独立运行的子任务，一个进程正在运行时至少会有一个线程。</li>
+<li>关于进程与线程的解释，可以看<a href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html" target="_blank" rel="external">这篇文章</a></li>
+<li>疑问：一个jvm进程中有多个线程，多核的cpu，某一个时刻，某一cpu可以运行某一进程，是不是说这多个线程只能在某一个核的该jvm进程的时间片内运行？<a href="http://blog.csdn.net/maosijunzi/article/details/42527553" target="_blank" rel="external">网友解释</a></li>
+<li>Thread.currentThread().getName();当前线程名</li>
+<li>实现线程，1.继承Thread 2.实现Runnable,java单继承的原因，优先考虑实现接口</li>
+<li>public class Thread implements Runnable ; 类Thread源码中继承了Runnable接口</li>
+<li>使用多线程时，代码顺序并不是实际执行顺序，启动多个线程（start方法），cpu空闲时会随机选取一个准备好的线程运行。</li>
+<li>启动线程，必须调用start(),如果直接thread.run(),则不会开一个新的线程，直接是在main线程中运行</li>
+<li>Thread类的构造方法，Thread(Runnable target),不光可以传入Runnable接口的对象，也可以传入一个Thread类的对象，这样做是相当于将一个Thread对象中的run方法交由其他的线程进行调度。</li>
+<li>普通方法加synchronized关键字，提供是一个对象锁</li>
+<li>static方法加synchronized关键字，提供的是class锁</li>
+<li>isAlive()判断当前线程是否存活</li>
+<li>sleep(s)的作用是让当前正在执行的线程休眠s秒，不交出所获得的锁。</li>
+<li>getId()是去的线程的唯一标识</li>
+<li>停止线程。方法一：Thread.stop()方法已经被废弃，最好不用，原因是暴力停止的不安全，可能导致一些资源没有释放，带来死锁。并且，调用stop(),会产生ThreadDeath异常。方法二：Thread.interrupt()方法，推荐方法。方法三：设置退出标志，使得正常退出，也就是当run方法运行完后线程终止</li>
+<li>thread.interrupt()将某个线程终止，含义是：将这个线程的中断标志设置为true,具体去终止线程，需要在该线程中去判断这个中断标志，然后结束代码</li>
+<li>判断线程是否中断，static interrupted(),静态方法，无论调用者是谁，都返回的是<strong>当前线程</strong>的中断状态，具体表现是，在main方法中，thread.interrupted(),具体线程thread是已经调用中断的，返回false,即返回是main线程的中断状态；另外一个特点是，调用一次本方法，中断标志会复位为false</li>
+<li>isInterrupted(),不是static,调用者的中断状态，也没有擦除效果，一般使用这个方法。</li>
+<li>在线程内部，通过查看中断标志为true后，可以抛出一个异常，达到后续代码不运行的目的</li>
+<li>同上，可以使用return达到同样目的</li>
+<li>在线程sleep状态下中断，会进入catch语句，并清除中断标志，变为false</li>
+<li>线程中断后，再遇到sleep方法，会进入异常代码</li>
+<li>suspend()暂停，resume()恢复。均废弃</li>
+<li>yield(),放弃cpu资源，时间未知。</li>
+<li>setPriority()设置线程优先级，优先级具有随机性</li>
+<li>thread.setDaemon(true),将thread设置为守护线程，从而main结束时thread也结束</li>
+</ul>
+<h2 id="对象及变量的并发访问"><a href="#对象及变量的并发访问" class="headerlink" title="对象及变量的并发访问"></a>对象及变量的并发访问</h2><ul>
+<li>方法内部的变量，是线程安全的。因为每个线程调用这个方法时都会创建一份私有变量。</li>
+<li>多个线程访问同一个对象的实例变量（属性），则存在“非线程安全”问题。</li>
+<li>多个线程访问多个对象（同一个class的对象）的static(静态)变量，则存在“非线程安全”问题。</li>
+<li>多个线程，访问同一个对象的同步（synchronized）普通方法，同一时间，只有一个线程可以执行该方法，是同步的，是线程安全的</li>
+<li>多个线程，访问多个对象（同class）的同一个同步（synchronized）方法,是异步的，由于每个对象一个同步锁。即同步普通方法锁的对象。</li>
+<li>多线程环境，某一线程获取同步方法的锁（对象锁），其它线程可以访问该对象的非同步方法。</li>
+<li>多线程环境，某一线程获取某一同步方法的锁（对象锁），其它线程不能访问该对象的其它同步方法。即同一个对象，多个同步方法是用的同一个对象锁。</li>
+<li>关键字synchronized拥有锁重入的功能：当一个线程获取到该对象的锁，执行代码过程中，再次获取锁是可以的，即一个同步方法中再去调用该对象其它同步方法，是可以的。自己可以获取自己内部的锁</li>
+<li>如果关键字synchronized不具备锁重入功能，则可能造成 <strong>死锁</strong>。</li>
+<li>当存在父子类继承关系时，子类是完全可以通过“可重入锁”调用父类的同步方法，这是由于java的继承特性。</li>
+<li>当一个线程执行的代码出现异常，其所持有的锁会自动释放。</li>
+<li>synchronized同步代码块（同步语句块），相比同步方法，会灵活点</li>
+<li>synchronized(this){//coding};也是对象锁</li>
+<li>synchronized(任意对象非this){//coding}；锁的是（）中的对象，多线程竞争同一个对象，则同步。</li>
+<li>synchronized(任意对象非this){//coding}；解决了前两种，同一对象只用一个锁的问题，增加了灵活性</li>
+<li>静态同步方法（static synchronized）、synchronized(Class.class),锁的是class,与普通同步方法的对象锁不是同一个，即同一对象的静态同步方法和普通同步方法是异步的。</li>
+<li>多线程，多个对象，如果是锁的class,则是同步</li>
+<li>JVM有一个String常量池，使用synchronized(String str){}可能带来一些例外，需要注意。</li>
+<li><strong>使用jdk自带工具检查死锁情况</strong>，cmd,jps(查看进程id列表),jstack pid (查看该进程的情况)</li>
+<li>内部类，静态内部类的synchronized用法与常规的基本相同</li>
+<li>synchronized(任意对象){}，当这个对象改变了，会出现异步的可能（比如字符串对象，赋新值），但是只是改这个对象的属性，还是同步的</li>
+<li>关键字volatile，作用一：使变量在多个线程间可见；作用二：禁止指令重排。</li>
+<li>作用一解释：关键字volatile会强制从公共堆栈中取得变量的值，而不是从线程私有数据栈中取得变量的值。</li>
+<li>volatile的缺点是：不支持原子性</li>
+<li>可以使用volatile加上原子类，保证多线程安全问题</li>
+<li>原子类 AtomicInteger…</li>
+<li>关键字synchronized可以使得多线程访问同一资源具有同步性，而且它还具有将线程工作内存中的私有变量与公共内存中的变量同步的功能，也就是保证了可见性。</li>
+</ul>
+<h2 id="等待-通知机制"><a href="#等待-通知机制" class="headerlink" title="等待/通知机制"></a>等待/通知机制</h2><ul>
+<li>多线程之间可以通过共享变量，来实现通信，但是不够灵活。</li>
+<li>等待/通知机制，wait(),notify()…</li>
+<li>wait(),是object的方法，该方法用来将<strong>当前线程</strong>置入“预执行队列”，并且在调用wait的代码行处停止执行，直到接到通知或者被中断。</li>
+<li>调用wait前必须获取到该对象的对象级别锁，调用时会释放该锁，若无锁调用，会抛出异常，IllegalMonitorStateException。</li>
+<li>notify()也是object的方法，如果有多个线程等待，则由线程规划器随机挑选其中一个呈现wait的线程，对其发出notify通知，使其可以进去等待锁的状态。</li>
+<li>notify调用前，线程也必须获取该对象的对象级别的锁，否则抛出IllegalMonitorStateException。</li>
+<li>调用notify后，不能及时释放锁，必须等该线程执行完。</li>
+<li>notifyAll(),唤醒所有等待这一共享资源的线程。</li>
+<li>wait状态的线程，被中断interrupt(),会抛出异常</li>
+<li>wait(long),等待long指定的时间，如果期间没有被唤醒，则超出这个时间自动唤醒</li>
+<li>消费者和生产者问题</li>
+<li>通过管道进行线程间的通信：PipedInputStream PipedInputStream PipedReader PipedWriter</li>
+<li>join()方法</li>
+<li>ThreadLocal的使用</li>
+</ul>
+<h2 id="Lock的使用"><a href="#Lock的使用" class="headerlink" title="Lock的使用"></a>Lock的使用</h2><h2 id="定时器的使用"><a href="#定时器的使用" class="headerlink" title="定时器的使用"></a>定时器的使用</h2><h2 id="单例模式与多线程"><a href="#单例模式与多线程" class="headerlink" title="单例模式与多线程"></a>单例模式与多线程</h2><h2 id="拾遗增补"><a href="#拾遗增补" class="headerlink" title="拾遗增补"></a>拾遗增补</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/读书笔记/">读书笔记</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-DahuaJS" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/01/10/DahuaJS/" class="article-date">
+      <time datetime="2017-01-10T12:17:30.000Z" itemprop="datePublished">2017-01-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/10/DahuaJS/">《大话数据结构》算法js实现</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>列表：</p>
+<ol>
+<li>快速排序</li>
+<li>归并排序</li>
+<li>冒泡排序</li>
+<li>简单选择排序</li>
+<li>直接插入排序</li>
+<li>希尔排序</li>
+<li>堆排序</li>
+<li>字符串匹配的朴素算法</li>
+<li>kmp模式匹配算法</li>
+<li>逆波兰式运算</li>
+<li>逆波兰式生成</li>
+<li>斐波那契数列</li>
+<li>树的遍历（先序，中序，后序）</li>
+<li>图的遍历（BFS/DFS）</li>
+</ol>
+<pre><code>//快速排序
+function quickSort(arr,min,max){
+    if(min &lt; max){
+        var len1 = min;
+        var len2 = max;
+
+        //选取基数优化（首尾中间值，取中间大小的值）
+        var mid = min + Math.floor((max-min)/2)
+        if(arr[mid] &gt; arr[max]){
+            arr[max] = arr[mid]+arr[max];
+            arr[mid] = arr[max]-arr[mid];
+            arr[max] = arr[max]-arr[mid];
+        }
+        if(arr[min] &gt; arr[max]){
+            arr[max] = arr[min]+arr[max];
+            arr[min] = arr[max]-arr[min];
+            arr[max] = arr[max]-arr[min];
+        }
+        if(arr[mid] &gt; arr[min]){
+            arr[min] = arr[mid]+arr[min];
+            arr[mid] = arr[min]-arr[mid];
+            arr[min] = arr[min]-arr[mid];
+        }
+
+        //基数左右两侧排序
+        var temp = arr[min];
+        while(min&lt;max){
+
+            while(min &lt; max &amp;&amp; arr[max] &gt;= temp){
+                max--;
+            }
+            arr[min] = arr[max];
+
+            while(min&lt;max &amp;&amp; arr[min] &lt;= temp){
+                min++;
+            }
+            arr[max] = arr[min];
+
+
+        }
+        arr[min] = temp;
+
+        //递归
+        quickSort(arr,len1,min-1);
+        quickSort(arr,min+1,len2);
+    }
+
+}
+
+var a = [12,2,69,1,27,111,19,15,100,1];
+quickSort(a,0,a.length-1);
+for(var i in a){
+console.log(a[i]);
+}
+
+//归并排序
+
+function mergeSort(arr,min,max){
+    if(min &lt; max){//临界条件
+        var mid = min+Math.floor((max-min)/2);
+        mergeSort(arr,min,mid);
+        mergeSort(arr,mid+1,max);
+        merge(arr,min,mid,max);
+
+    }
+
+}
+function merge(arr,min,mid,max){
+    var temparr = [];
+    var tempindex = min;
+    var min2 = min;
+    var right = mid+1;
+    while(min&lt;=mid &amp;&amp; right &lt;= max){
+        if(arr[min]&lt;=arr[right]){
+            temparr[tempindex++] = arr[min++];
+        }else{
+            temparr[tempindex++] = arr[right++];
+        }
+    }
+
+    while(min &lt;= mid){
+        temparr[tempindex++] = arr[min++];
+    }
+    while(right &lt;= max){
+        temparr[tempindex++] = arr[right++];
+    }
+
+    while(min2&lt;= max){
+        arr[min2] = temparr[min2++];
+    }
+
+}
+
+var a = [12,2,69,1,27,111,19,15,100,1];
+mergeSort(a,0,a.length-1);
+for(var i in a){
+console.log(a[i]);
+}
+
+//冒泡排序
+function Sort1(arr){
+    var len = arr.length;
+    if(len &gt; 1){
+        var flag = true; //优化
+        for(var i = 0 ; i &lt; len &amp;&amp; flag;i++){
+            flag = false;
+            for(var j = 0 ; j &lt; len-i-1;j++){
+
+                if(arr[j] &gt; arr[j+1]){
+                    arr[j] = arr[j]^arr[j+1];
+                    arr[j+1] = arr[j]^arr[j+1];
+                    arr[j] = arr[j]^arr[j+1];
+                    flag = true;
+
+                }
+            }
+        }
+
+    }
+
+}
+var a = [12,2,69,1,27,111,19,15,100,1];
+Sort1(a);
+for(var i in a){
+console.log(a[i]);
+}
+
+//简单选择排序
+
+function Sort2(arr){
+    var len = arr.length;
+    if(len &gt; 1){
+        for(var i = 0 ; i &lt; len-1; i++){
+            var k = i;
+            for(var j = i+1; j &lt; len ; j++){
+                if(arr[j] &lt; arr[k]){
+                    k = j;
+                }
+
+            }
+
+            if(i != k){
+                arr[i]  = arr[k]^arr[i];
+                arr[k]  = arr[k]^arr[i];
+                arr[i]  = arr[k]^arr[i];
+            }
+
+
+        }
+    }
+}
+var a = [12,2,69,1,27,111,19,15,100,1];
+Sort2(a);
+for(var i in a){
+console.log(a[i]);
+}
+
+//直接插入排序
+function Sort3(arr){
+    var len = arr.length;
+    if(len &gt; 1){
+        var j ;
+        for(var i = 1;i&lt;len;i++){
+            var temp = arr[i];
+
+            for(j = i-1;j &gt;= 0; j--){
+                if(arr[j] &gt; temp){
+                    arr[j+1] = arr[j];
+                }else{
+                    bleak;
+                }
+            }
+            if((j+1) != i){
+
+                arr[j+1] = temp;
+            }
+
+        }
+
+
+    }
+
+}
+
+var a = [12,2,69,1,27,111,19,15,100,1];
+Sort3(a);
+for(var i in a){
+console.log(a[i]);
+}
+
+//希尔排序
+function shellSort(arr){
+    var len = arr.length;
+    if(len &gt; 1){
+        var gap = 1;
+        while(gap &lt; len/5){
+            gap = gap*5 +1;
+        }
+
+        for(gap;gap&gt;0;gap = Math.floor(gap/5)){
+            for(var i = gap;i&lt;len;i++){
+                var temp = arr[i];
+                var j;
+                for(j=i-gap;j&gt;=0;j-=gap){
+                    if(arr[j]&gt;temp){
+                        arr[j+gap] = arr[j];
+                    }else{
+                        break;
+                    }
+
+                }
+                if(j+1 != i){
+                    arr[j+gap] = temp;
+                }
+
+            }
+
+        }
+
+    }
+
+}
+var a = [12,2,69,1,27,111,19,15,100,1];
+shellSort(a);
+for(var i in a){
+console.log(a[i]);
+}
+
+//堆排序
+
+function HeapSort(arr){
+    var len = arr.length;
+    if(len &gt; 1){
+        //构建最大堆,完全二叉树的性质，这里是遍历所有的含有子结点的结点，从最低层，最右边开//始，直到根结点。
+        for( var i = Math.floor(len/2)-1;i&gt;=0;i--){
+            heapify(arr,i,len);
+        }
+
+        //排序
+        for(var j = len-1 ; j &gt; 0 ; j--){
+            //已有的最大堆，把最大点（根节点）和最后的一个结点互换
+            var temp = arr[j];
+            arr[j] = arr[0];
+            arr[0] = temp;
+
+            //此时，最后的节点换到根节点位置，需要调整最大堆
+            heapify(arr,0,--len);
+        }
+    }
+}
+
+function heapify(arr,i,len){
+    var left = 2*i+1,right = 2*i+2,largest = i,temp;
+
+    //下标为i的节点，比较他本身，左孩子，右孩子，如果孩子比父节点的大，则交换，并对交换到下方的这个节点继续做判断（递归本方法）
+    if(left &lt; len &amp;&amp; arr[left] &gt; arr[i]){
+        largest = left;
+    }
+
+    if(right &lt; len &amp;&amp; arr[right] &gt; arr[largest]){
+        largest = right;
+    }
+
+    if(largest != i){
+        temp = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = temp;
+        heapify(arr,largest,len);
+    }
+}
+
+
+
+//字符串匹配的朴素算法
+//长字符串s，从下标pos处开始，查找后续是否存在字符串t(仅第一匹配成功的),返回匹配成功的下标，否则返回-1
+function indexof(s,t,pos){
+    var slen = s.length;
+    var tlen = t.length;
+    for(var i = pos;i&lt;=slen-tlen;i++){
+        var j ;
+        for(j=0;j&lt;tlen;j++){
+            if(s.charAt(i+j) != t.charAt(j)){
+                break;
+            }
+        }
+        if(j==tlen){
+            return i;
+        }
+
+    }
+    return -1;
+}
+indexof(&apos;ksdfnnksf&apos;,&apos;nk&apos;,0);
+
+//第二种写法，便于后续理解kmp匹配算法
+function indexof2(s,t,pos){
+    var slen = s.length;
+    var tlen = t.length;
+    var i = pos;
+    var j = 0;
+    while(i &lt; slen &amp;&amp; j &lt; tlen){
+
+        if(s.charAt(i) == t.charAt(j)){
+            i++;
+            j++;
+        }else{
+            i = i-j+1;
+            j = 0;
+
+        }
+
+    }
+    if(j&gt;=tlen){
+        return i-tlen;
+
+    }else{
+        return -1;
+    }
+}
+
+indexof2(&apos;ksdnfnksf&apos;,&apos;nk&apos;,0);
+
+
+//kmp模式匹配算法
+//相比较于朴素算法，减少不必要的重复比较，使得效率更高
+//核心：每轮比较后，使得i不回溯，j值取决于t串内部的重复程度。
+function getNext(t){
+    var next = [];
+
+
+}
+
+
+//逆波兰式运算
+//str 是右序表达式的数组
+function result(str){
+    var len = str.length;
+
+    var stack = [];//数值放入栈，遇到符号，出栈两个数字，计算
+    for(var i = 0;i&lt;len;i++){
+        if(str[i] != &apos;+&apos; &amp;&amp; str[i] != &apos;-&apos; &amp;&amp; str[i] != &apos;*&apos; &amp;&amp; str[i] != &apos;/&apos;){
+            stack.push(str[i]);
+        }else{
+            var p2 = stack.pop();//注意此处顺序，先pop是被操作数（被加减乘除）
+            var p1 = stack.pop();
+
+            switch(str[i]){
+                case &apos;+&apos;:
+                    p1 +=p2;
+                    break;
+                case &apos;-&apos;:
+                    p1 -=p2;
+                    break;
+                case &apos;*&apos;:
+                    p1 *=p2;
+                    break;
+                case &apos;+&apos;:
+                    p1 /=p2;
+                    break;
+
+            }
+            stack.push(p1);
+        }
+
+    }
+    return stack.pop();
+
+
+}
+var s = result([&quot;9&quot;, &quot;3&quot;, &quot;1&quot;, &quot;-&quot;, &quot;3&quot;, &quot;*&quot;, &quot;+&quot;, &quot;10&quot;, &quot;2&quot;, &quot;/&quot;, &quot;+&quot;]);//20
+var s1 = result([&quot;1&quot;, &quot;2&quot;, &quot;+&quot;, &quot;5&quot;, &quot;5&quot;, &quot;4&quot;, &quot;-&quot;, &quot;*&quot;, &quot;6&quot;, &quot;*&quot;, &quot;-&quot;, &quot;6&quot;, &quot;1&quot;, &quot;-&quot;, &quot;-&quot;]);//-32
+console.log(s+&quot;::::&quot;+s1);
+
+//逆波兰式生成
+//仅仅考虑+-*/()
+
+function create(arr){
+    var result = [];
+    var stack = [];
+
+    for(var i = 0 ; i &lt; arr.length;i++){
+        var now = arr[i];
+        if(isnum(now)){
+            result.push(now);//1.数字，直接放入结果数组
+        }else{
+
+            //2.符号相关处理
+            //2.1.左括号直接压入操作符号栈
+            if(now == &apos;(&apos;){
+                stack.push(now);
+            }
+
+            //2.2.右括号，将操作符号栈左括号‘(’之间操作符放入结果数组，抛弃左右括号&apos;(&apos;&apos;)&apos;
+            if(now == &apos;)&apos;){
+                var temp = stack.pop();
+                while(temp != &apos;(&apos;){
+                    result.push(temp);//把操作栈中左括号中间的符号输出
+                    temp = stack.pop();
+                }
+
+            }
+
+            //2.3.加号，减号,乘号，除号
+            //2.3.1.栈为空,或者栈顶为左括号‘(’,直接压入
+            //2.3.2.比较now和栈顶,当now优先级高于（不包括等于）栈顶，直接压入
+            //2.3.3.优先级小于等于栈顶，弹出栈顶压入结果数组，直至栈顶优先级低于（不包括等于）now,或者遇到左括号‘(’,或者操作栈空。此后，将now压入操作符号栈（不是结果数组）
+            //此处只考虑，加减乘除。
+            if(now == &apos;-&apos; || now == &apos;+&apos; || now == &apos;*&apos; || now == &apos;/&apos;){
+                if(stack.length == 0 || stack[stack.length-1] == &apos;(&apos;){
+                    stack.push(now);
+                }else{
+                    var temp2 = stack[stack.length-1];
+
+                    if(now == &apos;*&apos; || now == &apos;/&apos;){
+                        if(temp2 == &apos;*&apos; || temp2 == &apos;/&apos;){
+
+                        result.push(stack.pop());
+
+                        while(true){
+                            if(stack.length == 0){
+                                break;
+                            }
+                            temp2 = stack[stack.length-1];
+
+                            if(temp2 == &apos;(&apos; || temp2 == &apos;+&apos; || temp2 == &apos;-&apos;){
+                                break;
+                            }
+                            result.push(stack.pop());
+                        }
+                        //压入
+                        stack.push(now);
+
+                        }else{//加减，优先级低
+                            stack.push(now);
+                        }
+
+                    }
+
+                    if(now == &apos;+&apos; || now == &apos;-&apos;){
+                        result.push(stack.pop());
+                        while(true){
+                            if(stack.length == 0){
+                                break;
+                            }
+                            temp2 = stack[stack.length-1];
+
+                            if(temp2 == &apos;(&apos;){
+                                break;
+                            }
+                            result.push(stack.pop());
+                        }
+                        //压入
+                        stack.push(now);
+                    }
+
+                }
+            }
+
+
+
+
+        }
+
+    }
+    //stack中全部输出
+    while(stack.length&gt;0){
+        result.push(stack.pop());
+    }
+    return result;
+}
+
+//是不是数字
+function isnum(a){
+    if(a == &apos;(&apos; || a == &apos;)&apos; || a == &apos;+&apos; || a == &apos;-&apos; || a == &apos;*&apos; || a == &apos;/&apos;){
+
+        return false;
+    }
+    return true;
+}
+//测试
+//var h = create(&apos;9+(3-1)*3+10/2&apos;.split(&apos;&apos;));//数字10被分为1,0
+var h = create([&apos;9&apos;,&apos;+&apos;,&apos;(&apos;,&apos;3&apos;,&apos;-&apos;,&apos;1&apos;,&apos;)&apos;,&apos;*&apos;,&apos;3&apos;,&apos;+&apos;,&apos;10&apos;,&apos;/&apos;,&apos;2&apos;]);
+//h:9 3 1 - 3 * + 10 2 / +
+//[&quot;9&quot;, &quot;3&quot;, &quot;1&quot;, &quot;-&quot;, &quot;3&quot;, &quot;*&quot;, &quot;+&quot;, &quot;10&quot;, &quot;2&quot;, &quot;/&quot;, &quot;+&quot;]
+
+//var h = create(&apos;1+2-5*(5-4)*6-(6-1)&apos;.split(&apos;&apos;));
+//h:1 2 + 5 5 4 - * 6 * - 6 1 - -
+//[&quot;1&quot;, &quot;2&quot;, &quot;+&quot;, &quot;5&quot;, &quot;5&quot;, &quot;4&quot;, &quot;-&quot;, &quot;*&quot;, &quot;6&quot;, &quot;*&quot;, &quot;-&quot;, &quot;6&quot;, &quot;1&quot;, &quot;-&quot;, &quot;-&quot;]
+
+//斐波那契数列
+//递归
+function rabbit(n){
+    if(n&lt;0){
+        return &quot;error&quot;;
+    }else if(n&lt;=2){
+        return 1;
+
+    }
+    return rabbit(n-2)+rabbit(n-1);
+
+}
+//非递归
+function rabbit2(n){
+    if(n&lt;0){
+        return &quot;error&quot;;
+    }else if(n&lt;=2){
+        return 1;
+
+    }
+    var temp1 = 1;
+    var temp2 = 1;
+    for(var i = 4;i&lt;=n;i++){
+        var temp2 = temp1+temp2;//新的，两数之和
+        var temp1 = temp2-temp1;//原始temp2的值
+    }
+    return temp1+temp2;
+
+}
+
+//树的遍历
+
+//递归
+function print1(n){
+    console.log(&quot;先序遍历，此处对节点进行操作→→→&quot;+n.value);
+    print1(n.left);
+    //console.log(&quot;中序遍历，此处对节点进行操作→→→&quot;+n.value);
+    print1(n.right);
+    //console.log(&quot;后序遍历，此处对节点进行操作→→→&quot;+n.value);
+
+}
+//调用,root为根节点
+print1(root);
+
+//非递归
+function print2(n){
+    var arr = [];
+
+    while(n != null || arr.length &gt; 0){
+        if(n != null){
+            console.log(&quot;先序遍历，此处对节点进行操作→→→&quot;+n.value);
+            arr.push(n);
+            n = n.left;
+        }else{
+            n = arr.pop();
+            //console.log(&quot;中序遍历，此处对节点进行操作→→→&quot;+n.value);
+            n.right;
+        }
+    }
+
+}
+//先遍历根节点，然后遍历右孩子，最后遍历左孩子。
+function print3(n){
+    var arr = [];
+    var result = [];
+
+    while(n != null || arr.length &gt; 0){
+        if(n != null){
+            result.push(n);
+            arr.push(n);
+            n = n.right;
+        }else{
+            n = arr.pop();
+
+            n.left;
+        }
+    }
+
+    while(result.length &gt; 0 ){
+        console.log(&quot;后序遍历非递归操作：&quot;+result.pop());
+    }
+}
+
+//根据先序数组，生成二叉树，abdh##i##e##cf#j##g##
+
+function createTree(){
+
+    var value = &apos;用户依次输入字符&apos;;
+    if(value != &apos;#&apos;){
+        var node = node.value;
+        node.left = createTree();
+        node.right = createTree();
+    }
+}
+
+
+
+//图的遍历
+//邻接矩阵实现,无向图
+var vertexs = [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;];
+var flag = [false,false,false,false];
+var edges = [
+[0,1,1,0],
+[1,0,0,1],
+[1,0,0,1],
+[0,1,1,0]
+];
+
+//深度优先递归算法
+function DFSTraverse(){
+    for(var i = 0;i&lt;vertexs.length;i++){
+        if(flag[i] == false){
+            DFS(i);
+        }
+
+    }
+
+}
+
+function DFS(i){
+    flag[i] = true;
+
+    for(int j = 0 ;j&lt; vertexs.length ;j++){
+        if(flag[j] == false &amp;&amp; edges[i][j] == 1){
+            DFS(j);
+        }
+
+    }
+}
+
+//广度优先算法（队列）
+
+function BFS(){
+    var arr = [];//数组模拟队列
+    for(var i = 0 ; i &lt; vertexs.length;i++){
+        if(!flag[i]){
+            flag[i] = true;
+
+            arr.push(i);
+            while(arr.length &gt; 0){
+                int j = arr.shift();
+                for(var k = 0;k&lt;vertexs.length ;k++){
+                    if(edges[j][k] == 1 &amp;&amp; !flag[k]){
+                        flag[k] = true;
+                        arr.push(k);
+                    }
+                }
+
+            }
+        }
+
+    }
+}
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大话数据结构/">大话数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-DaHuaSort" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/01/05/DaHuaSort/" class="article-date">
+      <time datetime="2017-01-05T03:17:30.000Z" itemprop="datePublished">2017-01-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/05/DaHuaSort/">大话数据结构_排序</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>关于排序，面试的常考点，网上这类博客写的太好了，尤其是动态图这块，再者使用js编写，便于测试学习。<br><a href="https://gold.xitu.io/post/57dcd394a22b9d00610c5ec8" target="_blank" rel="external">网友博客推荐一</a><br><a href="http://www.jianshu.com/p/1b4068ccd505" target="_blank" rel="external">网友博客推荐二</a><br><a href="http://blog.csdn.net/amazing7/article/details/51603682" target="_blank" rel="external">网友博客推荐三</a></p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<p>假设含有n个记录的序列为{r1,r2,…,rn}，其相应的关键字分别是{k1,k2,…,kn}，需确定1,2,…,n的一种排列p1,p2,…,pn,使其相应的关键字满足Kp1&lt;=Kp2&lt;=…&lt;=Kpn(非递增或非递减)关系，即使得序列成为一个按关键字有序的序列{Rp1,Rp2,….,Rpn},这样的操作就称为<strong>排序</strong>。</p>
+</blockquote>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="排序的稳定性"><a href="#排序的稳定性" class="headerlink" title="排序的稳定性"></a>排序的稳定性</h3><blockquote>
+<p>假设Ki = Kj(1&lt;=i&lt;=n,1&lt;=j&lt;=n,i不等于j),且在排序前的序列中Ri领先于Rj。如果排序后Ri仍然领先于Rj，则称所用的排序算法是<strong>稳定的</strong>，反之，若可能使得排序后的序列中Rj领先Ri,则称所用的排序算法是<strong>不稳定的</strong>。</p>
+</blockquote>
+<p>通俗来说，<br>稳定：如果a原本在b前面，而a=b，排序之后a仍然在b的前面；<br>不稳定：如果a原本在b的前面，而a=b，排序之后a可能会出现在b的后面；</p>
+<p>注意：排序算法是否稳定，是要通过分析后才能得出的；在排序过程中，只要有一组关键字实例发生类似情况，就可以认定此算法是不稳定的了。</p>
+<p>算法稳定性的用途？<br>排序算法如果是稳定的，那么从一个键上排序，然后再从另一个键上排序，第一个键排序的结果可以为第二个键排序所用。（百度百科——排序算法稳定性）【个人感觉有点不太全面，后续总结】</p>
+<h3 id="内排序与外排序"><a href="#内排序与外排序" class="headerlink" title="内排序与外排序"></a>内排序与外排序</h3><blockquote>
+<p>内排序是在排序整个过程中，待排序的所有记录全部被放置在内存中。外排序是由于排序的记录个数太多，不能同时放置在内存，整个排序过程需要在内外存之间多次交换数据才能进行。</p>
+</blockquote>
+<p>主要讲解的是<strong>内排序</strong>。</p>
+<p>对于内排序来说，排序算法的性能主要受3个方面的影响：</p>
+<ol>
+<li>时间性能：要求算法尽可能少的关键字比较次数和尽可能少的记录移动次数。（时间复杂度大O阶衡量）</li>
+<li>辅助空间：除了存放待排序所占用的存储空间之外，执行算法所需要的其它存储空间。（还是内存，不同于外排序中的外存，如硬盘）</li>
+<li>算法的复杂性：指的是算法本身的复杂度，不是指算法的时间复杂度。</li>
+</ol>
+<p>内排序分为：插入排序（直接插入排序，希尔排序），交换排序（冒泡排序，快速排序），选择排序（简单选择，堆排序），归并排序。</p>
+<p>按照算法的复杂度分：冒泡排序，简单选择排序，直接插入排序属于<strong>简单算法</strong>；希尔排序，堆排序，归并排序，快速排序属于<strong>改进算法</strong>。</p>
+<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><p>上网上截图一张，便于整体了解：<br><img src="/2017/01/05/DaHuaSort/dahuasort.png" alt="[排序对比]" title="[排序对比]"></p>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><blockquote>
+<p>冒泡排序（Bubble Sort）是一种交换排序，基本思想是，两两比较相邻记录的关键字，如果反序则交换，直到没有反序的记录为止。</p>
+</blockquote>
+<p>最经典的冒泡算法js实现：</p>
+<pre><code>function bubbleSort(arr) {
+    console.time(&apos;经典冒泡排序&apos;);
+    var count = 0;//比较次数
+    var count1 = 0;//交换次数
+    var len = arr.length;
+    for (var i = 0; i &lt; len; i++) {
+        for (var j = 0; j &lt; len - 1 - i; j++) {
+            count++;
+            if (arr[j] &gt; arr[j+1]) {        //相邻元素两两对比
+                count1++;
+                var temp = arr[j+1];        //元素交换
+                arr[j+1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+    console.timeEnd(&apos;经典冒泡排序&apos;);
+    console.log(&apos;比较次数：&apos;+count+&apos;；交换次数：&apos;+count1);
+    return arr;
+}
+//var arr = [3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
+var arr=[2,1,3,4,5];
+console.log(bubbleSort(arr));//
+</code></pre><p>以上算法有缺陷，可以改进。<br>比如数组[2,1,3,4,5],i=0时，只交换一次，（2,1）交换下，就是有序的了，但是该算法继续去循环比较，这就浪费效率了。<br>改进版一：</p>
+<pre><code>function bubbleSort1(arr) {
+    console.time(&apos;冒泡排序改进1&apos;);
+    var count = 0;//比较次数
+    var count1 = 0;//交换次数
+    var len = arr.length;
+    var flag = true;//标记
+    for (var i = 0; i &lt; len &amp;&amp; flag; i++) {
+        flag = false;//某次，下面的j循环，if均不成立，则代表排序完成，中断i的循环。
+        for (var j = 0; j &lt; len - 1 - i; j++) {
+            count++;
+            if (arr[j] &gt; arr[j+1]) {        //相邻元素两两对比
+                count1++;
+                var temp = arr[j+1];        //元素交换
+                arr[j+1] = arr[j];
+                arr[j] = temp;
+                flag = true;//有交换
+            }
+        }
+    }
+    console.timeEnd(&apos;冒泡排序改进1&apos;);
+    console.log(&apos;比较次数：&apos;+count+&apos;；交换次数：&apos;+count1);
+    return arr;
+}
+var arr=[2,1,3,4,5];
+console.log(bubbleSort1(arr));//[1,2,3,4,5]
+</code></pre><p>以上代码，i=0时，循环j，有交换；i=1时，循环j，没有交换，flag为false，排序完成，终止循环。<br>这个适用于<strong>完全排序好的序列去中断循环</strong>，很多时候，排序提前做好了，后面的循环是无用的，使用这个改进方案，可以提高一定的效率。<br>还有一种改进方案，对于[2,1,3,4,5]也有较大的效率提高。</p>
+<pre><code>function bubbleSort2(arr) {
+    console.time(&apos;冒泡排序改进2&apos;);
+    var count = 0;//比较次数
+    var count1 = 0;//交换次数
+    var i = arr.length-1;  //初始时,最后位置保持不变
+    while ( i&gt; 0) {
+        var pos= 0; //每趟开始时,无记录交换
+        for (var j= 0; j&lt; i; j++){
+             count++;
+            if (arr[j]&gt; arr[j+1]) {
+                count1++;
+                pos= j; //记录交换的位置
+                var tmp = arr[j]; arr[j]=arr[j+1];arr[j+1]=tmp;
+            }
+        }
+        i= pos; //pos以后的已经排序好了，i直接跳过这段已经排序好的。
+
+     }
+     console.timeEnd(&apos;冒泡排序改进2&apos;);
+     console.log(&apos;比较次数：&apos;+count+&apos;；交换次数：&apos;+count1);
+     return arr;
+}
+var arr=[2,1,3,4,5];
+console.log(bubbleSort2(arr));
+</code></pre><p>以上代码，在第一次循环时，i=len-1,循环后，i=0,退出循环。<br>这个适用于<strong>跳过最大端（最小端）部分排序好的片段</strong>，此处代码是，最大端，有一部分已经排序好了，i值直接跳过这一块，达到提高效率的目的，（最小端的代码类似，是以找出最小值为基准的）。</p>
+<blockquote>
+<p>传统冒泡排序中每一趟排序操作只能找到一个最大值或最小值,我们考虑利用在每趟排序中进行正向和反向两遍冒泡的方法一次可以得到两个最终值(最大者和最小者) , 从而使排序趟数几乎减少了一半。</p>
+</blockquote>
+<pre><code>function bubbleSort3(arr) {
+    console.time(&apos;冒泡排序改进3&apos;);
+    var low = 0;
+    var high= arr.length-1; //设置变量的初始值
+    var tmp,j;
+    var count = 0;//比较次数
+    var count1 = 0;//交换次数
+    while (low &lt; high) {
+        for (j= low; j&lt; high; ++j){ //正向冒泡,找到最大者
+            count++;
+            if (arr[j]&gt; arr[j+1]) {
+                count1++;
+                tmp = arr[j]; arr[j]=arr[j+1];arr[j+1]=tmp;
+            }
+        }
+        --high;                 //修改high值, 前移一位
+        for (j=high; j&gt;low; --j){//反向冒泡,找到最小者
+            count++;
+            if (arr[j]&lt; arr[j-1]) {
+                count1++;
+                tmp = arr[j]; arr[j]=arr[j-1];arr[j-1]=tmp;
+            }
+        }
+        ++low;
+    }
+    console.timeEnd(&apos;冒泡排序改进3&apos;);
+    console.log(&apos;比较次数：&apos;+count+&apos;；交换次数：&apos;+count1);
+    return arr;
+}
+var arr=[2,1,3,4,5];
+console.log(bubbleSort3(arr));
+</code></pre><p>以上算法，比较次数并没有减少，（交换次数肯定都一样），但是，运行时间测试中的确有较少（相对于经典冒泡排序）。<br>引用中，“使排序趟数几乎减少了一半”，但是每趟都是循环两次（一次找最大，一次找最小）。总次数并没有减少。<strong>我猜测</strong>，每趟求一个最大值，求一个最小值。由于冒泡的特性，在找最大值时，其它较大值会向最大值端冒泡（移动）；在找最小值时，其它较小值会向最小值端冒泡（移动），使得排序尽早完成了。但是上述算法，并没有做优化，仍然循环完了，导致比较次数和经典冒泡一致，所以应当对其进行如改进算法12的优化，才会有效率的提升吧。<br>在改进算法1和2中，算法2应该是更加优秀的。由于算法1条件比较苛刻，必须全部都排序好了才终止无用的循环，算法2是最大端有排序好的片段，则会跳过该片段，算法2的条件是包含算法1的条件的（全部排序好，是一种最大端有排序好的片段的特殊情况）。所以使用改进算法2来对算法3进行改进，证实“我猜测”是否对。</p>
+<pre><code>function bubbleSort4(arr) {
+    console.time(&apos;冒泡排序改进4&apos;);
+    var low = 0;
+    var high= arr.length-1; //设置变量的初始值
+    var tmp,j;
+    var count = 0;//比较次数
+    var count1 = 0;//交换次数
+    while (low &lt; high) {
+        var high_pos = 0;
+        for (j= low; j&lt; high; ++j){ //正向冒泡,找到最大者
+            count++;
+            if (arr[j]&gt; arr[j+1]) {
+                count1++;
+                high_pos = j;
+                tmp = arr[j]; arr[j]=arr[j+1];arr[j+1]=tmp;
+            }
+        }
+        high = high_pos;
+        --high;                 //修改high值, 前移一位
+
+        var low_pos = 0;
+        for (j=high; j&gt;low; --j){//反向冒泡,找到最小者
+            count++;
+            if (arr[j]&lt; arr[j-1]) {
+                count1++;
+                low_pos = j;
+                tmp = arr[j]; arr[j]=arr[j-1];arr[j-1]=tmp;
+            }
+        }
+        low = low_pos;
+        ++low;
+    }
+    console.timeEnd(&apos;冒泡排序改进4&apos;);
+    console.log(&apos;比较次数：&apos;+count+&apos;；交换次数：&apos;+count1);
+    return arr;
+}
+var arr=[2,1,3,4,5];
+console.log(bubbleSort4(arr));
+</code></pre><p>以上代码，比较次数明显减少，并且交换次数也减少了。<br>测试数据为：[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48]。<br>证实“我猜测”有一定道理的。【后续有时间继续研究】。</p>
+<p>冒泡的时间复杂度：<br>最好情况为O(n);<br>最坏情况为O(n2)。</p>
+<h3 id="简单选择排序算法"><a href="#简单选择排序算法" class="headerlink" title="简单选择排序算法"></a>简单选择排序算法</h3><blockquote>
+<p>简单选择排序法（Simple Selection Sort）就是通过n-i次关键字间的比较，从n-i+1个记录中选出关键字最小的记录，并和第i(1&lt;=i&lt;=n)个记录交换之。</p>
+</blockquote>
+<p>它的工作原理：首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。</p>
+<p>简单选择排序法js实现：</p>
+<pre><code>function selectionSort(arr) {
+    var len = arr.length;
+    var minIndex, temp;
+    console.time(&apos;选择排序耗时&apos;);
+    for (var i = 0; i &lt; len - 1; i++) {
+        minIndex = i;
+        for (var j = i + 1; j &lt; len; j++) {
+            if (arr[j] &lt; arr[minIndex]) {     //寻找最小的数
+                minIndex = j;                 //将最小数的索引保存
+            }
+        }
+        if(i!=minIndex){
+            temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+        }
+    }
+    console.timeEnd(&apos;选择排序耗时&apos;);
+    return arr;
+}
+var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
+console.log(selectionSort(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
+</code></pre><p>简单选择排序算法的时间复杂度:<br>最好情况为O(n2);<br>最坏情况为O(n2)。</p>
+<h3 id="直接插入排序算法"><a href="#直接插入排序算法" class="headerlink" title="直接插入排序算法"></a>直接插入排序算法</h3><blockquote>
+<p>直接插入排序（Straight Insertion Sort）的基本操作是将一个记录插入到已经排好序的有序表中，从而得到一个新的，记录数增1的有序表。</p>
+</blockquote>
+<p>插入排序（Insertion-Sort）的算法描述是一种简单直观的排序算法。它的工作原理是：通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。插入排序在实现上，通常采用in-place排序（即只需用到O(1)的额外空间的排序），因而在从后向前扫描过程中，需要反复把已排序元素逐步向后挪位，为最新元素提供插入空间。</p>
+<p>直接插入排序算法js实现：</p>
+<pre><code>function insertionSort(array) {
+  console.time(&apos;插入排序耗时：&apos;);
+    for (var i = 1; i &lt; array.length; i++) {
+        var key = array[i];//待插入的值
+        var j = i - 1;
+        while (j &gt;= 0 &amp;&amp; array[j] &gt; key) {//循环i之前的元素，找到i的值正确的位置
+            array[j + 1] = array[j];//j处的值往后挪一位，为将来插入i处的值留位置
+            j--;
+        }
+        array[j + 1] = key;//i处的值插入正确位置
+    }
+    console.timeEnd(&apos;插入排序耗时：&apos;);
+    return array;
+
+}
+var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
+console.log(insertionSort(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
+</code></pre><p><strong>折半插入</strong>，改进后的插入排序，（查找插入位置时，是已排好序的序列，使用二分查找的方式）【感觉用处不大，还不如上面的算法】：</p>
+<pre><code>function binaryInsertionSort(array) {
+    console.time(&apos;二分插入排序耗时：&apos;);
+    for (var i = 1; i &lt; array.length; i++) {
+        var key = array[i], left = 0, right = i - 1;
+        while (left &lt;= right) {
+            var middle = parseInt((left + right) / 2);
+            if (key &lt; array[middle]) {
+                right = middle - 1;
+            } else {
+                left = middle + 1;
+            }
+        }
+        for (var j = i - 1; j &gt;= left; j--) {
+            array[j + 1] = array[j];
+        }
+        array[left] = key;
+    }
+    console.timeEnd(&apos;二分插入排序耗时：&apos;);
+    return array;
+}
+var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
+console.log(binaryInsertionSort(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
+</code></pre><p>插入排序的时间复杂度：<br>最好情况为O(n);<br>最坏情况为O(n2)。</p>
+<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><blockquote>
+<p>希尔排序（Shell Sort）是D.L.Shell于1959年提出的一种排序算法，在这之前排序算法的时间复杂度基本都是O(n2)的，希尔排序算法是突破这个时间复杂度的第一批算法之一。</p>
+</blockquote>
+<p>希尔排序是直接插入排序的改良。关键点：并不是随便分组后各自排序，而是将相隔某个“增量”的记录组成一个子序列，实现跳跃式的移动，使得排序的效率提高。“增量”的选取就非常关键了，目前还没有找到最好的增量序列。</p>
+<pre><code>function shellSort(arr) {
+    var len = arr.length,
+        temp,
+        gap = 1;
+    console.time(&apos;希尔排序耗时:&apos;);
+    while(gap &lt; len/5) {          //动态定义间隔序列
+        gap =gap*5+1;
+    }
+    for (gap; gap &gt; 0; gap = Math.floor(gap/5))     {//间隔序列不断缩小，直至为1时，达到全部进行简单插入算法
+        for (var i = gap; i &lt; len; i++) {//某一个间隔，对子序列进行插入排序
+            temp = arr[i];
+            for (var j = i-gap; j &gt;= 0 &amp;&amp; arr[j] &gt; temp; j-=gap) {
+                arr[j+gap] = arr[j];
+            }
+            arr[j+gap] = temp;
+        }
+    }
+    console.timeEnd(&apos;希尔排序耗时:&apos;);
+    return arr;
+}
+var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
+console.log(shellSort(arr));//[2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]
+</code></pre><h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><blockquote>
+<p>堆排序（Heap Sort）就是利用堆（假设利用大顶堆）进行排序的方法。它的基本思想：将待排序的序列构造成一个大顶堆，此时，整个序列的最大值就是堆顶的根节点，将它移走（其实就是将其与堆数组的末尾元素交换，此时末尾元素就是最大值），然后将剩余的n-1个序列重新构造成一个堆，这样就会得到n个元素中的次大值（n-1个元素的最大值，放到数组倒数第二位），如此反复执行，便能得到一个有序序列了。</p>
+</blockquote>
+<p>其他一些定义：</p>
+<ul>
+<li>堆定义：1.是一棵完全二叉树；2.每个结点的值都大于或者等于其左右孩子结点的值（大顶堆），或者每个结点的值都小于或等于其左右孩子结点的值（小顶堆）。</li>
+<li>大顶堆的根节点一定是堆中所有结点的最大值，小顶堆则是最小值。</li>
+<li>如果按照层次遍历的方式给结点从1开始编号，则有（大顶堆）Ki&gt;=K2i,Ki&gt;=K2i+1,[1&lt;=i&lt;=n/2]。这个可以查看二叉树的性质，大概意思，下标i与2i/2i+1是双亲子女关系。</li>
+</ul>
+<p>堆排序的js实现：</p>
+<pre><code>/*方法说明：堆排序
+@param  array 待排序数组*/
+function heapSort(array) {
+    console.time(&apos;堆排序耗时&apos;);
+    //建堆
+    var heapSize = array.length, temp;
+    for (var i = Math.floor(heapSize / 2) - 1; i &gt;= 0; i--) {
+        heapify(array, i, heapSize);
+    }
+    //堆排序
+    for (var j = heapSize - 1; j &gt;= 1; j--) {
+        temp = array[0];
+        array[0] = array[j];
+        array[j] = temp;
+        heapify(array, 0, --heapSize);//调整交换后的堆
+    }
+    console.timeEnd(&apos;堆排序耗时&apos;);
+    return array;
+}
+/*方法说明：维护堆的性质
+@param  arr 数组
+@param  x   数组下标
+@param  len 堆大小*/
+function heapify(arr, x, len) {
+    var l = 2 * x + 1, r = 2 * x + 2, largest = x, temp;
+    if (l &lt; len &amp;&amp; arr[l] &gt; arr[largest]) {
+        largest = l;
+    }
+    if (r &lt; len &amp;&amp; arr[r] &gt; arr[largest]) {
+        largest = r;
+    }
+    if (largest != x) {
+        temp = arr[x];
+        arr[x] = arr[largest];
+        arr[largest] = temp;
+        heapify(arr, largest, len);
+    }
+}
+var arr=[91,60,96,13,35,65,46,65,10,30,20,31,77,81,22];
+console.log(heapSort(arr));//[10, 13, 20, 22, 30, 31, 35, 46, 60, 65, 65, 77, 81, 91, 96]
+
+堆排序是一种不稳定的排序方法。
+堆排序的最好（最坏，平均）时间复杂度为O(nlogn)。
+</code></pre><h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><blockquote>
+<p>归并排序（Merging Sort）就是利用归并的思想实现的排序方法。它的原理是假设初始序列含有N个记录，则可以看成是N个有序的子序列，每个子序列的长度为1，然后两两归并，得到[n/2]（[x]表示不小于x的最小整数）个长度为2或1的有序子序列；再两两归并，……，如此重复，直至得到一个长度为N的有序序列为止，这种排序方法称为2路归并排序。</p>
+</blockquote>
+<p>“归并”一次的中文含义就是合并，并入的意思，而在数据结构中的定义是将两个或两个以上的有序表组合成一个新的有序表。</p>
+<p>归并排序的递归js实现</p>
+<pre><code>function mergeSort(arr) {  //采用自上而下的递归方法
+    var len = arr.length;
+    if(len &lt; 2) {//单个元素的子序列
+        return arr;
+    }
+    var middle = Math.floor(len / 2),
+        left = arr.slice(0, middle),
+        right = arr.slice(middle);
+    return merge(mergeSort(left), mergeSort(right));//递归到单个元素的子序列时，开始两两进行有序合并
+}
+//合并函数，将两个分别有序的子序列，合并为一个有序的序列
+function merge(left, right){
+    var result = [];
+    //两个子序列比较大小，插入返回数组
+    while (left.length &amp;&amp; right.length) {
+        if (left[0] &lt;= right[0]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
+    }
+    //必定有一个子序列没有元素了。
+    while (left.length)
+        result.push(left.shift());
+    while (right.length)
+        result.push(right.shift());
+    return result;
+}
+var arr=[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];
+console.log(mergeSort(arr));
+</code></pre><p>归并排序：</p>
+<ul>
+<li>时间复杂度均为O(nlogn)[最好，最坏，平均]</li>
+<li>空间复杂度为O(n)</li>
+<li>稳定的算法</li>
+</ul>
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><pre><code>function quickSort(arr,min,max){
+    if(min &lt; max){
+        var len1 = min;
+        var len2 = max;
+
+        //三个数字取中间值
+        var mid = min + Math.floor((max-min)/2)
+        if(arr[mid] &gt; arr[max]){
+            arr[max] = arr[mid]+arr[max];
+            arr[mid] = arr[max]-arr[mid];
+            arr[max] = arr[max]-arr[mid];
+        }
+        if(arr[min] &gt; arr[max]){
+            arr[max] = arr[min]+arr[max];
+            arr[min] = arr[max]-arr[min];
+            arr[max] = arr[max]-arr[min];
+        }
+        if(arr[mid] &gt; arr[min]){
+            arr[min] = arr[mid]+arr[min];
+            arr[mid] = arr[min]-arr[mid];
+            arr[min] = arr[min]-arr[mid];
+        }
+
+        var temp = arr[min];
+        //选出中区元素，并把比其小的值放左边，大的放右边
+        while(min&lt;max){
+
+            while(min &lt; max &amp;&amp; arr[max] &gt;= temp){
+                max--;
+            }
+            arr[min] = arr[max];
+
+            while(min&lt;max &amp;&amp; arr[min] &lt;= temp){
+                min++;
+            }
+            arr[max] = arr[min];
+
+
+        }
+        arr[min] = temp;
+
+        //递归调用
+        quickSort(arr,len1,min-1);
+        quickSort(arr,min+1,len2);
+    }
+
+}
+//测试
+var a = [12,2,69,1,27,111,19,15,100,1];
+quickSort(a,0,a.length-1);
+for(var i in a){
+console.log(a[i]);
+</code></pre><p>} </p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大话数据结构/">大话数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-Timu02" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/12/24/Timu02/" class="article-date">
+      <time datetime="2016-12-24T05:17:30.000Z" itemprop="datePublished">2016-12-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/24/Timu02/">两数互换</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="常规的交换"><a href="#常规的交换" class="headerlink" title="常规的交换"></a>常规的交换</h2><pre><code>var a = 11;
+var b = 12;
+var temp;//额外的变量
+temp = a;
+a = b;
+b = temp;
+</code></pre><h2 id="不使用额外空间"><a href="#不使用额外空间" class="headerlink" title="不使用额外空间"></a>不使用额外空间</h2><pre><code>var a = 11;
+var b = 12;
+a = a+b;//和
+b = a-b;//a
+a = a-b;//b
+</code></pre><h2 id="二进制操作，高效"><a href="#二进制操作，高效" class="headerlink" title="二进制操作，高效"></a>二进制操作，高效</h2><pre><code>var a = 11;
+var b = 12;
+a = a^b;
+b = a^b;//a^b^b = a本身
+a = a^b;//(a^b)^(a^b^b) = a^b^a = b本身
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/小技巧/">小技巧</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小技巧/">小技巧</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-Singleton" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/12/21/Singleton/" class="article-date">
+      <time datetime="2016-12-21T14:32:30.000Z" itemprop="datePublished">2016-12-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/21/Singleton/">单例模式</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>单例模式是设计模式中最简单，最常用的一种。<br>六种实现均是线程安全的，我们根据是否懒加载？</p>
+<ol>
+<li>是。懒汉式（同步方法），双重校验锁，静态内部类、枚举单例</li>
+<li>否。饿汉式，静态代码块
+          
+      
+    </li></ol></div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+      
+        <p class="article-more-link">
+          <a href="/2016/12/21/Singleton/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    </nav></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 kevinlsui
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+             post: ".article-entry a[href], .copyright a[href]", 
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
