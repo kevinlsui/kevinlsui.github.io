@@ -13,28 +13,28 @@
 
 
 
-<meta name="description" content="推荐博客
-题目：1亿（10亿，100亿？）个垃圾邮件地址，建立一个黑名单库，使得所用空间最小，查询速度快，准许一点误差。思路：
+<meta name="description" content="题目
+给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合
 
-常规方法，把这1亿个地址放入数组，每次来一个url,去循环数组，去判断是否属于黑名单；（对于这种大数据量的，基本不可能，占空间大，查询速度慢）
-哈希表，每一个地址通过哈希函数，放入类似hashmap结构中，每次来url,快速定位到该键值对，可知是否属于黑名单；（占据空间">
+根据数学知识，我们知道是字符长度的阶乘，比如，“123456”是6！=720。拿到这个题，首先确定不能是字符长度个for循环，比如，上面就有6个for循环嵌套，如果别人给100个数字了。。。所以想到了递归，下面是代码实现。
+代码实现123456789101112131415161718192021222324252">
 <meta property="og:type" content="article">
-<meta property="og:title" content="布隆过滤器">
-<meta property="og:url" content="http://kevinlsui.github.io/2017/05/01/Bloom/index.html">
+<meta property="og:title" content="给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合">
+<meta property="og:url" content="http://kevinlsui.github.io/2017/01/02/Suanfa01/index.html">
 <meta property="og:site_name" content="Kevinlsui Code">
-<meta property="og:description" content="推荐博客
-题目：1亿（10亿，100亿？）个垃圾邮件地址，建立一个黑名单库，使得所用空间最小，查询速度快，准许一点误差。思路：
+<meta property="og:description" content="题目
+给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合
 
-常规方法，把这1亿个地址放入数组，每次来一个url,去循环数组，去判断是否属于黑名单；（对于这种大数据量的，基本不可能，占空间大，查询速度慢）
-哈希表，每一个地址通过哈希函数，放入类似hashmap结构中，每次来url,快速定位到该键值对，可知是否属于黑名单；（占据空间">
+根据数学知识，我们知道是字符长度的阶乘，比如，“123456”是6！=720。拿到这个题，首先确定不能是字符长度个for循环，比如，上面就有6个for循环嵌套，如果别人给100个数字了。。。所以想到了递归，下面是代码实现。
+代码实现123456789101112131415161718192021222324252">
 <meta property="og:updated_time" content="2017-05-01T02:53:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="布隆过滤器">
-<meta name="twitter:description" content="推荐博客
-题目：1亿（10亿，100亿？）个垃圾邮件地址，建立一个黑名单库，使得所用空间最小，查询速度快，准许一点误差。思路：
+<meta name="twitter:title" content="给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合">
+<meta name="twitter:description" content="题目
+给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合
 
-常规方法，把这1亿个地址放入数组，每次来一个url,去循环数组，去判断是否属于黑名单；（对于这种大数据量的，基本不可能，占空间大，查询速度慢）
-哈希表，每一个地址通过哈希函数，放入类似hashmap结构中，每次来url,快速定位到该键值对，可知是否属于黑名单；（占据空间">
+根据数学知识，我们知道是字符长度的阶乘，比如，“123456”是6！=720。拿到这个题，首先确定不能是字符长度个for循环，比如，上面就有6个for循环嵌套，如果别人给100个数字了。。。所以想到了递归，下面是代码实现。
+代码实现123456789101112131415161718192021222324252">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -64,7 +64,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>布隆过滤器 | Kevinlsui Code</title>
+<title>给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合 | Kevinlsui Code</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -274,11 +274,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
-      <div class="body-wrap"><article id="post-Bloom" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Suanfa01" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/05/01/Bloom/" class="article-date">
-      <time datetime="2017-05-01T05:17:30.000Z" itemprop="datePublished">2017-05-01</time>
+      <a href="/2017/01/02/Suanfa01/" class="article-date">
+      <time datetime="2017-01-02T12:17:30.000Z" itemprop="datePublished">2017-01-02</time>
 </a>
     </div>
   
@@ -289,7 +289,7 @@
     
       <header class="article-header">
         <h1 class="article-title" itemprop="name">
-      布隆过滤器
+      给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合
     </h1>
       </header>
       
@@ -298,7 +298,7 @@
     <a class="article-category-link" href="/categories/算法/">算法</a>
     </div>
         <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/递归/">递归</a></li></ul>
     </div>
         <div class="clearfix"></div>
       </div>
@@ -307,26 +307,24 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><a href="http://blog.csdn.net/acceptedxukai/article/details/7031899" target="_blank" rel="external">推荐博客</a></p>
-<p>题目：1亿（10亿，100亿？）个垃圾邮件地址，建立一个黑名单库，使得所用空间最小，查询速度快，准许一点误差。<br>思路：</p>
-<ol>
-<li>常规方法，把这1亿个地址放入数组，每次来一个url,去循环数组，去判断是否属于黑名单；（对于这种大数据量的，基本不可能，占空间大，查询速度慢）</li>
-<li>哈希表，每一个地址通过哈希函数，放入类似hashmap结构中，每次来url,快速定位到该键值对，可知是否属于黑名单；（占据空间还是太大，但是速度应该可以，仍然不可取）</li>
-<li>布隆过滤器。（专门为这种大数据操作而生，人类智慧真是令人感叹！！！）</li>
-</ol>
+        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><blockquote>
+<p>给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合</p>
+</blockquote>
+<p>根据数学知识，我们知道是字符长度的阶乘，比如，“123456”是6！=720。<br>拿到这个题，首先确定不能是<strong>字符长度个for循环</strong>，比如，上面就有6个for循环嵌套，如果别人给100个数字了。。。<br>所以想到了递归，下面是代码实现。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">package com.kevinlsui.test;</div><div class="line"></div><div class="line">import java.util.LinkedList;</div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合</div><div class="line"> */</div><div class="line">public class Test &#123;</div><div class="line"></div><div class="line">    static int count = 0;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        //任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合</div><div class="line">        String str = &quot;123plh&quot;;</div><div class="line">        List&lt;Character&gt; list = split(str);</div><div class="line"></div><div class="line">        //初始调用递归</div><div class="line">        digui(list,&quot;&quot;,str.length());</div><div class="line"></div><div class="line">        System.out.println(&quot;排列组合的个数&quot;+count);</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 递归方法</div><div class="line">     * 第一个参数是待选择元素数组，第二个参数是已经排序的序列，第三个参数是初始字符长度，为了判断是否完成递归</div><div class="line">     * @param arr</div><div class="line">     * @param str</div><div class="line">     * @param size</div><div class="line">     */</div><div class="line">    public static void digui(List arr,String str,int size)&#123;</div><div class="line">        if(str.length() == size)&#123;//递归出口</div><div class="line">            System.out.println(str);</div><div class="line">            count++;</div><div class="line">        &#125;else&#123;</div><div class="line">            //核心代码</div><div class="line">            for(int i = 0 ; i &lt; arr.size();i++)&#123;</div><div class="line">                //循环过程不能删除循环体中的元素，所以新建一个临时list,同时选用LinkedList,删除效率更高</div><div class="line">                List temp = new LinkedList(arr);</div><div class="line">                digui(temp,str+temp.remove(i),size);//数组去掉一个字符，序列添加上该字符，下一轮递归</div><div class="line">            &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">    * 字符串转list</div><div class="line">    */</div><div class="line">    public static List split(String str)&#123;</div><div class="line">        List&lt;Character&gt; list = new LinkedList&lt;&gt;();</div><div class="line">        for(int i = 0 ; i &lt; str.length();i++)&#123;</div><div class="line">            list.add(str.charAt(i));</div><div class="line">        &#125;</div><div class="line">        return list;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     
   </div>
   
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/05/01/Bloom/">布隆过滤器</a></p>
+        <p><span>本文标题:</span><a href="/2017/01/02/Suanfa01/">给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">kevinlsui</a></p>
-        <p><span>发布时间:</span>2017-05-01, 13:17:30</p>
+        <p><span>发布时间:</span>2017-01-02, 20:17:30</p>
         <p><span>最后更新:</span>2017-05-01, 10:53:21</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/05/01/Bloom/" title="布隆过滤器">http://kevinlsui.github.io/2017/05/01/Bloom/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://kevinlsui.github.io/2017/05/01/Bloom/　　作者: kevinlsui" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/01/02/Suanfa01/" title="给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合">http://kevinlsui.github.io/2017/01/02/Suanfa01/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://kevinlsui.github.io/2017/01/02/Suanfa01/　　作者: kevinlsui" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -339,15 +337,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/05/08/JvmTools/">
-                    jvm——调优工具
+                <a href="/2017/01/05/DaHuaSort/">
+                    大话数据结构_排序
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/04/02/ConCAS/">
-                    concurrent包的基础：CAS
+                <a href="/2016/12/24/Timu02/">
+                    两数互换
                 </a>
             </div>
         
@@ -357,7 +355,7 @@
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目"><span class="toc-number">1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-number">2.</span> <span class="toc-text">代码实现</span></a></li></ol>
         
     </div>
     <style>
@@ -385,7 +383,7 @@
 
 <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/05/08/JvmTools/" title="上一篇: jvm——调优工具">
+            <a href="/2017/01/05/DaHuaSort/" title="上一篇: 大话数据结构_排序">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -393,7 +391,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/04/02/ConCAS/" title="下一篇: concurrent包的基础：CAS">
+            <a href="/2016/12/24/Timu02/" title="下一篇: 两数互换">
                 <i class="fa fa-angle-right"></i>
             </a>
         

@@ -13,28 +13,15 @@
 
 
 
-<meta name="description" content="推荐博客
-题目：1亿（10亿，100亿？）个垃圾邮件地址，建立一个黑名单库，使得所用空间最小，查询速度快，准许一点误差。思路：
-
-常规方法，把这1亿个地址放入数组，每次来一个url,去循环数组，去判断是否属于黑名单；（对于这种大数据量的，基本不可能，占空间大，查询速度慢）
-哈希表，每一个地址通过哈希函数，放入类似hashmap结构中，每次来url,快速定位到该键值对，可知是否属于黑名单；（占据空间">
-<meta property="og:type" content="article">
-<meta property="og:title" content="布隆过滤器">
-<meta property="og:url" content="http://kevinlsui.github.io/2017/05/01/Bloom/index.html">
+<meta name="description" content="kevinlsui,java,blog,hexo,github,yelee,js,前端,学习总结,分享,技术博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kevinlsui Code">
+<meta property="og:url" content="http://kevinlsui.github.io/tags/递归/index.html">
 <meta property="og:site_name" content="Kevinlsui Code">
-<meta property="og:description" content="推荐博客
-题目：1亿（10亿，100亿？）个垃圾邮件地址，建立一个黑名单库，使得所用空间最小，查询速度快，准许一点误差。思路：
-
-常规方法，把这1亿个地址放入数组，每次来一个url,去循环数组，去判断是否属于黑名单；（对于这种大数据量的，基本不可能，占空间大，查询速度慢）
-哈希表，每一个地址通过哈希函数，放入类似hashmap结构中，每次来url,快速定位到该键值对，可知是否属于黑名单；（占据空间">
-<meta property="og:updated_time" content="2017-05-01T02:53:21.000Z">
+<meta property="og:description" content="kevinlsui,java,blog,hexo,github,yelee,js,前端,学习总结,分享,技术博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="布隆过滤器">
-<meta name="twitter:description" content="推荐博客
-题目：1亿（10亿，100亿？）个垃圾邮件地址，建立一个黑名单库，使得所用空间最小，查询速度快，准许一点误差。思路：
-
-常规方法，把这1亿个地址放入数组，每次来一个url,去循环数组，去判断是否属于黑名单；（对于这种大数据量的，基本不可能，占空间大，查询速度慢）
-哈希表，每一个地址通过哈希函数，放入类似hashmap结构中，每次来url,快速定位到该键值对，可知是否属于黑名单；（占据空间">
+<meta name="twitter:title" content="Kevinlsui Code">
+<meta name="twitter:description" content="kevinlsui,java,blog,hexo,github,yelee,js,前端,学习总结,分享,技术博客">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -64,7 +51,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>布隆过滤器 | Kevinlsui Code</title>
+<title>Tag: 递归 | Kevinlsui Code</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -74,9 +61,9 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: true,
+        isPost: false,
         isArchive: false,
-        isTag: false,
+        isTag: true,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
@@ -274,137 +261,38 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
-      <div class="body-wrap"><article id="post-Bloom" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/05/01/Bloom/" class="article-date">
-      <time datetime="2017-05-01T05:17:30.000Z" itemprop="datePublished">2017-05-01</time>
+      <div class="body-wrap"><section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2017/01/02/Suanfa01/" class="archive-article-date">
+      <time datetime="2017-01-02T12:17:30.000Z" itemprop="datePublished">01-02</time>
 </a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        <h1 class="article-title" itemprop="name">
-      布隆过滤器
+        </div>
+         <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/01/02/Suanfa01/">给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合</a>
     </h1>
-      </header>
-      
-      <div class="article-info article-info-post">
-        <div class="article-category tagcloud">
+        <div class="article-info info-on-archive">
+          <div class="article-category tagcloud">
     <a class="article-category-link" href="/categories/算法/">算法</a>
     </div>
-        <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+          <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/递归/">递归</a></li></ul>
     </div>
+        </div>
         <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><a href="http://blog.csdn.net/acceptedxukai/article/details/7031899" target="_blank" rel="external">推荐博客</a></p>
-<p>题目：1亿（10亿，100亿？）个垃圾邮件地址，建立一个黑名单库，使得所用空间最小，查询速度快，准许一点误差。<br>思路：</p>
-<ol>
-<li>常规方法，把这1亿个地址放入数组，每次来一个url,去循环数组，去判断是否属于黑名单；（对于这种大数据量的，基本不可能，占空间大，查询速度慢）</li>
-<li>哈希表，每一个地址通过哈希函数，放入类似hashmap结构中，每次来url,快速定位到该键值对，可知是否属于黑名单；（占据空间还是太大，但是速度应该可以，仍然不可取）</li>
-<li>布隆过滤器。（专门为这种大数据操作而生，人类智慧真是令人感叹！！！）</li>
-</ol>
-      
-    </div>
-    
+    </header>
   </div>
-  
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/05/01/Bloom/">布隆过滤器</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">kevinlsui</a></p>
-        <p><span>发布时间:</span>2017-05-01, 13:17:30</p>
-        <p><span>最后更新:</span>2017-05-01, 10:53:21</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/05/01/Bloom/" title="布隆过滤器">http://kevinlsui.github.io/2017/05/01/Bloom/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://kevinlsui.github.io/2017/05/01/Bloom/　　作者: kevinlsui" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
-        </p>
-    </div>
-
-
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/05/08/JvmTools/">
-                    jvm——调优工具
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/04/02/ConCAS/">
-                    concurrent包的基础：CAS
-                </a>
-            </div>
-        
-    </nav>
-  
 </article>
-<div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
-        
-            
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
-
-    <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-    </script>
-
-
-
-
-    
-
-
-<div class="scroll" id="post-nav-button">
-        
-            <a href="/2017/05/08/JvmTools/" title="上一篇: jvm——调优工具">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2017/04/02/ConCAS/" title="下一篇: concurrent包的基础：CAS">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/05/29/MyTodoList/">一个实用的小工具——TodoList</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/JvmArea/">jvm——运行时数据区域</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/JS_OOP/">JS高级知识——面向对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/11/JvmGC/">jvm——垃圾回收机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/JvmTools/">jvm——调优工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/01/Bloom/">布隆过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/02/ConCAS/">concurrent包的基础：CAS</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ConcurrentTools/">concurrent包下的并发工具类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ThreadState/">线程的状态Thread.State</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/Cglib/">CGLIB动态代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/Css3Rem/">使用css3:rem,让屏幕适配变得简单起来</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/DynamicProxy/">jdk动态代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/01/">动态规划——01背包问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/AboutHandlerbarsjs/">Handlerbars.js中if-else对字符串'NULL'不起作用问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/01/DuShu02/">Java并发编程的艺术——读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/DuShu01/">Java多线程编程核心技术——读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/10/DahuaJS/">《大话数据结构》算法js实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/05/DaHuaSort/">大话数据结构_排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/02/Suanfa01/">给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/24/Timu02/">两数互换</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/21/Singleton/">单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/13/SpringSetValue/">使用spring注入项目的配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/03/MyBatisStart/">Mybatis使用总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/17/MethodArgs/">一道面试题，加深了我对java参数传递的理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/04/InnerClass/">java基础知识——内部类</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/11/Enum/">java基础知识——枚举</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/FanXing/">java基础知识——泛型</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/21/Annotation/">Java基础知识——注解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/25/ListRemoveElement/">ArrayList删除元素的正确姿势</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/JiSuan/">逆波兰式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/KMP/">字符串匹配模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Timu01/">8个小球，找出其中一个次品</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/18/SqlRule/">简单解释下数据库三大范式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/11/SqlScript/">一个简单的mysql建库脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/15/DesignPattern/">设计模式学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/11/Object/">Java源码-Object.java</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/05/Regular/">正则表达式学习整理</a></li></ul>
-
-
-    <script>
-        
-    </script></div>
+  
+  
+    </div></section></div>
       <footer id="footer">
     <div class="outer">
         <div id="footer-info">
