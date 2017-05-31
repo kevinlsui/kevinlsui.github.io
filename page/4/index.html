@@ -140,13 +140,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>Menu</li>
-                        <li>Tags</li>
+                        <li>菜单</li>
+                        <li>标签</li>
                         
-                        <li>Friends</li>
+                        <li>友情链接</li>
                         
                         
-                        <li>About Me</li>
+                        <li>关于我</li>
                         
                     </ul>
                 </div>
@@ -264,9 +264,90 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
-      <div class="body-wrap"><article id="post-KMP" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ListRemoveElement" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/25/ListRemoveElement/" class="article-date">
+      <time datetime="2016-04-25T14:10:30.000Z" itemprop="datePublished">2016-04-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/25/ListRemoveElement/">ArrayList删除元素的正确姿势</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <pre><code>package com.kevinlsui.base;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Test_listRemove {
+
+    public static void main(String[] args) {
+        List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+        list.add(&quot;1&quot;);
+        list.add(&quot;2&quot;);
+        list.add(&quot;3&quot;);
+        list.add(&quot;4&quot;);
+        System.out.println(list);
+
+        /*for(String a : list){
+            // 报错。java.util.ConcurrentModificationException
+            list.remove(a);
+        }*/
+
+        /*for(Iterator&lt;String&gt; ti = list.iterator();ti.hasNext();){
+            System.out.println(ti.next());
+            //报错。java.util.ConcurrentModificationException
+            list.remove(ti.next());
+        }*/
+
+        //1.迭代器删除元素,ok
+        //2.只有内部实现迭代器的类（比如list），才可以使用foreach循环（本质是迭代器实现）
+        for(Iterator&lt;String&gt; ti = list.iterator();ti.hasNext();){
+            //System.out.println(ti.next());
+            //使用迭代器删除，ok
+            ti.remove();
+        }
+        System.out.println(list);
+    }
+
+}
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/集合框架/">集合框架</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java基础/">java基础</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-KMP" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/04/01/KMP/" class="article-date">
@@ -741,7 +822,7 @@ console.log(s+&quot;::::&quot;+s1);
     
       <header class="article-header">
         <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/16/Observer/">轻松学习设计模式——观察者模式</a>
+      <a class="article-title" href="/2016/03/16/Observer/">轻松理解设计模式——观察者模式</a>
     </h1>
       </header>
       
@@ -1108,141 +1189,9 @@ public class Object {
   
 </article>
   
-    <article id="post-Regular" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/05/Regular/" class="article-date">
-      <time datetime="2015-10-05T12:17:30.000Z" itemprop="datePublished">2015-10-05</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/05/Regular/">正则表达式学习整理</a>
-    </h1>
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="一些闲话"><a href="#一些闲话" class="headerlink" title="一些闲话"></a>一些闲话</h2><p>作为程序猿，工作中经常用到正则表达式，每次用时也都是网上去搜一些相关的东西，以解决问题为目的，这样做的效率很低。此次，趁有空好好整理一番。<br>参考文档：<a href="http://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="external">正则表达式30分钟入门教程</a></p>
-<h2 id="正则表达式学习"><a href="#正则表达式学习" class="headerlink" title="正则表达式学习"></a>正则表达式学习</h2><p>###定义</p>
-<blockquote>
-<p>正则表达式（regular expression）描述了一种字符串匹配的模式，可以用来检查一个串中是否包含某种子串、将匹配的子串做替换、从某个串中取出符合某个条件的子串等</p>
-</blockquote>
-<h3 id="常用元字符"><a href="#常用元字符" class="headerlink" title="常用元字符"></a>常用元字符</h3><ul>
-<li>. 匹配除了换行符以外的任意字符</li>
-<li>\w 匹配字母或者数字或者下划线或者汉字</li>
-<li>\s 匹配任意的空白符</li>
-<li>\d 匹配数字</li>
-<li>\b 匹配单词的开始或者结束</li>
-<li>^ 匹配字符串的开始</li>
-<li>$ 匹配字符串的结束</li>
-</ul>
-<p>如果想单纯的匹配这些元字符（下面的<em>、[]等等也是元字符），需要加<em>*转义符号”\”</em></em>。例如，kevinlsui\.com匹配的是kevinlsui.com。这里的.不是表示元字符。<br>“\”单纯作为斜杠去匹配，需要写成”\\“。</p>
-<h3 id="重复相关的元字符"><a href="#重复相关的元字符" class="headerlink" title="重复相关的元字符"></a>重复相关的元字符</h3><ul>
-<li>* 重复零次或者多次</li>
-<li>+ 重复一次或者多次</li>
-<li>？ 重复零次或者一次</li>
-<li>{n} 重复n次</li>
-<li>{n,} 重复n次或者更多次（大于等于n次）</li>
-<li>{n,m} 重复n到m次（大于等于n，小于等于m）</li>
-</ul>
-<h3 id="字符类中-的使用"><a href="#字符类中-的使用" class="headerlink" title="字符类中[]的使用"></a>字符类中[]的使用</h3><ol>
-<li>需要匹配某一些字符中的一个，可以使用[]。<br>例如：[aeiou]匹配任何一个元音字母，[.?!]匹配这三种符号中的一个（这里做为元字符，可以不加转义，即可匹配符号本身）。</li>
-<li>指定字符范围<br>例如：[0-9]代表0到9这十个数中的一个，[a-zA-Z]代表大写和小写24个字母中的一个</li>
-</ol>
-<h3 id="分枝条件"><a href="#分枝条件" class="headerlink" title="分枝条件"></a>分枝条件</h3><p>1.分枝条件使用符号”|”。例如：a|b,a或者b，满足一者即可<br>2.使用分支注意各个条件的顺序。原因是：匹配分枝条件时，会从左到右测试每一个分枝条件，如果有满足的，则后面的不再匹配。<br>例如：\d{5}|\d{5}-\d{4}的话，那么就只会匹配5位的邮编(以及9位邮编的前5位)。</p>
-<h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3><p>我们使用符号“()”，来进行分组。<br>例如：(\d{1,3}){3},对（）中的子表达式进行整体的3次重复</p>
-<h3 id="反义"><a href="#反义" class="headerlink" title="反义"></a>反义</h3><ul>
-<li>\W 大写的W，表示\w的反义，匹配任意不是字母，数字，下划线，汉字的字符</li>
-<li>\S 大写的S，表示\s的反义，匹配任意不是空白符的字符</li>
-<li>\D 大写的D，表示\d的反义，匹配任意不是数字的字符</li>
-<li>\B 大写的B，表示\b的反义，匹配不是单词开头或者结束的位置</li>
-<li>[^a] 匹配除了a以外的任意字符</li>
-<li>[^aeiou] 匹配除了这几个元音字符以外的任意字符</li>
-</ul>
-<h3 id="后向引用，零宽断言，负向零宽断言"><a href="#后向引用，零宽断言，负向零宽断言" class="headerlink" title="后向引用，零宽断言，负向零宽断言"></a>后向引用，零宽断言，负向零宽断言</h3><p>属于比较高级的应用了，这个用到相对较少。<br>几种常见的案例：</p>
-<ol>
-<li>\b(\w+)\b\s+\1\b，当需要使用已经匹配的子表达式（使用()的表达式），后面使用\1来引用</li>
-<li>2[0-4]\d(?#200-249)|25<a href="?#250-255">0-5</a>|[01]?\d\d?(?#0-199)，使用（？#comment）来注释</li>
-<li>\b\w+(?=ing\b)，匹配以ing结尾的单词的前面部分(除了ing以外的部分)，如查找I’m singing while you’re dancing.时，它会匹配sing和danc。<strong>零宽断言</strong></li>
-<li>(?&lt;=\bre)\w+\b会匹配以re开头的单词的后半部分(除了re以外的部分)，例如在查找reading a book时，它匹配ading。<strong>零宽断言</strong></li>
-<li>\b\w<em>q(?!u)\w</em>\b，<strong>负向零宽断言</strong></li>
-</ol>
-<h3 id="贪婪与懒惰"><a href="#贪婪与懒惰" class="headerlink" title="贪婪与懒惰"></a>贪婪与懒惰</h3><p>这个工作中多次遇到。<br>贪婪模式：尽可能多的匹配字符。【默认是贪婪模式】<br>例如：a.*b,对于字符串aababa,结果是aabab<br>懒惰模式：尽可能少的匹配字符，在重复符号后面加”?”<br>例如：a.*?b,对于字符串aababa,结果是aab,ab</p>
-<p>懒惰限定符</p>
-<ul>
-<li>*？ 重复任意次，但是尽可能少重复</li>
-<li>+？ 重复一次或者多次，但是尽可能少重复</li>
-<li>？？ 重复零次或者一次，但是尽可能少重复</li>
-<li>{n,m}? 重复n到m次，但是尽可能少重复</li>
-<li>{n,}? 重复n次及以上，但是尽可能少重复</li>
-</ul>
-<h3 id="平衡组-递归匹配"><a href="#平衡组-递归匹配" class="headerlink" title="平衡组/递归匹配"></a>平衡组/递归匹配</h3><p>高级用法。</p>
-<h2 id="java中正则的使用"><a href="#java中正则的使用" class="headerlink" title="java中正则的使用"></a>java中正则的使用</h2><p>java的正则表达式相关，均在java.util.regex 包中，主要包括以下三个类：</p>
-<ul>
-<li>Pattern 类：<br>pattern 对象是一个正则表达式的编译表示。Pattern 类没有公共构造方法。要创建一个 Pattern 对象，你必须首先调用其公共静态编译方法，它返回一个 Pattern 对象。该方法接受一个正则表达式作为它的第一个参数。</li>
-<li>Matcher 类：<br>Matcher 对象是对输入字符串进行解释和匹配操作的引擎。与Pattern 类一样，Matcher 也没有公共构造方法。你需要调用 Pattern 对象的 matcher 方法来获得一个 Matcher 对象。</li>
-<li>PatternSyntaxException：<br>PatternSyntaxException 是一个非强制异常类，它表示一个正则表达式模式中的语法错误。</li>
-</ul>
-<p>使用示例：</p>
-<pre><code>//字符串包含验证
- Pattern pattern = Pattern.compile(&quot;^Java.*&quot;);
- Matcher matcher = pattern.matcher(&quot;Java不是人&quot;);
- boolean b= matcher.matches();//当条件满足时，将返回true，否则返回false
- System.out.println(b);
-
-//字符串分割
-Pattern pattern = Pattern.compile(&quot;[, |]+&quot;);
-String[] strs = pattern.split(&quot;Java Hello World Java,Hello,,World|Sun&quot;);
-for (int i=0;i&lt;strs.length;i++) {
-    System.out.println(strs[i]);
-}
-
-//文本替换（替换首个，或者替换全部）
-Pattern pattern = Pattern.compile(&quot;正则表达式&quot;);
-Matcher matcher = pattern.matcher(&quot;正则表达式 Hello World,正则表达式 Hello World&quot;);
-//替换第一个符合正则的数据
-System.out.println(matcher.replaceFirst(&quot;Java&quot;));
-////替换全部符合正则的数据
-System.out.println(matcher.replaceAll(&quot;Java&quot;));
-
-//提取子串
-Pattern pattern = Pattern.compile(&quot;href=/&quot;(.+?)/&quot;&quot;);
-Matcher matcher = pattern.matcher(&quot;&lt;a href=/&quot;index.html/&quot;&gt;主页&lt;/a&gt;&quot;);
-if(matcher.find())
-     System.out.println(matcher.group(1));
-}
-</code></pre><h2 id="js中正则的使用"><a href="#js中正则的使用" class="headerlink" title="js中正则的使用"></a>js中正则的使用</h2>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/正则表达式/">正则表达式</a>
-    </div>
-      <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
-    </div>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav></div>
       <footer id="footer">
     <div class="outer">
@@ -1252,14 +1201,14 @@ if(matcher.find())
                 2016-2017 kevinlsui
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style="display:none">
-                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -1268,7 +1217,7 @@ if(matcher.find())
                 
                 
                     <span id="busuanzi_container_page_pv" style="display:none">
-                        <span id="page-visit" title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -1297,9 +1246,9 @@ if(matcher.find())
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide()" title="Comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window

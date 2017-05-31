@@ -140,13 +140,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>Menu</li>
-                        <li>Tags</li>
+                        <li>菜单</li>
+                        <li>标签</li>
                         
-                        <li>Friends</li>
+                        <li>友情链接</li>
                         
                         
-                        <li>About Me</li>
+                        <li>关于我</li>
                         
                     </ul>
                 </div>
@@ -264,7 +264,7 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
       <div class="body-wrap"><article id="post-Timu02" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -415,6 +415,57 @@ a = a^b;//(a^b)^(a^b^b) = a^b^a = b本身
       
         <p class="article-more-link">
           <a href="/2016/11/13/SpringSetValue/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-TemplateMethod" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/11/08/TemplateMethod/" class="article-date">
+      <time datetime="2016-11-08T15:17:30.000Z" itemprop="datePublished">2016-11-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/08/TemplateMethod/">轻松理解设计模式——模板方法模式</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <blockquote>
+<p><strong>模板方法模式</strong>：定义一个操作中算法的框架，而将一些步骤延迟到子类中，使得子类可以不改变算法的结构即可重定义该算法中的某些特定步骤。</p>
+</blockquote>
+<p><strong>模板方法模式</strong>，是框架设计中用到频率最高的几种设计模式之一，像spring中有很多地方用到该设计模式。<br>本文是一个小demo,相信你看完会感概一句：原来传说中的<strong>模板方法模式</strong>这么简单！<br>
+          
+      
+    </p></div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+      
+        <p class="article-more-link">
+          <a href="/2016/11/08/TemplateMethod/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -978,90 +1029,9 @@ public class Test {
   
 </article>
   
-    <article id="post-ListRemoveElement" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/25/ListRemoveElement/" class="article-date">
-      <time datetime="2016-04-25T14:10:30.000Z" itemprop="datePublished">2016-04-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/25/ListRemoveElement/">ArrayList删除元素的正确姿势</a>
-    </h1>
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <pre><code>package com.kevinlsui.base;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-public class Test_listRemove {
-
-    public static void main(String[] args) {
-        List&lt;String&gt; list = new ArrayList&lt;String&gt;();
-        list.add(&quot;1&quot;);
-        list.add(&quot;2&quot;);
-        list.add(&quot;3&quot;);
-        list.add(&quot;4&quot;);
-        System.out.println(list);
-
-        /*for(String a : list){
-            // 报错。java.util.ConcurrentModificationException
-            list.remove(a);
-        }*/
-
-        /*for(Iterator&lt;String&gt; ti = list.iterator();ti.hasNext();){
-            System.out.println(ti.next());
-            //报错。java.util.ConcurrentModificationException
-            list.remove(ti.next());
-        }*/
-
-        //1.迭代器删除元素,ok
-        //2.只有内部实现迭代器的类（比如list），才可以使用foreach循环（本质是迭代器实现）
-        for(Iterator&lt;String&gt; ti = list.iterator();ti.hasNext();){
-            //System.out.println(ti.next());
-            //使用迭代器删除，ok
-            ti.remove();
-        }
-        System.out.println(list);
-    }
-
-}
-</code></pre>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/集合框架/">集合框架</a>
-    </div>
-      <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java基础/">java基础</a></li></ul>
-    </div>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav></div>
       <footer id="footer">
     <div class="outer">
@@ -1071,14 +1041,14 @@ public class Test_listRemove {
                 2016-2017 kevinlsui
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style="display:none">
-                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
                 
@@ -1087,7 +1057,7 @@ public class Test_listRemove {
                 
                 
                     <span id="busuanzi_container_page_pv" style="display:none">
-                        <span id="page-visit" title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 
@@ -1116,9 +1086,9 @@ public class Test_listRemove {
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide()" title="Comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script>
     // Open in New Window

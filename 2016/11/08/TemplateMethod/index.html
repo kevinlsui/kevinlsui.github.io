@@ -13,16 +13,22 @@
 
 
 
-<meta name="description" content="《深入理解Java虚拟机》是一本能让java开发者废寝忘食的书。最初拿到这本书，自己还是一个完全懵懂、“知其然而不知其所以然”的java菜鸟，现在可能好一点了，这本书也来来回回翻了好几遍，对jvm有了一定的认识。最近要找工作，又重新学习了下，总结一下一些基本的知识点。本文主要总结一下jvm的垃圾回收相关内容。">
+<meta name="description" content="模板方法模式：定义一个操作中算法的框架，而将一些步骤延迟到子类中，使得子类可以不改变算法的结构即可重定义该算法中的某些特定步骤。
+
+模板方法模式，是框架设计中用到频率最高的几种设计模式之一，像spring中有很多地方用到该设计模式。本文是一个小demo,相信你看完会感概一句：原来传说中的模板方法模式这么简单！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jvm——垃圾回收机制">
-<meta property="og:url" content="http://kevinlsui.github.io/2017/05/11/JvmGC/index.html">
+<meta property="og:title" content="轻松理解设计模式——模板方法模式">
+<meta property="og:url" content="http://kevinlsui.github.io/2016/11/08/TemplateMethod/index.html">
 <meta property="og:site_name" content="Kevinlsui Code">
-<meta property="og:description" content="《深入理解Java虚拟机》是一本能让java开发者废寝忘食的书。最初拿到这本书，自己还是一个完全懵懂、“知其然而不知其所以然”的java菜鸟，现在可能好一点了，这本书也来来回回翻了好几遍，对jvm有了一定的认识。最近要找工作，又重新学习了下，总结一下一些基本的知识点。本文主要总结一下jvm的垃圾回收相关内容。">
-<meta property="og:updated_time" content="2017-05-29T08:55:38.349Z">
+<meta property="og:description" content="模板方法模式：定义一个操作中算法的框架，而将一些步骤延迟到子类中，使得子类可以不改变算法的结构即可重定义该算法中的某些特定步骤。
+
+模板方法模式，是框架设计中用到频率最高的几种设计模式之一，像spring中有很多地方用到该设计模式。本文是一个小demo,相信你看完会感概一句：原来传说中的模板方法模式这么简单！">
+<meta property="og:updated_time" content="2017-05-01T02:53:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jvm——垃圾回收机制">
-<meta name="twitter:description" content="《深入理解Java虚拟机》是一本能让java开发者废寝忘食的书。最初拿到这本书，自己还是一个完全懵懂、“知其然而不知其所以然”的java菜鸟，现在可能好一点了，这本书也来来回回翻了好几遍，对jvm有了一定的认识。最近要找工作，又重新学习了下，总结一下一些基本的知识点。本文主要总结一下jvm的垃圾回收相关内容。">
+<meta name="twitter:title" content="轻松理解设计模式——模板方法模式">
+<meta name="twitter:description" content="模板方法模式：定义一个操作中算法的框架，而将一些步骤延迟到子类中，使得子类可以不改变算法的结构即可重定义该算法中的某些特定步骤。
+
+模板方法模式，是框架设计中用到频率最高的几种设计模式之一，像spring中有很多地方用到该设计模式。本文是一个小demo,相信你看完会感概一句：原来传说中的模板方法模式这么简单！">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -52,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>jvm——垃圾回收机制 | Kevinlsui Code</title>
+<title>轻松理解设计模式——模板方法模式 | Kevinlsui Code</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -262,11 +268,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
-      <div class="body-wrap"><article id="post-JvmGC" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-TemplateMethod" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/05/11/JvmGC/" class="article-date">
-      <time datetime="2017-05-11T14:17:30.000Z" itemprop="datePublished">2017-05-11</time>
+      <a href="/2016/11/08/TemplateMethod/" class="article-date">
+      <time datetime="2016-11-08T15:17:30.000Z" itemprop="datePublished">2016-11-08</time>
 </a>
     </div>
   
@@ -277,16 +283,16 @@
     
       <header class="article-header">
         <h1 class="article-title" itemprop="name">
-      jvm——垃圾回收机制
+      轻松理解设计模式——模板方法模式
     </h1>
       </header>
       
       <div class="article-info article-info-post">
         <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/jvm/">jvm</a>
+    <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
     </div>
         <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jvm/">jvm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
     </div>
         <div class="clearfix"></div>
       </div>
@@ -295,79 +301,28 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>《深入理解Java虚拟机》是一本能让java开发者废寝忘食的书。<br>最初拿到这本书，自己还是一个完全懵懂、“知其然而不知其所以然”的java菜鸟，现在可能好一点了，这本书也来来回回翻了好几遍，对jvm有了一定的认识。最近要找工作，又重新学习了下，总结一下一些基本的知识点。<br>本文主要总结一下<strong>jvm的垃圾回收相关内容</strong>。<br><a id="more"></a></p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
-<li>哪些内存需要回收机制</li>
-<li>如何判定该对象已经死亡（可以回收）</li>
-<li>垃圾收集算法有哪几种</li>
-<li>HotSpot是如何实现</li>
-<li>有哪几种垃圾收集器</li>
-</ol>
-<h3 id="哪些内存需要回收机制"><a href="#哪些内存需要回收机制" class="headerlink" title="哪些内存需要回收机制"></a>哪些内存需要回收机制</h3><p>根据jvm运行时数据区域的划分，我们可以知道，<strong>程序计数器、虚拟机栈、本地方法栈</strong>，这三块区域，随线程而生，随线程而灭，是不需要垃圾回收器来处理的。<br>而<strong>java堆、方法区</strong>，是线程共有的，并且占用的大小不确定，所以，需要使用垃圾回收器来回收那些已经没有用的对象（堆中）、常量（方法区）、类（方法区）。</p>
-<h3 id="如何判定该对象已经死亡（可以回收）"><a href="#如何判定该对象已经死亡（可以回收）" class="headerlink" title="如何判定该对象已经死亡（可以回收）"></a>如何判定该对象已经死亡（可以回收）</h3><p>对于<strong>java堆</strong>中的对象，如何判断是否可以回收，一般有两种方法：</p>
-<ol>
-<li><strong>引用计数算法</strong>，存在着无用的循环引用问题，java没有采用这种方法；</li>
-<li><strong>可达性分析算法</strong>，是java语言采用的方式。</li>
-</ol>
-<blockquote>
-<p>可达性分析算法：Reachablility Analysis,通过一系列的称为“GC Roots”的对象作为起点，从这些节点开始搜索，搜索所走过的路径称为<strong>引用链（Reference Chain）</strong>,当一个对象到GC Roots没有任何引用链相连，即从GC Roots到这个对象不可达，则证明该对象是不可用的，是可回收的对象。</p>
+        <blockquote>
+<p><strong>模板方法模式</strong>：定义一个操作中算法的框架，而将一些步骤延迟到子类中，使得子类可以不改变算法的结构即可重定义该算法中的某些特定步骤。</p>
 </blockquote>
-<p>java语言中，可以作为GC Roots的对象包括以下几种：</p>
-<ol>
-<li>虚拟机栈（栈帧中的本地变量表）中引用的对象</li>
-<li>方法区中类静态（static）属性引用的对象</li>
-<li>方法区中常量（final static）引用的对象</li>
-<li>本地方法栈中JNI（Native本地方法）引用的对象</li>
-</ol>
-<p>这里穿插一个小知识：对引用概念的扩充，<strong>强引用，软引用，弱引用，虚引用</strong>的介绍，主要用于一些系统的缓存功能，解决的问题是，当内存空间充足，留着这些引用关联的对象；若内存不足，则回收它们。</p>
-<p>对象回收的过程：</p>
-<ol>
-<li>某对象与GC Roots之间不可达，它被<strong>第一次标记</strong>；</li>
-<li>此时看此对象是否有必要执行finalize()方法（Object类的方法）；<br>2.1  对象没有覆盖该方法，或者该方法已经被虚拟机调用过，则不用再执行了；（然后了？？？可能就被回收了）<br>2.2 对象需要执行该方法，被放置到F-Queue队列中等待被虚拟机线程执行，在此方法内，让自己和引用链重新连接，是唯一解救自己的方法</li>
-<li>稍后GC将对F-Queue队列中的对象进行<strong>第二次小规模的标记</strong>，此时，如果对象拯救了自己，它重新与引用链连接上，则会在这次标记过程中被移除“即将回收”的集合，如果这轮也被标记了，基本就要被回收了。</li>
-</ol>
-<h3 id="回收方法区"><a href="#回收方法区" class="headerlink" title="回收方法区"></a>回收方法区</h3><ol>
-<li>方法区，也就是HotSpot的永久代，收集的“性价比”很低，很少需要回收的，但是回收是必要的</li>
-<li>回收的主要内容：废弃的常量和无用的类</li>
-<li>大量使用反射、动态代理、CGLIB等字节码类生成框架、动态JSP、OSGI这类频繁自定义classloader的场景，就需要永久代的垃圾回收，避免内存溢出。</li>
-</ol>
-<h3 id="垃圾收集算法有哪几种"><a href="#垃圾收集算法有哪几种" class="headerlink" title="垃圾收集算法有哪几种"></a>垃圾收集算法有哪几种</h3><ol>
-<li>标记-清除算法</li>
-<li>复制算法</li>
-<li>标记-整理算法</li>
-<li>分代收集算法（我觉得这个不算一种算法吧，不应该放在这里）</li>
-</ol>
-<h3 id="HotSpot是如何实现"><a href="#HotSpot是如何实现" class="headerlink" title="HotSpot是如何实现"></a>HotSpot是如何实现</h3><p>使用分代收集的思想，把新生代内存区域划分为8:1:1，使用复制算法；老年代使用“标记-清理”或者“标记-整理”算法。</p>
-<h3 id="有哪几种垃圾收集器"><a href="#有哪几种垃圾收集器" class="headerlink" title="有哪几种垃圾收集器"></a>有哪几种垃圾收集器</h3><p>这里只是列出这几种垃圾回收器，具体关于回收器的内容需要多读几遍才能看懂。</p>
-<ol>
-<li>Serial收集器（新生代，单线程，较严重Stop the World）</li>
-<li>ParNew收集器（新生代，并行多线程，较严重Stop the World）</li>
-<li>Parallel Scavenge收集器（新生代，并行多线程，吞吐量优先）</li>
-<li>Serial Old 收集器(老年代，单线程，标记-整理)</li>
-<li>Parallel Old 收集器（老年代，多线程，标记-整理，与Parallel Scavenge收集器搭配吞吐量优先，吞吐量优先）</li>
-<li>CMS 收集器（老年代，标记-清除，并发，低停顿）</li>
-<li>G1收集器（最先进，新生代/老年代，并发，整体看是“标记-整理”，局部看“复制”，低停顿）</li>
-</ol>
-<h3 id="内存分配与回收策略"><a href="#内存分配与回收策略" class="headerlink" title="内存分配与回收策略"></a>内存分配与回收策略</h3><ol>
-<li>对象优先分配在Eden上</li>
-<li>大对象直接进入老年代</li>
-<li>长期存活的对象进入老年代</li>
-<li>动态对象年龄判定</li>
-<li>空间分配担保</li>
-</ol>
+<p><strong>模板方法模式</strong>，是框架设计中用到频率最高的几种设计模式之一，像spring中有很多地方用到该设计模式。<br>本文是一个小demo,相信你看完会感概一句：原来传说中的<strong>模板方法模式</strong>这么简单！<br><a id="more"></a></p>
+<p>代码展示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">package com.kevinlsui.test;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 抽象类</div><div class="line"> */</div><div class="line">public abstract class Sort &#123;</div><div class="line">    </div><div class="line">    //定义一个骨架，步骤123，但是算法核心实现，由各子类来完成</div><div class="line">    public void arraySort(int[] arr)&#123;</div><div class="line">        //1.验证参数</div><div class="line">        int length = arr.length;</div><div class="line">        if(length &lt; 2)&#123;</div><div class="line">            System.out.println(&quot;数组长度小于2，请检查待排序数组！！！&quot;);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        //2.排序实现</div><div class="line">        sortImpl(arr);</div><div class="line"></div><div class="line">        //3.结果展示</div><div class="line">        for(int i = 0 ; i &lt; length;i++)&#123;</div><div class="line">            System.out.print(arr[i]+&quot; &quot;);</div><div class="line">        &#125;</div><div class="line">        System.out.println();</div><div class="line">        System.out.println(&quot;----------排序完成----------&quot;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    //抽象方法，等子类实现</div><div class="line">    protected abstract void sortImpl(int[] arr);</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">package com.kevinlsui.test;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 实现类1</div><div class="line"> */</div><div class="line">public class QuickSort extends Sort &#123;</div><div class="line">    //子类实现，模板方法</div><div class="line">    @Override</div><div class="line">    protected void sortImpl(int[] arr) &#123;</div><div class="line">        System.out.println(&quot;我用快速排序算法实现的。。。&quot;);</div><div class="line">        //排序</div><div class="line">        sortArr(arr,0,arr.length-1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //快速排序，复习下算法</div><div class="line">    private void sortArr(int[] arr , int min ,int max)&#123;</div><div class="line">        if(min &lt; max)&#123;//出口条件</div><div class="line">            int len1 = min;</div><div class="line">            int len2 = max;</div><div class="line"></div><div class="line">            int temp = arr[min];//基准点，这里可以使用“三数取中”优化</div><div class="line">            while (min &lt; max)&#123;</div><div class="line">                while (min &lt; max &amp;&amp; arr[max] &gt;= temp)&#123;</div><div class="line">                    max--;</div><div class="line">                &#125;</div><div class="line">                arr[min] = arr[max];</div><div class="line"></div><div class="line">                while (min &lt; max &amp;&amp; arr[min] &lt;= temp)&#123;</div><div class="line">                    min++;</div><div class="line">                &#125;</div><div class="line">                arr[max] = arr[min];</div><div class="line">            &#125;</div><div class="line">            arr[min] = temp;</div><div class="line"></div><div class="line">            sortArr(arr,len1,min-1);</div><div class="line">            sortArr(arr,min+1,len2);</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">package com.kevinlsui.test;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 实现类2</div><div class="line"> */</div><div class="line">public class MergeSort extends Sort &#123;</div><div class="line"></div><div class="line">     //子类实现，模板方法</div><div class="line">    @Override</div><div class="line">    protected void sortImpl(int[] arr) &#123;</div><div class="line">        System.out.println(&quot;我用归并排序算法实现的。。。&quot;);</div><div class="line">        //归并</div><div class="line">        sortArr(arr,0,arr.length-1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //归并排序算法实现</div><div class="line">    private void sortArr(int[] arr,int min,int max)&#123;</div><div class="line">        if (min &lt; max)&#123;</div><div class="line">            int mid = (min+max)/2;</div><div class="line">            sortArr(arr,min,mid);</div><div class="line">            sortArr(arr,mid+1,max);</div><div class="line">            merge(arr,min,mid,max);</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    //合并实现</div><div class="line">    private void merge(int[] arr, int min, int mid, int max) &#123;</div><div class="line">        int[] temp = new int[max-min+1];//按需设置数组长度</div><div class="line">        int index = 0;</div><div class="line">        int left = min;//左指针</div><div class="line">        int right = mid+1;</div><div class="line"></div><div class="line">        //合并</div><div class="line">        while (left &lt;= mid &amp;&amp; right &lt;= max)&#123;</div><div class="line">            if(arr[left] &gt; arr[right])&#123;</div><div class="line">                temp[index++] = arr[right++];</div><div class="line">            &#125;else&#123;</div><div class="line">                temp[index++] = arr[left++];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        //某一半数字用完了</div><div class="line">        while (left &lt;= mid)&#123;</div><div class="line">            temp[index++] = arr[left++];</div><div class="line">        &#125;</div><div class="line">        while (right &lt;= max)&#123;</div><div class="line">            temp[index++]=arr[right++];</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        //临时数组数据放回原数组</div><div class="line">        for(int i = 0 ;i &lt; temp.length;i++)&#123;</div><div class="line">            arr[min++] = temp[i];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">package com.kevinlsui.test;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 测试类</div><div class="line"> */</div><div class="line">public class SortTest &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        int[] arr = &#123;32,12,89,24,10,66,2,32,45,10&#125;;</div><div class="line"></div><div class="line">        Sort sort1 = new QuickSort();</div><div class="line">        sort1.arraySort(arr);</div><div class="line"></div><div class="line">        Sort sort2 = new MergeSort();</div><div class="line">        sort2.arraySort(arr);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//结果：</div><div class="line"></div><div class="line">// 我用快速排序算法实现的。。。</div><div class="line">// 2 10 10 12 24 32 32 45 66 89 </div><div class="line">// ----------排序完成----------</div><div class="line">// 我用归并排序算法实现的。。。</div><div class="line">// 2 10 10 12 24 32 32 45 66 89 </div><div class="line">// ----------排序完成----------</div></pre></td></tr></table></figure>
       
     </div>
     
   </div>
   
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/05/11/JvmGC/">jvm——垃圾回收机制</a></p>
+        <p><span>本文标题:</span><a href="/2016/11/08/TemplateMethod/">轻松理解设计模式——模板方法模式</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">kevinlsui</a></p>
-        <p><span>发布时间:</span>2017-05-11, 22:17:30</p>
-        <p><span>最后更新:</span>2017-05-29, 16:55:38</p>
+        <p><span>发布时间:</span>2016-11-08, 23:17:30</p>
+        <p><span>最后更新:</span>2017-05-01, 10:53:21</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/05/11/JvmGC/" title="jvm——垃圾回收机制">http://kevinlsui.github.io/2017/05/11/JvmGC/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://kevinlsui.github.io/2017/05/11/JvmGC/　　作者: kevinlsui" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/11/08/TemplateMethod/" title="轻松理解设计模式——模板方法模式">http://kevinlsui.github.io/2016/11/08/TemplateMethod/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://kevinlsui.github.io/2016/11/08/TemplateMethod/　　作者: kevinlsui" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -380,15 +335,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/05/26/JS_OOP/">
-                    JS高级知识——面向对象
+                <a href="/2016/11/13/SpringSetValue/">
+                    使用spring注入项目的配置文件
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/05/08/JvmTools/">
-                    jvm——调优工具
+                <a href="/2016/11/03/MyBatisStart/">
+                    Mybatis使用总结
                 </a>
             </div>
         
@@ -398,7 +353,7 @@
 <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-number">1.</span> <span class="toc-text">问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#哪些内存需要回收机制"><span class="toc-number">1.1.</span> <span class="toc-text">哪些内存需要回收机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何判定该对象已经死亡（可以回收）"><span class="toc-number">1.2.</span> <span class="toc-text">如何判定该对象已经死亡（可以回收）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回收方法区"><span class="toc-number">1.3.</span> <span class="toc-text">回收方法区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垃圾收集算法有哪几种"><span class="toc-number">1.4.</span> <span class="toc-text">垃圾收集算法有哪几种</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HotSpot是如何实现"><span class="toc-number">1.5.</span> <span class="toc-text">HotSpot是如何实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有哪几种垃圾收集器"><span class="toc-number">1.6.</span> <span class="toc-text">有哪几种垃圾收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存分配与回收策略"><span class="toc-number">1.7.</span> <span class="toc-text">内存分配与回收策略</span></a></li></ol></li></ol>
+            
         
     </div>
     <style>
@@ -426,7 +381,7 @@
 
 <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/05/26/JS_OOP/" title="上一篇: JS高级知识——面向对象">
+            <a href="/2016/11/13/SpringSetValue/" title="上一篇: 使用spring注入项目的配置文件">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -434,7 +389,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/05/08/JvmTools/" title="下一篇: jvm——调优工具">
+            <a href="/2016/11/03/MyBatisStart/" title="下一篇: Mybatis使用总结">
                 <i class="fa fa-angle-right"></i>
             </a>
         
