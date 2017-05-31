@@ -13,28 +13,19 @@
 
 
 
-<meta name="description" content="要点
-不是jdk自带，需要导入jar包。所需要的jar,cglib-3.0.jar;asm-4.0.jar;asm-util-4.0.jar
-由于jdk动态代理要求，被代理类和代理类要实现同一个接口，当无接口时，就需要使用到cglib动态代理。
-原理是：通过字节码技术为代理类创建子类，并在子类中采用方法拦截的技术拦截所有父类方法的调用，顺势织入横切逻辑。
-cglib的性能高于jdk动态代理，但是c">
+<meta name="description" content="观察者模式，学习代码。
+12345678910111213package com.kevinlsui.observer.example;/*** 被观察类接口*/public interface Subject &amp;#123;	// 观察者注册	public void add(Observer o);	//观察者注销	public void remove(Observer o);	// 消息发布	p">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CGLIB动态代理">
-<meta property="og:url" content="http://kevinlsui.github.io/2017/03/28/Cglib/index.html">
+<meta property="og:title" content="轻松学习设计模式——观察者模式">
+<meta property="og:url" content="http://kevinlsui.github.io/2016/03/16/Observer/index.html">
 <meta property="og:site_name" content="Kevinlsui Code">
-<meta property="og:description" content="要点
-不是jdk自带，需要导入jar包。所需要的jar,cglib-3.0.jar;asm-4.0.jar;asm-util-4.0.jar
-由于jdk动态代理要求，被代理类和代理类要实现同一个接口，当无接口时，就需要使用到cglib动态代理。
-原理是：通过字节码技术为代理类创建子类，并在子类中采用方法拦截的技术拦截所有父类方法的调用，顺势织入横切逻辑。
-cglib的性能高于jdk动态代理，但是c">
+<meta property="og:description" content="观察者模式，学习代码。
+12345678910111213package com.kevinlsui.observer.example;/*** 被观察类接口*/public interface Subject &amp;#123;	// 观察者注册	public void add(Observer o);	//观察者注销	public void remove(Observer o);	// 消息发布	p">
 <meta property="og:updated_time" content="2017-05-01T02:53:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CGLIB动态代理">
-<meta name="twitter:description" content="要点
-不是jdk自带，需要导入jar包。所需要的jar,cglib-3.0.jar;asm-4.0.jar;asm-util-4.0.jar
-由于jdk动态代理要求，被代理类和代理类要实现同一个接口，当无接口时，就需要使用到cglib动态代理。
-原理是：通过字节码技术为代理类创建子类，并在子类中采用方法拦截的技术拦截所有父类方法的调用，顺势织入横切逻辑。
-cglib的性能高于jdk动态代理，但是c">
+<meta name="twitter:title" content="轻松学习设计模式——观察者模式">
+<meta name="twitter:description" content="观察者模式，学习代码。
+12345678910111213package com.kevinlsui.observer.example;/*** 被观察类接口*/public interface Subject &amp;#123;	// 观察者注册	public void add(Observer o);	//观察者注销	public void remove(Observer o);	// 消息发布	p">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -64,7 +55,7 @@ cglib的性能高于jdk动态代理，但是c">
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>CGLIB动态代理 | Kevinlsui Code</title>
+<title>轻松学习设计模式——观察者模式 | Kevinlsui Code</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -274,11 +265,11 @@ cglib的性能高于jdk动态代理，但是c">
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me">
 </nav>
-      <div class="body-wrap"><article id="post-Cglib" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Observer" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/03/28/Cglib/" class="article-date">
-      <time datetime="2017-03-28T12:17:30.000Z" itemprop="datePublished">2017-03-28</time>
+      <a href="/2016/03/16/Observer/" class="article-date">
+      <time datetime="2016-03-16T15:17:30.000Z" itemprop="datePublished">2016-03-16</time>
 </a>
     </div>
   
@@ -289,16 +280,16 @@ cglib的性能高于jdk动态代理，但是c">
     
       <header class="article-header">
         <h1 class="article-title" itemprop="name">
-      CGLIB动态代理
+      轻松学习设计模式——观察者模式
     </h1>
       </header>
       
       <div class="article-info article-info-post">
         <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/cglib/">cglib</a>
+    <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
     </div>
         <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java高级/">java高级</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
     </div>
         <div class="clearfix"></div>
       </div>
@@ -307,122 +298,26 @@ cglib的性能高于jdk动态代理，但是c">
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h2><ol>
-<li>不是jdk自带，需要导入jar包。所需要的jar,cglib-3.0.jar;asm-4.0.jar;asm-util-4.0.jar</li>
-<li>由于jdk动态代理要求，被代理类和代理类要实现同一个接口，当无接口时，就需要使用到cglib动态代理。</li>
-<li>原理是：通过字节码技术为代理类创建子类，并在子类中采用方法拦截的技术拦截所有父类方法的调用，顺势织入横切逻辑。</li>
-<li>cglib的性能高于jdk动态代理，但是cglib创建代理对象时间较长，所以对于单例的对象，因为无需频繁创建对象，用CGLib合适。</li>
-<li>由于CGLib由于是采用动态创建子类的方法，对于<strong>final</strong>方法，无法进行代理。</li>
-</ol>
-<a id="more"></a>
-<h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><hr>
-<pre><code>package com.kevinlsui.cglib;
-
-public class TestCglib {
-    public void say(){
-        System.out.println(&quot;say...&quot;);
-    }
-
-    public final void hello(){
-        System.out.println(&quot;hello...&quot;);
-    }
-}
-</code></pre><hr>
-<pre><code>package com.kevinlsui.cglib;
-
-import java.lang.reflect.Method;
-
-import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.MethodInterceptor;
-import net.sf.cglib.proxy.MethodProxy;
-
-public class ProxyCglib implements MethodInterceptor{
-
-    public Object getProxy(Class clazz){
-        Enhancer en = new Enhancer();
-        en.setSuperclass(clazz);
-        en.setCallback(this);
-        return en.create();
-    }
-
-    @Override
-    public Object intercept(Object obj, Method arg1, Object[] args,
-            MethodProxy proxy) throws Throwable {
-        System.out.println(&quot;前置代理&quot;);  
-        //通过代理类调用父类中的方法  
-        Object result = proxy.invokeSuper(obj, args);  
-        System.out.println(&quot;后置代理&quot;);  
-        return result; 
-    }
-
-}
-</code></pre><hr>
-<pre><code>package com.kevinlsui.cglib;
-
-import java.lang.reflect.Method;
-
-import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.MethodInterceptor;
-import net.sf.cglib.proxy.MethodProxy;
-
-public class TestMain {
-
-    //1.所需要的jar,cglib-3.0.jar;asm-4.0.jar;asm-util-4.0.jar
-    public static void main(String[] args) {
-        //常规写法
-        TestCglib cg = (TestCglib) new ProxyCglib().getProxy(TestCglib.class);
-        cg.say();//代理成功
-        cg.hello();//final方法，代理失败，仅仅执行此final方法
-
-        //其它写法1,不需要ProxyCglib
-        final TestCglib t = new TestCglib();
-        TestCglib cg2 = (TestCglib) Enhancer.create(TestCglib.class, new MethodInterceptor(){
-            @Override
-            public Object intercept(Object obj, Method method, Object[] args,
-                    MethodProxy proxy) throws Throwable {
-                System.out.println(&quot;前置。。。&quot;);
-                Object result = method.invoke(t, args);//此处使用真实业务对象
-                System.out.println(&quot;后置。。。&quot;);
-                return result;
-            }
-        });
-        cg2.say();
-        cg2.hello();
-
-
-        //其它写法2，不需要ProxyCglib
-        TestCglib cg3 = (TestCglib) Enhancer.create(TestCglib.class, new MethodInterceptor(){
-            @Override
-            public Object intercept(Object obj, Method method, Object[] args,
-                    MethodProxy proxy) throws Throwable {
-                System.out.println(&quot;前置。。。&quot;);
-                //Object result = method.invoke(t, args);//此处使用真实业务对象
-                Object result = proxy.invokeSuper(obj, args);  
-                System.out.println(&quot;后置。。。&quot;);
-                return result;
-            }
-        });
-        cg3.say();
-        cg3.hello();
-
-    }
-
-
-}
-</code></pre>
+        <p>观察者模式，学习代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">package com.kevinlsui.observer.example;</div><div class="line"></div><div class="line">/**</div><div class="line">* 被观察类接口</div><div class="line">*/</div><div class="line">public interface Subject &#123;</div><div class="line">	// 观察者注册</div><div class="line">	public void add(Observer o);</div><div class="line">	//观察者注销</div><div class="line">	public void remove(Observer o);</div><div class="line">	// 消息发布</div><div class="line">	public void update();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">package com.kevinlsui.observer.example;</div><div class="line"></div><div class="line">import java.util.ArrayList;</div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">/**</div><div class="line">* 被观察类</div><div class="line">*/</div><div class="line">public class WeatherData implements Subject&#123;</div><div class="line"></div><div class="line">	private int low;</div><div class="line">	private int hight;</div><div class="line">	private String weather;</div><div class="line">	private List&lt;Observer&gt; list = new ArrayList&lt;Observer&gt;();</div><div class="line">	</div><div class="line">	public int getLow() &#123;</div><div class="line">		return low;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public int getHight() &#123;</div><div class="line">		return hight;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public String getWeather() &#123;</div><div class="line">		return weather;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public void setData(int low,int hight,String weather)&#123;</div><div class="line">		this.low = low;</div><div class="line">		this.hight = hight;</div><div class="line">		this.weather = weather;</div><div class="line">		update();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void add(Observer o) &#123;</div><div class="line">		if(!list.contains(o))&#123;</div><div class="line">			list.add(o);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void remove(Observer o) &#123;</div><div class="line">		if(list.contains(o))&#123;</div><div class="line">			list.remove(o);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public void update() &#123;</div><div class="line">		for(Observer o :list)&#123;</div><div class="line">			o.update(getLow(),getHight(),getWeather());</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">package com.kevinlsui.observer.example;</div><div class="line"></div><div class="line">/**</div><div class="line">* 观察类接口</div><div class="line">*/</div><div class="line">public interface Observer &#123;</div><div class="line">    //坐等信息发布过来</div><div class="line">	public void update(int low,int hight,String weather);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">package com.kevinlsui.observer.example;</div><div class="line"></div><div class="line">/**</div><div class="line">* 观察类1</div><div class="line">*/</div><div class="line">public class Ipad implements Observer&#123;</div><div class="line">	private Subject sub;</div><div class="line">	</div><div class="line">	public Ipad(Subject subject)&#123;</div><div class="line">		this.sub = subject;</div><div class="line">		subject.add(this);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public void cancle()&#123;</div><div class="line">		sub.remove(this);</div><div class="line">	&#125;</div><div class="line">	@Override</div><div class="line">	public void update(int low, int hight, String weather) &#123;</div><div class="line">		System.out.println(&quot;Ipd....low:&quot;+low+&quot;;hight:&quot;+hight+&quot;;weather:&quot;+weather);</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">package com.kevinlsui.observer.example;</div><div class="line"></div><div class="line">/**</div><div class="line">* 观察类2</div><div class="line">*/</div><div class="line">public class Phone implements Observer&#123;</div><div class="line"></div><div class="line">	private Subject sub;</div><div class="line">	</div><div class="line">	public Phone(Subject subject)&#123;</div><div class="line">		this.sub = subject;</div><div class="line">		subject.add(this);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public void cancle()&#123;</div><div class="line">		sub.remove(this);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@Override</div><div class="line">	public void update(int low, int hight, String weather) &#123;</div><div class="line">		System.out.println(&quot;Phone..........low:&quot;+low+&quot;;hight:&quot;+hight+&quot;;weather:&quot;+weather);</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">package com.kevinlsui.observer.example;</div><div class="line"></div><div class="line">/**</div><div class="line">*测试类</div><div class="line">*/</div><div class="line">public class Test &#123;</div><div class="line">	</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		System.out.println(&quot;观察者模式.........&quot;);</div><div class="line">		WeatherData we = new WeatherData();</div><div class="line">		</div><div class="line">		Phone p = new Phone(we);</div><div class="line">		Ipad ipad = new Ipad(we);</div><div class="line">		we.setData(1, 12, &quot;晴天&quot;);</div><div class="line">		p.cancle();</div><div class="line">		we.setData(5, 18, &quot;大晴天&quot;);</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     
   </div>
   
     <div class="copyright">
-        <p><span>Title:</span><a href="/2017/03/28/Cglib/">CGLIB动态代理</a></p>
+        <p><span>Title:</span><a href="/2016/03/16/Observer/">轻松学习设计模式——观察者模式</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">kevinlsui</a></p>
-        <p><span>Created:</span>2017-03-28, 20:17:30</p>
+        <p><span>Created:</span>2016-03-16, 23:17:30</p>
         <p><span>Updated:</span>2017-05-01, 10:53:21</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2017/03/28/Cglib/" title="CGLIB动态代理">http://kevinlsui.github.io/2017/03/28/Cglib/</a>
-            <span class="copy-path" data-clipboard-text="From http://kevinlsui.github.io/2017/03/28/Cglib/　　By kevinlsui" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2016/03/16/Observer/" title="轻松学习设计模式——观察者模式">http://kevinlsui.github.io/2016/03/16/Observer/</a>
+            <span class="copy-path" data-clipboard-text="From http://kevinlsui.github.io/2016/03/16/Observer/　　By kevinlsui" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -435,15 +330,15 @@ public class TestMain {
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/04/01/ThreadState/">
-                    线程的状态Thread.State
+                <a href="/2016/03/18/JdkObserver/">
+                    jdk自带的观察者模式
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/03/21/Css3Rem/">
-                    使用css3:rem,让屏幕适配变得简单起来
+                <a href="/2016/02/18/SqlRule/">
+                    简单解释下数据库三大范式
                 </a>
             </div>
         
@@ -453,7 +348,7 @@ public class TestMain {
 <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#要点"><span class="toc-number">1.</span> <span class="toc-text">要点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码示例"><span class="toc-number">2.</span> <span class="toc-text">代码示例</span></a></li></ol>
+            
         
     </div>
     <style>
@@ -481,7 +376,7 @@ public class TestMain {
 
 <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/04/01/ThreadState/" title="Pre: 线程的状态Thread.State">
+            <a href="/2016/03/18/JdkObserver/" title="Pre: jdk自带的观察者模式">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -489,7 +384,7 @@ public class TestMain {
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/03/21/Css3Rem/" title="Next: 使用css3:rem,让屏幕适配变得简单起来">
+            <a href="/2016/02/18/SqlRule/" title="Next: 简单解释下数据库三大范式">
                 <i class="fa fa-angle-right"></i>
             </a>
         
