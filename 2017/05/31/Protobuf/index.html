@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="kevinlsui">
+
+
+
+<meta name="description" content="本文内容：
+
+protobuf介绍
+protobuf简单示例（真的不用像网上说的那样，各种编译安装的）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="protobuf简单入门（windows+java）">
+<meta property="og:url" content="http://kevinlsui.github.io/2017/05/31/Protobuf/index.html">
+<meta property="og:site_name" content="Kevinlsui Code">
+<meta property="og:description" content="本文内容：
+
+protobuf介绍
+protobuf简单示例（真的不用像网上说的那样，各种编译安装的）">
+<meta property="og:updated_time" content="2017-05-31T14:43:44.313Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="protobuf简单入门（windows+java）">
+<meta name="twitter:description" content="本文内容：
+
+protobuf介绍
+protobuf简单示例（真的不用像网上说的那样，各种编译安装的）">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+
+
+    <link rel="shortcut icon" href="/apple-touch-icon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>protobuf简单入门（windows+java） | Kevinlsui Code</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">kevinlsui</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">学习、总结、分享、进步</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">归档</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/book/">书籍推荐</a></li>
+                        
+                            <li><a href="/todolist/">todoList</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java高级/">java高级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk源码/">jdk源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protobuf/">protobuf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大话数据结构/">大话数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小技巧/">小技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记/">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/递归/">递归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决/">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Java后台开发工程师</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">kevinlsui</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">kevinlsui</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">学习、总结、分享、进步</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">归档</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/book/">书籍推荐</a></li>
+                
+                    <li><a href="/todolist/">todoList</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-Protobuf" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/05/31/Protobuf/" class="article-date">
+      <time datetime="2017-05-31T14:42:30.000Z" itemprop="datePublished">2017-05-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      protobuf简单入门（windows+java）
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/protobuf/">protobuf</a>
+    </div>
+        <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/protobuf/">protobuf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/序列化/">序列化</a></li></ul>
+    </div>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>本文内容：</p>
+<ol>
+<li>protobuf介绍</li>
+<li>protobuf简单示例（真的不用像网上说的那样，各种编译安装的）<a id="more"></a>
+<h2 id="protobuf介绍"><a href="#protobuf介绍" class="headerlink" title="protobuf介绍"></a>protobuf介绍</h2></li>
+</ol>
+<blockquote>
+<p>Protobuf协议，全称：Protocol Buffer ,是Google开发的一种数据描述语言，能够将结构化数据序列化，可用于数据存储、通信协议等方面。</p>
+</blockquote>
+<p>官方网站：<a href="https://github.com/google/protobuf" target="_blank" rel="external">https://github.com/google/protobuf</a></p>
+<p>现在大部分系统的数据交互格式是json,较老的可能使用的是xml，他们都是文本格式的，对于某些系统，要求更快的生成速度，更小的占用空间，就需要使用<strong>protobuf</strong>了。<br>我们完全可以把它理解为更快、更简单、更小的JSON或者XML，它是二进制的，突出优点：1.序列化、反序列化速度快；2.占用空间小。<br>但是，<strong>我认为</strong>可能它的普及程度应该不及json,原因：1.相对来说，使用起来比较麻烦；2.二进制的，不像json，xml能直观的看懂消息含义。<br>我了解到这个技术，还是以前一位同事，新公司做的软硬件结合，需要自己定义一种协议来通信，正好protobuf很符合他们的技术选型要求。<br>同类框架：facebook thrift/微软 bond</p>
+<h2 id="protobuf简单示例"><a href="#protobuf简单示例" class="headerlink" title="protobuf简单示例"></a>protobuf简单示例</h2><p>本示例是在windows操作系统上，使用java语言，来完成的一个入门小demo。具体步骤：</p>
+<ol>
+<li>下载windows环境下的生成工具，protoc-3.3.0-win32.zip，地址：<a href="https://github.com/google/protobuf/releases/tag/v3.3.0" target="_blank" rel="external">https://github.com/google/protobuf/releases/tag/v3.3.0</a> （我这提供的是最新版3.3.0的网址）</li>
+<li>解压，bin目录下获得protoc.exe。(仅仅使用该exe工具，就可以完成proto文件转java文件【及其他语言格式】，不需要网上所说的各种编译安装)（说要必须配置环境变量path的，就更不要提了，请搞清楚path设置的意义）</li>
+<li>编写proto文件——person.proto，我这就写个小demo，具体各种字段类型，枚举之类的，等要深入使用，再查阅文档即可。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">syntax = &quot;proto3&quot;;//定义使用的版本，这里是proto3</div><div class="line">package kevinlsui; // </div><div class="line"></div><div class="line">option java_package = &quot;com.kevinlsui.protobuf&quot;; // 包结构</div><div class="line">option java_outer_classname = &quot;MyFirstProtobuf&quot;; // 生成的java类的名字</div><div class="line"></div><div class="line">//定义一个消息</div><div class="line">message Person</div><div class="line">&#123;</div><div class="line">    //proto3,给字段加required 、optional ，转换时提示错误，删掉就好了，后续用时具体研究原因</div><div class="line">    string name =1; // 定义个name,字段类型是string（等号后面的1，是该字段的标志，一般1-15，具体后续研究）</div><div class="line">    int32 age = 2; // 定义年龄age,字段类型是int</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>4.win——cmd，切换到exe的目录（如果你配置了path,就不用切换到该目录了），执行proto文件转java文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">protoc -I=F:\protobuf\protoc-3.3.0-win32\bin --java_out=F:\protobuf\protoc-3.3.0-win32\bin F:\protobuf\protoc-3.3.0-win32\bin\person.proto</div><div class="line">// 具体参数含义，google/baidu</div><div class="line">// 注意修改对应目录</div></pre></td></tr></table></figure></p>
+<p>5.在对应包目录（com.kevinlsui.protobuf）下，找到 MyFirstProtobuf.java。<br>6.IDE里面新建java工程，引入jar包：protobuf-java-3.3.0.jar。（可maven仓库下载，或直接pom配置）<br>7.建立测试类，具体代码如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">package com.kevinlsui.protobuf.test;</div><div class="line"></div><div class="line">import com.google.protobuf.InvalidProtocolBufferException;</div><div class="line">import com.kevinlsui.protobuf.MyFirstProtobuf;</div><div class="line"></div><div class="line">/**</div><div class="line"> * protobuf测试类</div><div class="line"> */</div><div class="line">public class ProtobufTest &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        //序列化，转换为流</div><div class="line">        MyFirstProtobuf.Person.Builder builder = MyFirstProtobuf.Person.newBuilder();</div><div class="line">        builder.setName(&quot;kevinlsui&quot;);</div><div class="line">        builder.setAge(25);</div><div class="line"></div><div class="line">        MyFirstProtobuf.Person person = builder.build();</div><div class="line">        System.out.println(person.getName());</div><div class="line">        System.out.println(person.getAge());</div><div class="line"></div><div class="line">        byte[] bytes = person.toByteArray();</div><div class="line">        System.out.println(bytes);</div><div class="line"></div><div class="line">        System.out.println(&quot;================================&quot;);</div><div class="line">        //反序列化，转为对象</div><div class="line">        try &#123;</div><div class="line">            MyFirstProtobuf.Person person1 = MyFirstProtobuf.Person.parseFrom(bytes);</div><div class="line">            System.out.println(person1.getName());</div><div class="line">            System.out.println(person1.getAge());</div><div class="line"></div><div class="line">        &#125; catch (InvalidProtocolBufferException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">// console显示：</div><div class="line">// kevinlsui</div><div class="line">// 25</div><div class="line">// [B@49d67b41</div><div class="line">// ================================</div><div class="line">// kevinlsui</div><div class="line">// 25</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/05/31/Protobuf/">protobuf简单入门（windows+java）</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">kevinlsui</a></p>
+        <p><span>发布时间:</span>2017-05-31, 22:42:30</p>
+        <p><span>最后更新:</span>2017-05-31, 22:43:44</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/05/31/Protobuf/" title="protobuf简单入门（windows+java）">http://kevinlsui.github.io/2017/05/31/Protobuf/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://kevinlsui.github.io/2017/05/31/Protobuf/　　作者: kevinlsui" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/05/29/MyTodoList/">
+                    一个实用的小工具——TodoList
+                </a>
+            </div>
+        
+    </nav>
+  
+</article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#protobuf介绍"><span class="toc-number">1.</span> <span class="toc-text">protobuf介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#protobuf简单示例"><span class="toc-number">2.</span> <span class="toc-text">protobuf简单示例</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+    
+
+
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/05/29/MyTodoList/" title="下一篇: 一个实用的小工具——TodoList">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/05/31/Protobuf/">protobuf简单入门（windows+java）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/29/MyTodoList/">一个实用的小工具——TodoList</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/JvmArea/">jvm——运行时数据区域</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/JS_OOP/">JS高级知识——面向对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/11/JvmGC/">jvm——垃圾回收机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/JvmTools/">jvm——调优工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/01/Bloom/">布隆过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/02/ConCAS/">concurrent包的基础：CAS</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ConcurrentTools/">concurrent包下的并发工具类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ThreadState/">线程的状态Thread.State</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/Cglib/">CGLIB动态代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/Css3Rem/">使用css3:rem,让屏幕适配变得简单起来</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/DynamicProxy/">jdk动态代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/01/">动态规划——01背包问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/AboutHandlerbarsjs/">Handlerbars.js中if-else对字符串'NULL'不起作用问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/01/DuShu02/">Java并发编程的艺术——读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/DuShu01/">Java多线程编程核心技术——读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/10/DahuaJS/">《大话数据结构》算法js实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/10/Decorator/">轻松理解设计模式——装饰者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/05/DaHuaSort/">大话数据结构_排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/02/Suanfa01/">给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/24/Timu02/">两数互换</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/21/Singleton/">单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/13/SpringSetValue/">使用spring注入项目的配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/08/TemplateMethod/">轻松理解设计模式——模板方法模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/03/MyBatisStart/">Mybatis使用总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/17/MethodArgs/">一道面试题，加深了我对java参数传递的理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/04/InnerClass/">java基础知识——内部类</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/11/Enum/">java基础知识——枚举</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/FanXing/">java基础知识——泛型</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/21/Annotation/">Java基础知识——注解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/25/ListRemoveElement/">ArrayList删除元素的正确姿势</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/JiSuan/">逆波兰式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/KMP/">字符串匹配模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Timu01/">8个小球，找出其中一个次品</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/18/JdkObserver/">jdk自带的观察者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/16/Observer/">轻松理解设计模式——观察者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/18/SqlRule/">简单解释下数据库三大范式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/11/SqlScript/">一个简单的mysql建库脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/15/DesignPattern/">设计模式学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/11/Object/">Java源码-Object.java</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/05/Regular/">正则表达式学习整理</a></li></ul>
+
+
+    <script>
+        
+    </script></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2017 kevinlsui
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+             post: ".article-entry a[href], .copyright a[href]", 
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
