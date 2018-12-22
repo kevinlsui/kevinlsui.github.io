@@ -100,8 +100,9 @@
 	var storage=window.localStorage;
 	var htmlarr = [];//按照日期倒序
 	var html = '';
+	var reg = /^\d{4}-\d{2}-\d{2}$/;
 	for(var si in storage){
-		if(si != key){
+		if(si != key && reg.test(si)){
 			var html = '';
 			html += '<div class="his_title">'+
 						'<span class="his_date">'+si+'</span>'+

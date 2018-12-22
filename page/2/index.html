@@ -266,7 +266,55 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
-      <div class="body-wrap"><article id="post-ThreadState" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ConcurrentTools" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/01/ConcurrentTools/" class="article-date">
+      <time datetime="2017-04-01T12:17:30.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/01/ConcurrentTools/">concurrent包下的并发工具类</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JDK1.5，Sun大神（Doug Lea）为我们带来了java.util.concurrent工具包，以简化并发编程。<br>在concurrent包之前，我们要借助join(),wait()/notify()，synchronized等来实现并发编程，难度较大，也容易出现问题，而concurrent包的到来，我们可以使用线程池（ThreadPoolExecutor）、灵活的可重入锁（ReentrantLock）、原子类（AtomicInteger…）、阻塞队列（ArrayBlockingQueue…）、线程安全Map(ConcurrentMap…)、以及本节会介绍的并发工具（CountDownLatch、CyclicBarrier…），使得并发编程变得容易了，也增加了很多灵活性。<br>
+          
+      
+    </p></div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/concurrent/">concurrent</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jdk源码/">jdk源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
+    </div>
+      
+        <p class="article-more-link">
+          <a href="/2017/04/01/ConcurrentTools/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-ThreadState" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2017/04/01/ThreadState/" class="article-date">
@@ -305,7 +353,7 @@
     </div>
       
         <p class="article-more-link">
-          <a href="/2017/04/01/ThreadState/#more">more >></a>
+          <a href="/2017/04/01/ThreadState/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -359,7 +407,7 @@
     </div>
       
         <p class="article-more-link">
-          <a href="/2017/03/28/Cglib/#more">more >></a>
+          <a href="/2017/03/28/Cglib/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -407,7 +455,7 @@
     </div>
       
         <p class="article-more-link">
-          <a href="/2017/03/21/Css3Rem/#more">more >></a>
+          <a href="/2017/03/21/Css3Rem/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -727,7 +775,7 @@ public class DpTest {
     </div>
       
         <p class="article-more-link">
-          <a href="/2017/03/11/AboutHandlerbarsjs/#more">more >></a>
+          <a href="/2017/03/11/AboutHandlerbarsjs/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -1612,54 +1660,6 @@ function BFS(){
       <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大话数据结构/">大话数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
     </div>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-  
-    <article id="post-Decorator" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/01/10/Decorator/" class="article-date">
-      <time datetime="2017-01-10T12:17:30.000Z" itemprop="datePublished">2017-01-10</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/10/Decorator/">轻松理解设计模式——装饰者模式</a>
-    </h1>
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>装饰者模式，最经典的应用是<strong>java io</strong>。但是jdk源码比较的高深，这里写一个小demo加强理解。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"> //老板，来一个苹果牛奶蛋糕，多少钱</div><div class="line">AppleCake ac = new AppleCake(new MikeCake());</div><div class="line">//好嘞，15块</div><div class="line">System.out.println(ac.cost());//15</div><div class="line">//挺便宜啊，能不能再加点橘子</div><div class="line">OrangeCake ac2 = new OrangeCake(ac);</div><div class="line">//哦，那就得17块了</div><div class="line">System.out.println(ac2.cost());//17</div><div class="line">//真便宜，那再加一份苹果吧！</div><div class="line">// 当然可以哦，咱们水果店可使用的是设计模式中大名鼎鼎的“装饰者模式”，你想加多少份水果都可以，只要盒子能装下。。。</div></pre></td></tr></table></figure></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
-    </div>
-      <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-    </div>
-      
-        <p class="article-more-link">
-          <a href="/2017/01/10/Decorator/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>

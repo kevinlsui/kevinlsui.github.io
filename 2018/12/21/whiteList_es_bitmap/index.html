@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="kevinlsui">
+
+
+
+<meta name="description" content="平台—新白名单一、背景
+平台，基于白名单制，原有流程：
+
+运营后台导入用户pin列表,把这一批用户分配给产品（一个或多个）;
+现有pin列表，根据id范围分配给产品（一个或多个）;
+
+
+原有白名单分配流程，操作较简单，但由于用户质量参差不齐，运营同学无法精准的通过增减白名单，来控制产品的进件人数，同时，用户在风控侧有大量的风控数据，根据用户风险的变化情况，来给产品增减白名单，从而达到精准运营和风险">
+<meta property="og:type" content="article">
+<meta property="og:title" content="白名单实现分享——ES、bitmap">
+<meta property="og:url" content="http://kevinlsui.github.io/2018/12/21/whiteList_es_bitmap/index.html">
+<meta property="og:site_name" content="Kevinlsui Code">
+<meta property="og:description" content="平台—新白名单一、背景
+平台，基于白名单制，原有流程：
+
+运营后台导入用户pin列表,把这一批用户分配给产品（一个或多个）;
+现有pin列表，根据id范围分配给产品（一个或多个）;
+
+
+原有白名单分配流程，操作较简单，但由于用户质量参差不齐，运营同学无法精准的通过增减白名单，来控制产品的进件人数，同时，用户在风控侧有大量的风控数据，根据用户风险的变化情况，来给产品增减白名单，从而达到精准运营和风险">
+<meta property="og:image" content="http://kevinlsui.gitee.io/picture/pic/core_flow.png">
+<meta property="og:image" content="http://kevinlsui.gitee.io/picture/pic/ES_index.png">
+<meta property="og:image" content="http://kevinlsui.gitee.io/picture/pic/ES_data_show.png">
+<meta property="og:image" content="http://kevinlsui.gitee.io/picture/pic/ES_mysql_diff.png">
+<meta property="og:image" content="http://kevinlsui.gitee.io/picture/pic/es_index_struc.png">
+<meta property="og:image" content="http://kevinlsui.gitee.io/picture/pic/bitmap.png">
+<meta property="og:image" content="http://kevinlsui.gitee.io/picture/pic/product_list_|.png">
+<meta property="og:image" content="http://kevinlsui.gitee.io/picture/pic/add_flow.png">
+<meta property="og:updated_time" content="2018-12-22T01:11:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="白名单实现分享——ES、bitmap">
+<meta name="twitter:description" content="平台—新白名单一、背景
+平台，基于白名单制，原有流程：
+
+运营后台导入用户pin列表,把这一批用户分配给产品（一个或多个）;
+现有pin列表，根据id范围分配给产品（一个或多个）;
+
+
+原有白名单分配流程，操作较简单，但由于用户质量参差不齐，运营同学无法精准的通过增减白名单，来控制产品的进件人数，同时，用户在风控侧有大量的风控数据，根据用户风险的变化情况，来给产品增减白名单，从而达到精准运营和风险">
+<meta name="twitter:image" content="http://kevinlsui.gitee.io/picture/pic/core_flow.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+
+
+    <link rel="shortcut icon" href="/apple-touch-icon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>白名单实现分享——ES、bitmap | Kevinlsui Code</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">kevinlsui</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">学习、总结、分享、进步</p>
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">归档</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/book/">书籍推荐</a></li>
+                        
+                            <li><a href="/todolist/">todoList</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2018/">2018</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java高级/">java高级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk源码/">jdk源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jvm/">jvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protobuf/">protobuf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/work/">work</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大话数据结构/">大话数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/小技巧/">小技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记/">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/递归/">递归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/问题解决/">问题解决</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Java后台开发工程师</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">kevinlsui</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">kevinlsui</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">学习、总结、分享、进步</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">归档</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/book/">书籍推荐</a></li>
+                
+                    <li><a href="/todolist/">todoList</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:kevinlsui@163.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/kevinlsui" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-whiteList_es_bitmap" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/21/whiteList_es_bitmap/" class="article-date">
+      <time datetime="2018-12-21T15:17:30.000Z" itemprop="datePublished">2018-12-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 class="article-title" itemprop="name">
+      白名单实现分享——ES、bitmap
+    </h1>
+      </header>
+      
+      <div class="article-info article-info-post">
+        <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/work/">work</a>
+    </div>
+        <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2018/">2018</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/work/">work</a></li></ul>
+    </div>
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="平台—新白名单"><a href="#平台—新白名单" class="headerlink" title="平台—新白名单"></a>平台—新白名单</h1><h2 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h2><blockquote>
+<p>平台，基于白名单制，原有流程：</p>
+<ol>
+<li>运营后台导入用户pin列表,把这一批用户分配给产品（一个或多个）;</li>
+<li>现有pin列表，根据id范围分配给产品（一个或多个）;</li>
+</ol>
+</blockquote>
+<p>原有白名单分配流程，操作较简单，但由于用户质量参差不齐，运营同学无法精准的通过增减白名单，来控制产品的进件人数，同时，用户在风控侧有大量的风控数据，根据用户风险的变化情况，来给产品增减白名单，从而达到精准运营和风险控制。</p>
+<blockquote>
+<p>在这样的背景下，新白名单的基本诉求：</p>
+<ol>
+<li>根据风控指标筛选，并支持按风控规则比例分配名单</li>
+<li>支持实时进行本产品或不同产品间，进行用户的排斥筛选</li>
+<li>能按照指定的方式，全量或部分删减已经配置的白名单列表</li>
+</ol>
+</blockquote>
+<p>目前这些功能已经全部实现。</p>
+<a id="more"></a>
+<h2 id="二、核心流程"><a href="#二、核心流程" class="headerlink" title="二、核心流程"></a>二、核心流程</h2><p><img src="http://kevinlsui.gitee.io/picture/pic/core_flow.png" alt="流程图"></p>
+<h2 id="三、基础知识"><a href="#三、基础知识" class="headerlink" title="三、基础知识"></a>三、基础知识</h2><h3 id="3-1-ES索引结构"><a href="#3-1-ES索引结构" class="headerlink" title="3.1 ES索引结构"></a>3.1 ES索引结构</h3><p><img src="http://kevinlsui.gitee.io/picture/pic/ES_index.png" alt="流程图"></p>
+<h3 id="3-2-ES数据展示"><a href="#3-2-ES数据展示" class="headerlink" title="3.2 ES数据展示"></a>3.2 ES数据展示</h3><p><img src="http://kevinlsui.gitee.io/picture/pic/ES_data_show.png" alt="流程图"></p>
+<h3 id="3-3-ES与mysql对比"><a href="#3-3-ES与mysql对比" class="headerlink" title="3.3 ES与mysql对比"></a>3.3 ES与mysql对比</h3><p><img src="http://kevinlsui.gitee.io/picture/pic/ES_mysql_diff.png" alt="流程图"></p>
+<h3 id="3-4-倒序索引"><a href="#3-4-倒序索引" class="headerlink" title="3.4 倒序索引"></a>3.4 倒序索引</h3><p><img src="http://kevinlsui.gitee.io/picture/pic/es_index_struc.png" alt="流程图"></p>
+<h3 id="3-5-采用ES的原因"><a href="#3-5-采用ES的原因" class="headerlink" title="3.5 采用ES的原因"></a>3.5 采用ES的原因</h3><blockquote>
+<ol>
+<li>大数据量存储（集群、分片、备份片）</li>
+<li>类似sql的查询，支持各种条件筛选（=、！=、in、is null、like、not like）(sum、max、min)</li>
+<li>检索速度快(倒序索引)</li>
+<li>其他：大数据量深度分页（scroll）、批量处理（bulk）</li>
+</ol>
+</blockquote>
+<h3 id="3-6-Redis-bitmap展示"><a href="#3-6-Redis-bitmap展示" class="headerlink" title="3.6 Redis-bitmap展示"></a>3.6 Redis-bitmap展示</h3><p><img src="http://kevinlsui.gitee.io/picture/pic/bitmap.png" alt="流程图"></p>
+<h3 id="3-7-Redis-bitmap本质"><a href="#3-7-Redis-bitmap本质" class="headerlink" title="3.7 Redis-bitmap本质"></a>3.7 Redis-bitmap本质</h3><blockquote>
+<ol>
+<li>redis中最基本的数据结构：key-value</li>
+<li>value对应的是二进制数组</li>
+<li>redis提供丰富api:setbit、getbit、bitcount、bitpos</li>
+</ol>
+</blockquote>
+<h3 id="3-8-采用bitmap原因"><a href="#3-8-采用bitmap原因" class="headerlink" title="3.8 采用bitmap原因"></a>3.8 采用bitmap原因</h3><blockquote>
+<ol>
+<li>占用空间较少（目前1.7亿用户，大约占用30G+，即一千万占用约2G）</li>
+<li>查询速度快(redis基于内存，查询速度ms级，适用于借钱平台大数据量访问)</li>
+</ol>
+</blockquote>
+<h3 id="3-9-使用场景（适用于结果非0即1的场景）"><a href="#3-9-使用场景（适用于结果非0即1的场景）" class="headerlink" title="3.9 使用场景（适用于结果非0即1的场景）"></a>3.9 使用场景（适用于结果非0即1的场景）</h3><blockquote>
+<ol>
+<li>白名单场景</li>
+<li>用户签到统计（用户为key,日期为value数组）</li>
+<li>日活用户统计（日期为key,用户数字id为value数组）</li>
+<li>…(大家补充)</li>
+</ol>
+</blockquote>
+<h2 id="四、业务相关"><a href="#四、业务相关" class="headerlink" title="四、业务相关"></a>四、业务相关</h2><h3 id="4-1-为什么需要同步？"><a href="#4-1-为什么需要同步？" class="headerlink" title="4.1 为什么需要同步？"></a>4.1 为什么需要同步？</h3><blockquote>
+<p>利用”有则更新，无则插入”规则，不同于mysql的是，ES基于的是id,且整条记录替换，而mysql是根据唯一索引，可指定具体字段<br>我们（风控）就是根据使用mysql的经验，以为可以支持部分字段（风控标签字段）的更新，最后线上验证时发现问题，风控推送更新数据，覆盖掉了我们的业务字段（产品列表、用户序号等），后引入“同步方案”。</p>
+</blockquote>
+<h3 id="4-2-为什么需要先插入“用户-产品维度的ES索引”，后更新操作？"><a href="#4-2-为什么需要先插入“用户-产品维度的ES索引”，后更新操作？" class="headerlink" title="4.2 为什么需要先插入“用户_产品维度的ES索引”，后更新操作？"></a>4.2 为什么需要先插入“用户_产品维度的ES索引”，后更新操作？</h3><blockquote>
+<p>提前告诉答案：保证增加（减少）白名单，要么全部成功，要么全部失败。具体如何保证，下文介绍，此处介绍如果不使用这个中间索引的后果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1. 顺带的作用：如果R2M出现问题，用户白名单数据都丢失了，可以根据该索引数据，进行恢复</div><div class="line">2. 增加白名单场景：[直接从用户标签ES中获取用户，直接反更新“产品列表”字段、redis位图]</div><div class="line">----2.1 产品1风控规则：A等级用户 80%；B等级用户 20%</div><div class="line">----2.2 某次给产品1添加白名单，总数1000人，其中A等级800人，B等级200人</div><div class="line">----2.3 刚给操作100人，异常了。此时，成功100人都是等级A。</div><div class="line">----2.4 相当于此后，该产品的风控用户比例不满足8:2【风控规则，为强制要求】</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="4-3-为什么ES中“产品列表”字段需要加“-”？"><a href="#4-3-为什么ES中“产品列表”字段需要加“-”？" class="headerlink" title="4.3 为什么ES中“产品列表”字段需要加“|”？"></a>4.3 为什么ES中“产品列表”字段需要加“|”？</h3><p><img src="http://kevinlsui.gitee.io/picture/pic/product_list_|.png" alt="流程图"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt; 如果有产品编码：ccb,wfccb</div><div class="line">&gt; =--------------</div><div class="line">&gt; 张三    “ccb,wfccb”</div><div class="line">&gt; 李四    “ccb”</div><div class="line">&gt; 王五    “wfccb”</div><div class="line">&gt; =--------------</div><div class="line">&gt; select * from table where assignproduct not like &quot;%cbb%&quot;;</div><div class="line">&gt; 预期结果：王五</div><div class="line">&gt; 执行结果：[空]</div></pre></td></tr></table></figure>
+<h3 id="4-4-一次添加白名单的全流程"><a href="#4-4-一次添加白名单的全流程" class="headerlink" title="4.4 一次添加白名单的全流程"></a>4.4 一次添加白名单的全流程</h3><p><img src="http://kevinlsui.gitee.io/picture/pic/add_flow.png" alt="流程图"></p>
+<h3 id="4-5-白名单现状"><a href="#4-5-白名单现状" class="headerlink" title="4.5 白名单现状"></a>4.5 白名单现状</h3><blockquote>
+<ul>
+<li>产品历史白名单清洗完成后，总用户数在1.7亿左右，产品白名单在18亿左右。</li>
+<li>运营同学已经开始使用新功能进行白名单的增减操作，上周五完成3700万的名单添加(今天预计会增加2000万)</li>
+<li>R2M空间占用，也由原来的80G左右，缩减到30G</li>
+<li>借钱平台，用户白名单列表查询已经切到新的R2M查询（TP99 基本在3ms以内，TP99基本在1.5ms左右）</li>
+</ul>
+</blockquote>
+<h3 id="4-6-待改进项"><a href="#4-6-待改进项" class="headerlink" title="4.6 待改进项"></a>4.6 待改进项</h3><blockquote>
+<ul>
+<li>增减白名单的效率问题（线上环境，一小时500万，但是多个产品操作时，会有所下降，300-400万/小时）</li>
+<li>主要原因:<br>（1）ES集群处理瓶颈(目前数据放在JES的一个公共集群，资源较有限)<br>（2）需要保证数据处理结果的严谨性，部分环节无法发挥异步或并发处理的优势（后续可以优化流程）</li>
+</ul>
+</blockquote>
+<h2 id="五、代码展示"><a href="#五、代码展示" class="headerlink" title="五、代码展示"></a>五、代码展示</h2><h3 id="5-1-ES"><a href="#5-1-ES" class="headerlink" title="5.1 ES"></a>5.1 ES</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div></pre></td><td class="code"><pre><div class="line">package com.jd.jr.dubhe.ctrl.center.task.show;</div><div class="line"></div><div class="line">import com.jd.jr.dubhe.ctrl.center.task.BaseTest;</div><div class="line">import com.jd.jr.dubhe.ctrl.center.task.api.enums.DubheUserRiskLabelFieldEnum;</div><div class="line">import com.jd.jr.dubhe.ctrl.center.task.api.enums.ProcessFlagEnum;</div><div class="line">import com.jd.jr.dubhe.ctrl.center.task.api.enums.UserStatusEnum;</div><div class="line">import com.jd.jr.jes.client.EsClientFactory;</div><div class="line">import com.wangyin.commons.util.Logger;</div><div class="line">import com.wangyin.commons.util.LoggerFactory;</div><div class="line">import org.elasticsearch.action.bulk.BackoffPolicy;</div><div class="line">import org.elasticsearch.action.bulk.BulkProcessor;</div><div class="line">import org.elasticsearch.action.bulk.BulkRequest;</div><div class="line">import org.elasticsearch.action.bulk.BulkResponse;</div><div class="line">import org.elasticsearch.action.delete.DeleteResponse;</div><div class="line">import org.elasticsearch.action.get.GetResponse;</div><div class="line">import org.elasticsearch.action.index.IndexRequest;</div><div class="line">import org.elasticsearch.action.index.IndexResponse;</div><div class="line">import org.elasticsearch.action.search.ClearScrollRequest;</div><div class="line">import org.elasticsearch.action.search.SearchRequestBuilder;</div><div class="line">import org.elasticsearch.action.search.SearchResponse;</div><div class="line">import org.elasticsearch.action.update.UpdateRequest;</div><div class="line">import org.elasticsearch.client.Client;</div><div class="line">import org.elasticsearch.common.unit.ByteSizeUnit;</div><div class="line">import org.elasticsearch.common.unit.ByteSizeValue;</div><div class="line">import org.elasticsearch.common.unit.TimeValue;</div><div class="line">import org.elasticsearch.common.xcontent.XContentBuilder;</div><div class="line">import org.elasticsearch.index.query.BoolQueryBuilder;</div><div class="line">import org.elasticsearch.index.query.QueryBuilder;</div><div class="line">import org.elasticsearch.index.query.QueryBuilders;</div><div class="line">import org.elasticsearch.index.query.RangeQueryBuilder;</div><div class="line">import org.elasticsearch.search.SearchHit;</div><div class="line">import org.elasticsearch.search.SearchHits;</div><div class="line">import org.elasticsearch.search.aggregations.AggregationBuilder;</div><div class="line">import org.elasticsearch.search.aggregations.AggregationBuilders;</div><div class="line">import org.elasticsearch.search.aggregations.metrics.max.Max;</div><div class="line">import org.junit.Test;</div><div class="line"></div><div class="line">import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;</div><div class="line"></div><div class="line">/**</div><div class="line"> * @Describe： ES相关操作</div><div class="line"> * JES-wiki:http://wiki.cbpmgt.com/confluence/pages/viewpage.action?pageId=20589182</div><div class="line"> * @Author: liuke</div><div class="line"> * @Date: 2018/12/19 12:38</div><div class="line"> */</div><div class="line">public class ESTest extends BaseTest &#123;</div><div class="line">    public static final Logger logger = LoggerFactory.getLogger(ESTest.class);</div><div class="line"></div><div class="line"></div><div class="line">    public static final String INDEX = &quot;dubhe_user_risk_label&quot;;</div><div class="line">    public static final String TYPE = &quot;dubhe&quot;;</div><div class="line">    public static final String URL = &quot;http://172.24.5.78:8083&quot;;</div><div class="line">    public static final String APPNAME = &quot;dubhe_ctrlcenter_task&quot;;</div><div class="line">    public static final String SECRET = &quot;122ac7fa73f2e8cae7b4e9c68ba9908d&quot;;</div><div class="line"></div><div class="line"></div><div class="line">    public static final String PREFIX_PIN = &quot;show_pin_12121_&quot;;</div><div class="line">    public static final String PRODUCT_CODE_PROTECT = &quot;|&quot;;</div><div class="line"></div><div class="line"></div><div class="line">    public static Client client;</div><div class="line"></div><div class="line">    static &#123;</div><div class="line">        //获取客户端</div><div class="line">        EsClientFactory esClientFactory = new EsClientFactory(URL, APPNAME, SECRET);</div><div class="line">        try &#123;</div><div class="line">            client = esClientFactory.createClient();</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            logger.info(&quot;异常：&quot;, e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * insert</div><div class="line">     * &lt;p&gt;</div><div class="line">     * select * from dubhe_user_risk_label where userid = &quot;show_pin_12121_0001&quot;</div><div class="line">     */</div><div class="line">    @Test</div><div class="line">    public void test1() throws Exception &#123;</div><div class="line">        XContentBuilder builder = jsonBuilder()</div><div class="line">                .startObject()</div><div class="line">                .field(&quot;accounttype&quot;, &quot;JDPIN&quot;)</div><div class="line">                .field(&quot;usergrade&quot;, &quot;B&quot;)</div><div class="line">                .field(&quot;userid&quot;, PREFIX_PIN + &quot;0001&quot;)</div><div class="line">                .endObject();</div><div class="line">        String json = builder.toString();</div><div class="line">        System.out.println(&quot;============insert:&quot; + json);</div><div class="line">        //插入数据,指定id:PREFIX_PIN+&quot;0001&quot;</div><div class="line">        //注意：如果id=1的记录存在，则更新【主键的有则更新，无则插入】【整个文档覆盖】</div><div class="line">        IndexResponse response = client.prepareIndex(INDEX, TYPE, PREFIX_PIN + &quot;0001&quot;)</div><div class="line">                .setSource(builder)</div><div class="line">                .get();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 根据id查询</div><div class="line">     */</div><div class="line">    @Test</div><div class="line">    public void test2() &#123;</div><div class="line">        GetResponse response = client.prepareGet(INDEX, TYPE, PREFIX_PIN + &quot;0001&quot;).get();</div><div class="line">        System.out.println(&quot;============query_result:&quot; + response.getSourceAsString());</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * 更新</div><div class="line">     * select * from dubhe_user_risk_label where userid = &quot;show_pin_12121_0001&quot;</div><div class="line">     */</div><div class="line">    @Test</div><div class="line">    public void test7() throws Exception &#123;</div><div class="line">        UpdateRequest updateRequest = new UpdateRequest(INDEX, TYPE, PREFIX_PIN + &quot;0001&quot;)</div><div class="line">                .doc(jsonBuilder()</div><div class="line">                        .startObject()</div><div class="line">                        .field(&quot;usergrade&quot;, &quot;A&quot;)</div><div class="line">                        .endObject());</div><div class="line">        client.update(updateRequest).get();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 删除</div><div class="line">     */</div><div class="line">    @Test</div><div class="line">    public void test8() &#123;</div><div class="line">        DeleteResponse response = client.prepareDelete(INDEX, TYPE, PREFIX_PIN + &quot;0001&quot;).get();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 多条件查询</div><div class="line">     * select * from dubhe_user_risk_label where userstatus = 1 and userserial&gt;=10 and userserial&lt;=100 and assignproduct not like &quot;%|ccb|%&quot; limit 0,10</div><div class="line">     */</div><div class="line">    @Test</div><div class="line">    public void test3() &#123;</div><div class="line">        String methodDesc = &quot;ESTest|test3||&quot;;</div><div class="line">        //1.拼接where条件</div><div class="line">        BoolQueryBuilder bqb = QueryBuilders.boolQuery();</div><div class="line"></div><div class="line">        //用户状态</div><div class="line">        QueryBuilder userStatusQb = QueryBuilders.termQuery(DubheUserRiskLabelFieldEnum.USERSTATUS.getCode(), UserStatusEnum.VALID.getCode());</div><div class="line">        bqb.must(userStatusQb);//添加筛选条件</div><div class="line"></div><div class="line">        //范围</div><div class="line">        RangeQueryBuilder userSerialRqb = QueryBuilders.rangeQuery(DubheUserRiskLabelFieldEnum.LENDERLIMIT.getCode())</div><div class="line">                .from(1L, true)</div><div class="line">                .to(5L, true);</div><div class="line">        bqb.filter(userSerialRqb);//添加筛选条件</div><div class="line"></div><div class="line">        //产品去重：not like</div><div class="line">        QueryBuilder prodCodeQb = QueryBuilders.wildcardQuery(DubheUserRiskLabelFieldEnum.ASSIGNPRODUCT.getCode(), &quot;*&quot; + PRODUCT_CODE_PROTECT + &quot;ccb&quot; + PRODUCT_CODE_PROTECT + &quot;*&quot;);</div><div class="line">        bqb.mustNot(prodCodeQb);</div><div class="line"></div><div class="line"></div><div class="line">        //2.查询es</div><div class="line">        SearchRequestBuilder searchRequestBuilder = client.prepareSearch(INDEX).setTypes(TYPE);</div><div class="line">        searchRequestBuilder.setQuery(bqb).setFrom(0).setSize(10);//返回一条数据</div><div class="line">        logger.info(methodDesc, &quot;【请求ES】|ES请求参数：&quot;, searchRequestBuilder.toString());</div><div class="line">        SearchResponse searchResponse = searchRequestBuilder.get();</div><div class="line">        logger.info(methodDesc, &quot;【请求ES-返回】|返回searchResponse：&quot;, searchResponse);</div><div class="line"></div><div class="line">        SearchHits searchHits = searchResponse.getHits();</div><div class="line">        for (SearchHit hit : searchHits.getHits()) &#123;</div><div class="line">            //打印返回一条数据</div><div class="line">            logger.info(methodDesc, &quot;【请求ES-返回一条数据】|一条数据：&quot;, hit.getSourceAsString());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        Long count = searchHits.getTotalHits();</div><div class="line">        logger.info(methodDesc, &quot;【请求ES-返回总数】|count：&quot;, count);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * scroll-游标</div><div class="line">     * select * from dubhe_user_risk_label where userserial &gt;= 1 and userserial &lt;= 10 AND processflag=1</div><div class="line">     */</div><div class="line">    @Test</div><div class="line">    public void test5() &#123;</div><div class="line">        String methodDesc = &quot;ESTest|test5||&quot;;</div><div class="line">        //1.拼接where条件</div><div class="line">        BoolQueryBuilder bqb = QueryBuilders.boolQuery();</div><div class="line">        QueryBuilder processFlagQb = QueryBuilders.termQuery(DubheUserRiskLabelFieldEnum.PROCESSFLAG.getCode(), ProcessFlagEnum.PROCESSED.getCode());</div><div class="line">        bqb.must(processFlagQb);//添加筛选条件</div><div class="line"></div><div class="line">        //范围</div><div class="line">       /* RangeQueryBuilder userSerialRqb = QueryBuilders.rangeQuery(DubheUserRiskLabelFieldEnum.USERSERIAL.getCode())</div><div class="line">                .from(1L, true)</div><div class="line">                .to(1000L, true);</div><div class="line">        bqb.filter(userSerialRqb);//添加筛选条件*/</div><div class="line"></div><div class="line"></div><div class="line">        logger.info(methodDesc, &quot;ES-Scroll操作|BoolQueryBuilder:&quot;, bqb);</div><div class="line">        //返回的字段</div><div class="line">        String[] fields = &#123;DubheUserRiskLabelFieldEnum.USERID.getCode(),</div><div class="line">                DubheUserRiskLabelFieldEnum.ACCOUNTTYPE.getCode(),</div><div class="line">                DubheUserRiskLabelFieldEnum.PROCESSFLAG.getCode()&#125;;</div><div class="line"></div><div class="line">        //4.scroll</div><div class="line">        SearchResponse scrollResp = getScroll(INDEX, TYPE, bqb, fields);</div><div class="line">        logger.info(methodDesc, &quot;ES-Scroll操作-首次获取的条数：&quot;, scrollResp.getHits().getHits().length);</div><div class="line"></div><div class="line">        //计数器</div><div class="line">        Long stats = 0l;</div><div class="line">        Long userSerialNo = 0l;</div><div class="line"></div><div class="line">        do &#123;</div><div class="line">            for (SearchHit hit : scrollResp.getHits().getHits()) &#123;</div><div class="line">                //logger.debug(methodDesc, &quot;数据内容|id:&quot;, hit.getId(), &quot;|内容：&quot;, hit.getSourceAsString());</div><div class="line">                //todo 数据处理</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            scrollResp = client.prepareSearchScroll(scrollResp.getScrollId()).setScroll(TimeValue.timeValueSeconds(Long.valueOf(5l))).execute().actionGet();</div><div class="line">            logger.info(methodDesc, &quot;ES-Scroll操作-非首次获取的条数：&quot;, scrollResp.getHits().getHits().length);</div><div class="line"></div><div class="line">        &#125; while (scrollResp.getHits().getHits().length != 0);</div><div class="line"></div><div class="line"></div><div class="line">        //5.清理scroll</div><div class="line">        ClearScrollRequest request = new ClearScrollRequest();</div><div class="line">        request.addScrollId(scrollResp.getScrollId());</div><div class="line">        client.clearScroll(request);</div><div class="line">        logger.info(methodDesc, &quot;ES-Scroll操作-完成|处理条数:&quot;, stats, &quot;|最终序号:&quot;, userSerialNo);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * bulk-批量操作</div><div class="line">     * select * from dubhe_user_risk_label where userid like &quot;show_pin_12121_%&quot;</div><div class="line">     */</div><div class="line">    @Test</div><div class="line">    public void test6() throws Exception &#123;</div><div class="line">        BulkProcessor bulk = getBulkProcessor();</div><div class="line"></div><div class="line">        for (int i = 1; i &lt; 100; i++) &#123;</div><div class="line">            String userId = PREFIX_PIN + &quot;00000000000&quot; + i;</div><div class="line">            XContentBuilder builder = jsonBuilder()</div><div class="line">                    .startObject()</div><div class="line">                    .field(&quot;userid&quot;, userId)</div><div class="line">                    .field(&quot;accountType&quot;, &quot;JDPIN&quot;)</div><div class="line">                    .endObject();</div><div class="line"></div><div class="line">            bulk.add(new IndexRequest(INDEX, TYPE).source(builder));</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        //bulk清理</div><div class="line">        bulk.flush();</div><div class="line">        bulk.close();</div><div class="line">        client.admin().indices().prepareRefresh(INDEX).get();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * upsert ： 有则更新（支持部分字段更新），无则插入</div><div class="line">     * select * from dubhe_user_risk_label where userid = &quot;show_pin_12121_00011111&quot;</div><div class="line">     */</div><div class="line">    @Test</div><div class="line">    public void test4() throws Exception &#123;</div><div class="line">        BulkProcessor bulk = getBulkProcessor();</div><div class="line">        String userId = PREFIX_PIN + &quot;00011111&quot;;</div><div class="line">        String flag = &quot;----&quot;;</div><div class="line">        XContentBuilder builder = jsonBuilder()</div><div class="line">                .startObject()</div><div class="line">                .field(&quot;userid&quot;, userId)</div><div class="line">                .field(&quot;accounttype&quot;, &quot;JDPIN&quot; + flag)</div><div class="line">                .field(&quot;usersource&quot;, &quot;FK&quot; + flag)</div><div class="line">                .field(&quot;usergrade&quot;, &quot;A&quot;)</div><div class="line">                //.field(&quot;userstatus&quot;, &quot;1&quot;)</div><div class="line">                .endObject();</div><div class="line"></div><div class="line">        //upsert</div><div class="line">        bulk.add(new UpdateRequest(INDEX, TYPE, userId).doc(builder).docAsUpsert(true));</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * 聚合函数：max</div><div class="line">     */</div><div class="line">    @Test</div><div class="line">    public void test9() &#123;</div><div class="line">        String methodDesc = &quot;ESTest|test9||&quot;;</div><div class="line">        String userSerialMax = &quot;userSerialMax&quot;;</div><div class="line">        AggregationBuilder aggBuilder = AggregationBuilders.max(userSerialMax).field(DubheUserRiskLabelFieldEnum.USERSERIAL.getCode());</div><div class="line"></div><div class="line">        BoolQueryBuilder bqb = QueryBuilders.boolQuery();</div><div class="line">        QueryBuilder processFlagQb = QueryBuilders.termQuery(DubheUserRiskLabelFieldEnum.PROCESSFLAG.getCode(), ProcessFlagEnum.PROCESSED.getCode());</div><div class="line">        bqb.must(processFlagQb);//添加筛选条件</div><div class="line"></div><div class="line"></div><div class="line">        SearchRequestBuilder searchRequestBuilder = client.prepareSearch(INDEX).setTypes(TYPE)</div><div class="line">                .setQuery(bqb)</div><div class="line">                .addAggregation(aggBuilder)</div><div class="line">                .setFrom(0)</div><div class="line">                .setSize(1);</div><div class="line">        logger.info(methodDesc, &quot;【请求ES】|ES请求对象：&quot;, searchRequestBuilder.toString());</div><div class="line">        SearchResponse searchResponse = searchRequestBuilder.get();</div><div class="line">        logger.info(methodDesc, &quot;【请求ES-返回】|返回searchResponse：&quot;, searchResponse);</div><div class="line"></div><div class="line">        SearchHits searchHits = searchResponse.getHits();</div><div class="line">        /*for (SearchHit hit : searchHits.getHits()) &#123;</div><div class="line">            //打印返回一条数据</div><div class="line">            //logger.info(methodDesc, &quot;【请求ES-返回】|数据：&quot;, hit.getSourceAsString());</div><div class="line"></div><div class="line">        &#125;*/</div><div class="line">        Max valueCount = searchResponse.getAggregations().get(userSerialMax);</div><div class="line">        Double max = valueCount.getValue();</div><div class="line">        logger.info(methodDesc, &quot;【请求ES-返回总数】|max：&quot;, max);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * 使用sql查询</div><div class="line">     * todo liuke 支持不完善【目前jar为快照版，不推荐线上使用】</div><div class="line">     *</div><div class="line">     * @throws Exception</div><div class="line">     */</div><div class="line">    public void testEsSql() throws Exception &#123;</div><div class="line">        String query = &quot;select count(*) as num from dubhe_user_risk_label where userGrade=&apos;A&apos;&quot;;</div><div class="line"></div><div class="line">        //SqlElasticSearchRequestBuilder select = (SqlElasticSearchRequestBuilder) searchDao.explain(query).explain();</div><div class="line">        //SearchResponse response = (SearchResponse) select.get();</div><div class="line">        //Aggregations agg = response.getAggregations();</div><div class="line">        //InternalValueCount agg2 = agg.get(&quot;num&quot;);</div><div class="line">        //System.out.println(&quot;=====统计总数：&quot; + agg2.getValue());</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">//============================================================================//</div><div class="line"></div><div class="line"></div><div class="line">    public static BulkProcessor getBulkProcessor() &#123;</div><div class="line">        //创建BulkProcessor</div><div class="line">        BulkProcessor bulkProcessor = BulkProcessor.builder(</div><div class="line">                client,</div><div class="line">                new BulkProcessor.Listener() &#123;</div><div class="line">                    @Override</div><div class="line">                    public void beforeBulk(long executionId,</div><div class="line">                                           BulkRequest request) &#123;</div><div class="line">                        System.out.println(&quot;===============beforeBulk&quot;);</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    @Override</div><div class="line">                    public void afterBulk(long executionId,</div><div class="line">                                          BulkRequest request,</div><div class="line">                                          BulkResponse response) &#123;</div><div class="line">                        System.out.println(&quot;===============afterBulk_sucess&quot;);</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    @Override</div><div class="line">                    public void afterBulk(long executionId,</div><div class="line">                                          BulkRequest request,</div><div class="line">                                          Throwable failure) &#123;</div><div class="line">                        System.out.println(&quot;===============afterBulk_fail:&quot; + failure);</div><div class="line">                    &#125;</div><div class="line">                &#125;)</div><div class="line">                .setBulkActions(10000)//超过10000条，提交服务端</div><div class="line">                .setBulkSize(new ByteSizeValue(5, ByteSizeUnit.MB))//5M，提交服务端</div><div class="line">                .setFlushInterval(TimeValue.timeValueSeconds(5))//5s,刷新一次，提交服务端</div><div class="line">                //以上3个条件任何一个满足，则，提交服务端</div><div class="line">                .setConcurrentRequests(0)//默认1,表示积累和发送是异步的。https://blog.csdn.net/wslyk606/article/details/79413980</div><div class="line">                .setBackoffPolicy(</div><div class="line">                        BackoffPolicy.exponentialBackoff(TimeValue.timeValueMillis(100), 3))//重试策略</div><div class="line">                .build();</div><div class="line"></div><div class="line">        return bulkProcessor;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    private static SearchResponse getScroll(String index, String type, BoolQueryBuilder bqb, String[] fields) &#123;</div><div class="line">        SearchResponse scrollResp = client.prepareSearch(index).setTypes(type)</div><div class="line">                .setScroll(TimeValue.timeValueSeconds(3l))//结果保存时间</div><div class="line">                .setVersion(true)</div><div class="line">                .setQuery(bqb)</div><div class="line">                .setFetchSource(fields, null)</div><div class="line">                .setSize(Integer.valueOf(10000))//每次获取的条数</div><div class="line">                .get(); //执行</div><div class="line">        return scrollResp;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="5-2-Redis-bitmap"><a href="#5-2-Redis-bitmap" class="headerlink" title="5.2 Redis-bitmap"></a>5.2 Redis-bitmap</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @Describe： Redis-bitmap-test</div><div class="line"> * @Author: liuke</div><div class="line"> * @Date: 2018/12/19 12:01</div><div class="line"> */</div><div class="line">public class RedisBitMapTest extends BaseTest &#123;</div><div class="line">    private static final Logger logger = LoggerFactory.getLogger(RedisBitMapTest.class);</div><div class="line"></div><div class="line">    @Resource</div><div class="line">    CacheClusterClient cacheClusterClient;</div><div class="line"></div><div class="line">    @Test</div><div class="line">    public void test() &#123;</div><div class="line">        String key1 = &quot;bitmap-test-1&quot;;</div><div class="line">        String key2 = &quot;bitmap-test-2&quot;;</div><div class="line"></div><div class="line">        //1.获取&quot;jd&quot;的二进制：</div><div class="line">        System.out.println(&quot;=============获取\&quot;jd\&quot;的二进制：&quot;);</div><div class="line">        cacheClusterClient.set(key1, &quot;jd&quot;);</div><div class="line">        byte[] value = cacheClusterClient.get(key1.getBytes());</div><div class="line">        BitSet set = byteArray2BitSet(value);</div><div class="line">        System.out.println(&quot;==============size:&quot; + set.size());</div><div class="line">        for (int i = 0; i &lt; set.size(); i++) &#123;</div><div class="line">            System.out.println(i + &quot;:&quot; + set.get(i));</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        //2.演示：setbit</div><div class="line">        System.out.println(&quot;=============演示：setbit：&quot;);</div><div class="line">        cacheClusterClient.setbit(key2, 1, &quot;1&quot;);</div><div class="line">        cacheClusterClient.setbit(key2, 2, &quot;1&quot;);</div><div class="line">        cacheClusterClient.setbit(key2, 4, &quot;1&quot;);</div><div class="line">        cacheClusterClient.setbit(key2, 6, &quot;1&quot;);</div><div class="line">        cacheClusterClient.setbit(key2, 9, &quot;1&quot;);</div><div class="line">        cacheClusterClient.setbit(key2, 10, &quot;1&quot;);</div><div class="line">        cacheClusterClient.setbit(key2, 13, &quot;1&quot;);</div><div class="line">        System.out.println(&quot;=============演示：setbit——结果：&quot; + cacheClusterClient.get(key2));</div><div class="line"></div><div class="line"></div><div class="line">        //3.演示：getbit</div><div class="line">        System.out.println(&quot;演示：getbit：&quot;);</div><div class="line">        System.out.println(cacheClusterClient.getbit(key2, 1));</div><div class="line">        System.out.println(cacheClusterClient.getbit(key2, 2));</div><div class="line">        System.out.println(cacheClusterClient.getbit(key2, 4));</div><div class="line">        System.out.println(cacheClusterClient.getbit(key2, 6));</div><div class="line">        System.out.println(cacheClusterClient.getbit(key2, 9));</div><div class="line">        System.out.println(cacheClusterClient.getbit(key2, 10));</div><div class="line">        System.out.println(cacheClusterClient.getbit(key2, 13));</div><div class="line">        System.out.println(&quot;============&quot;);</div><div class="line">        System.out.println(cacheClusterClient.getbit(key2, 3));</div><div class="line">        System.out.println(cacheClusterClient.getbit(key2, 5));</div><div class="line">        System.out.println(cacheClusterClient.getbit(key2, 7));</div><div class="line">        System.out.println(cacheClusterClient.getbit(key2, 64));</div><div class="line">        System.out.println(cacheClusterClient.getbit(key2, 6400));</div><div class="line"></div><div class="line">        //3.演示：bitcount</div><div class="line">        System.out.println(&quot;演示：bitcount【位图中1的个数】(预期7个)，结果：&quot; + cacheClusterClient.bitcount(key2));</div><div class="line"></div><div class="line"></div><div class="line">        //4.高级-bitcount</div><div class="line">        System.out.println(&quot;演示：bitcount【第一个字节中1的个数】(预期4个)，结果：&quot; + cacheClusterClient.bitcount(key2, 0, 0));</div><div class="line">        System.out.println(&quot;演示：bitcount【第二个字节中1的个数】(预期3个)，结果：&quot; + cacheClusterClient.bitcount(key2, 1, 1));</div><div class="line"></div><div class="line">        //5.演示bitpos</div><div class="line">        System.out.println(&quot;演示：bitpos【第一个1出现的位置】，结果：&quot; + &quot;【【【R2m不支持】】】&quot;/*cacheClusterClient.bitpos(key2,1)*/);</div><div class="line">        System.out.println(&quot;演示：bitpos【第一个0出现的位置】，结果：&quot; + &quot;【【【R2m不支持】】】&quot;/*cacheClusterClient.bitpos(key2,0)*/);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /**</div><div class="line">     * byte转为bitset</div><div class="line">     *</div><div class="line">     * @param bytes</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    public static BitSet byteArray2BitSet(byte[] bytes) &#123;</div><div class="line">        BitSet bitSet = new BitSet(bytes.length * 8);</div><div class="line">        int index = 0;</div><div class="line">        for (int i = 0; i &lt; bytes.length; i++) &#123;</div><div class="line">            for (int j = 7; j &gt;= 0; j--) &#123;</div><div class="line">                bitSet.set(index++, (bytes[i] &amp; (1 &lt;&lt; j)) &gt;&gt; j == 1 ? true : false);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return bitSet;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="5-3-java并发包-java-util-concurrent"><a href="#5-3-java并发包-java-util-concurrent" class="headerlink" title="5.3 java并发包-java.util.concurrent"></a>5.3 java并发包-java.util.concurrent</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @Describe： java.util.concurrent：线程池、CountDownLatch</div><div class="line"> * @Author: liuke</div><div class="line"> * @Date: 2018/12/19 11:47</div><div class="line"> */</div><div class="line">public class ConcurrentTest &#123;</div><div class="line"></div><div class="line">    private static final Logger log = LoggerFactory.getLogger(ConcurrentTest.class);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 线程池</div><div class="line">     */</div><div class="line">    private static final ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10, 60L, TimeUnit.SECONDS, new LinkedBlockingQueue());</div><div class="line">    private static final Integer THREAD_NUM = 10;</div><div class="line"></div><div class="line"></div><div class="line">    public static void main(String[] args) throws Exception &#123;</div><div class="line">        String methodDesc = &quot;ConcurrentTest|main|学习java.util.concurrent：线程池、CountDownLatch|&quot;;</div><div class="line"></div><div class="line">        try &#123;</div><div class="line">            CountDownLatch cdl = new CountDownLatch(THREAD_NUM);</div><div class="line">            for (int i = 0; i &lt; THREAD_NUM; i++) &#123;</div><div class="line"></div><div class="line">                final Map&lt;String, Integer&gt; processSerial = Maps.newHashMap();</div><div class="line">                processSerial.put(&quot;processSerial&quot;, i);</div><div class="line">                //开启10个线程处理</div><div class="line">                log.info(methodDesc, &quot;开启线程：&quot;, processSerial.get(&quot;processSerial&quot;));</div><div class="line">                executor.submit(new Runnable() &#123;</div><div class="line">                    @Override</div><div class="line">                    public void run() &#123;</div><div class="line">                        //biz</div><div class="line">                        biz(processSerial, cdl);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line"></div><div class="line">            &#125;</div><div class="line">            //CountDownLatch,等待10个线程执行完【成功 or 异常】，然后进行验证是否处理成功</div><div class="line">            cdl.await(100, TimeUnit.SECONDS);//超时退出，一般不会出现这种情况</div><div class="line">            log.info(methodDesc, &quot;【===========线程执行完毕】&quot;);</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            log.info(methodDesc, &quot;异常|e:&quot;, e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 业务逻辑</div><div class="line">     *</div><div class="line">     * @param processSerial</div><div class="line">     * @param cdl</div><div class="line">     */</div><div class="line">    private static void biz(Map&lt;String, Integer&gt; processSerial, CountDownLatch cdl) &#123;</div><div class="line">        String methodDesc = &quot;ConcurrentTest|biz|业务逻辑|&quot;;</div><div class="line">        try &#123;</div><div class="line">            log.info(methodDesc, &quot;线程执行：&quot;, processSerial.get(&quot;processSerial&quot;));</div><div class="line">            //todo 业务逻辑</div><div class="line">            Thread.sleep(5000);</div><div class="line"></div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            log.info(methodDesc, &quot;异常|e:&quot;, e);</div><div class="line">        &#125; finally &#123;</div><div class="line">            //finally里面执行</div><div class="line">            cdl.countDown();</div><div class="line">            log.info(methodDesc, &quot;线程：&quot;, processSerial.get(&quot;processSerial&quot;), &quot;执行-完成&quot;);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/12/21/whiteList_es_bitmap/">白名单实现分享——ES、bitmap</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">kevinlsui</a></p>
+        <p><span>发布时间:</span>2018-12-21, 23:17:30</p>
+        <p><span>最后更新:</span>2018-12-22, 09:11:00</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/12/21/whiteList_es_bitmap/" title="白名单实现分享——ES、bitmap">http://kevinlsui.github.io/2018/12/21/whiteList_es_bitmap/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://kevinlsui.github.io/2018/12/21/whiteList_es_bitmap/　　作者: kevinlsui" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/12/16/work_pc_catalog/">
+                    工作PC-便于管理的目录结构
+                </a>
+            </div>
+        
+    </nav>
+  
+</article>
+<div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#平台—新白名单"><span class="toc-number">1.</span> <span class="toc-text">平台—新白名单</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、背景"><span class="toc-number">1.1.</span> <span class="toc-text">一、背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、核心流程"><span class="toc-number">1.2.</span> <span class="toc-text">二、核心流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、基础知识"><span class="toc-number">1.3.</span> <span class="toc-text">三、基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-ES索引结构"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 ES索引结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-ES数据展示"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 ES数据展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-ES与mysql对比"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3 ES与mysql对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-倒序索引"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.4 倒序索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-采用ES的原因"><span class="toc-number">1.3.5.</span> <span class="toc-text">3.5 采用ES的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-Redis-bitmap展示"><span class="toc-number">1.3.6.</span> <span class="toc-text">3.6 Redis-bitmap展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-Redis-bitmap本质"><span class="toc-number">1.3.7.</span> <span class="toc-text">3.7 Redis-bitmap本质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-采用bitmap原因"><span class="toc-number">1.3.8.</span> <span class="toc-text">3.8 采用bitmap原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-9-使用场景（适用于结果非0即1的场景）"><span class="toc-number">1.3.9.</span> <span class="toc-text">3.9 使用场景（适用于结果非0即1的场景）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、业务相关"><span class="toc-number">1.4.</span> <span class="toc-text">四、业务相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-为什么需要同步？"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 为什么需要同步？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-为什么需要先插入“用户-产品维度的ES索引”，后更新操作？"><span class="toc-number">1.4.2.</span> <span class="toc-text">4.2 为什么需要先插入“用户_产品维度的ES索引”，后更新操作？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-为什么ES中“产品列表”字段需要加“-”？"><span class="toc-number">1.4.3.</span> <span class="toc-text">4.3 为什么ES中“产品列表”字段需要加“|”？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-一次添加白名单的全流程"><span class="toc-number">1.4.4.</span> <span class="toc-text">4.4 一次添加白名单的全流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-白名单现状"><span class="toc-number">1.4.5.</span> <span class="toc-text">4.5 白名单现状</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-待改进项"><span class="toc-number">1.4.6.</span> <span class="toc-text">4.6 待改进项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、代码展示"><span class="toc-number">1.5.</span> <span class="toc-text">五、代码展示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-ES"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1 ES</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-Redis-bitmap"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2 Redis-bitmap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-java并发包-java-util-concurrent"><span class="toc-number">1.5.3.</span> <span class="toc-text">5.3 java并发包-java.util.concurrent</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+    
+
+
+<div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/12/16/work_pc_catalog/" title="下一篇: 工作PC-便于管理的目录结构">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/12/21/whiteList_es_bitmap/">白名单实现分享——ES、bitmap</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/16/work_pc_catalog/">工作PC-便于管理的目录结构</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/31/Protobuf/">protobuf简单入门（windows+java）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/29/MyTodoList/">一个实用的小工具——TodoList</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/27/JvmArea/">jvm——运行时数据区域</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/26/JS_OOP/">JS高级知识——面向对象</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/11/JvmGC/">jvm——垃圾回收机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/08/JvmTools/">jvm——调优工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/01/Bloom/">布隆过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/02/ConCAS/">concurrent包的基础：CAS</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ConcurrentTools/">concurrent包下的并发工具类</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/01/ThreadState/">线程的状态Thread.State</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/28/Cglib/">CGLIB动态代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/21/Css3Rem/">使用css3:rem,让屏幕适配变得简单起来</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/15/DynamicProxy/">jdk动态代理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/01/">动态规划——01背包问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/11/AboutHandlerbarsjs/">Handlerbars.js中if-else对字符串'NULL'不起作用问题解决</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/03/01/DuShu02/">Java并发编程的艺术——读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/11/DuShu01/">Java多线程编程核心技术——读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/10/DahuaJS/">《大话数据结构》算法js实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/10/Decorator/">轻松理解设计模式——装饰者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/05/DaHuaSort/">大话数据结构_排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/02/Suanfa01/">给定任意字符序列，类似“123456”、“qxklt”,输出全部的排列组合</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/24/Timu02/">两数互换</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/21/Singleton/">单例模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/13/SpringSetValue/">使用spring注入项目的配置文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/08/TemplateMethod/">轻松理解设计模式——模板方法模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/11/03/MyBatisStart/">Mybatis使用总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/17/MethodArgs/">一道面试题，加深了我对java参数传递的理解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/04/InnerClass/">java基础知识——内部类</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/11/Enum/">java基础知识——枚举</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/FanXing/">java基础知识——泛型</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/21/Annotation/">Java基础知识——注解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/25/ListRemoveElement/">ArrayList删除元素的正确姿势</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/KMP/">字符串匹配模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/JiSuan/">逆波兰式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/Timu01/">8个小球，找出其中一个次品</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/18/JdkObserver/">jdk自带的观察者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/16/Observer/">轻松理解设计模式——观察者模式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/18/SqlRule/">简单解释下数据库三大范式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/11/SqlScript/">一个简单的mysql建库脚本</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/15/DesignPattern/">设计模式学习整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/11/Object/">Java源码-Object.java</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/05/Regular/">正则表达式学习整理</a></li></ul>
+
+
+    <script>
+        
+    </script></div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2018 kevinlsui
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+<script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide()" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+             post: ".article-entry a[href], .copyright a[href]", 
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>

@@ -266,7 +266,71 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
-      <div class="body-wrap"><article id="post-work_pc_catalog" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-whiteList_es_bitmap" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/21/whiteList_es_bitmap/" class="article-date">
+      <time datetime="2018-12-21T15:17:30.000Z" itemprop="datePublished">2018-12-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/21/whiteList_es_bitmap/">白名单实现分享——ES、bitmap</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h1 id="平台—新白名单"><a href="#平台—新白名单" class="headerlink" title="平台—新白名单"></a>平台—新白名单</h1><h2 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h2><blockquote>
+<p>平台，基于白名单制，原有流程：</p>
+<ol>
+<li>运营后台导入用户pin列表,把这一批用户分配给产品（一个或多个）;</li>
+<li>现有pin列表，根据id范围分配给产品（一个或多个）;</li>
+</ol>
+</blockquote>
+<p>原有白名单分配流程，操作较简单，但由于用户质量参差不齐，运营同学无法精准的通过增减白名单，来控制产品的进件人数，同时，用户在风控侧有大量的风控数据，根据用户风险的变化情况，来给产品增减白名单，从而达到精准运营和风险控制。</p>
+<blockquote>
+<p>在这样的背景下，新白名单的基本诉求：</p>
+<ol>
+<li>根据风控指标筛选，并支持按风控规则比例分配名单</li>
+<li>支持实时进行本产品或不同产品间，进行用户的排斥筛选</li>
+<li>能按照指定的方式，全量或部分删减已经配置的白名单列表</li>
+</ol>
+</blockquote>
+<p>目前这些功能已经全部实现。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/work/">work</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2018/">2018</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/work/">work</a></li></ul>
+    </div>
+      
+        <p class="article-more-link">
+          <a href="/2018/12/21/whiteList_es_bitmap/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-work_pc_catalog" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2018/12/16/work_pc_catalog/" class="article-date">
@@ -289,20 +353,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <a id="more"></a>
-<p>当你使用一台电脑超过一年，会越发觉得目录管理的重要性。</p>
-<blockquote>
-<p>总目录：kevinlsui<br>01-code（svn仓库/git仓库）<br>—-1.1 业务线1（项目比较多的话，每次换业务线可以整理一次）<br>——–1.1.1 项目1<br>——–1.1.2 项目2<br>—-1.2 业务线2<br>——–1.2.1 项目1<br>——–1.2.2 项目2</p>
-<p>02-公司资料<br>—- 2.1 项目（最常用的目录）<br>——–2.1.1 项目1-需求1（产品原型；流程图；接口文档；测试用例等）<br>——–2.1.2 项目1-需求2（产品原型；流程图；接口文档；测试用例等）<br>——–2.1.3 项目2-需求1（产品原型；流程图；接口文档；测试用例等）<br>—- 2.2 业务知识,开会ppt,技术分享</p>
-<p>03-个人资料<br>—- 3.1 个人学习项目-code/md（可持续学习，快速测试新技术）<br>—- 3.2 常用工具<br>—- 3.3 学习视频<br>—- 3.4 学习pdf<br>—- 3.5 书签保存<br>—- 3.6 其他</p>
-<p>04-software(软件安装)<br>—- 4.1 maven<br>—- 4.2 svn<br>—- 4.3 tomcat<br>—- 4.4 idea<br>—- 4.5 sql-yog<br>—- 4.6 chrome<br>—- 4.7 crt/xshell</p>
-<p>05-repo(maven;gradle)</p>
-<p>06-安装包<br>—- 6.1 mysql(可能多个版本)<br>—- 2.2 jdk(可能多个版本)<br>—- 2.3 idea(可能多个版本)<br>—- 2.4 zk<br>—- 2.5 dubbo</p>
-<p>07-download<br>—- 7.1 chrome-download<br>—- 7.2 xunlei-download<br>—- 7.3 weixin-download</p>
-</blockquote>
-<p><strong>[常用的，放入桌面快捷方式]</strong><br><strong>[工作中，比较着急的，直接放桌面，定期整理(每周写周报时)，避免后续东西太多，整理起来太辛苦]</strong></p>
+              <p>当你使用一台电脑超过一年，会越发觉得目录管理的重要性。<br>
+          
       
-    </div>
+    </p></div>
     
     <div class="article-info article-info-index">
       
@@ -312,6 +366,10 @@
       <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2018/">2018</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/work/">work</a></li></ul>
     </div>
+      
+        <p class="article-more-link">
+          <a href="/2018/12/16/work_pc_catalog/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -361,7 +419,7 @@
     </div>
       
         <p class="article-more-link">
-          <a href="/2017/05/31/Protobuf/#more">more >></a>
+          <a href="/2017/05/31/Protobuf/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -409,7 +467,7 @@
     </div>
       
         <p class="article-more-link">
-          <a href="/2017/05/29/MyTodoList/#more">more >></a>
+          <a href="/2017/05/29/MyTodoList/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -457,7 +515,7 @@
     </div>
       
         <p class="article-more-link">
-          <a href="/2017/05/27/JvmArea/#more">more >></a>
+          <a href="/2017/05/27/JvmArea/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -508,7 +566,7 @@
     </div>
       
         <p class="article-more-link">
-          <a href="/2017/05/26/JS_OOP/#more">more >></a>
+          <a href="/2017/05/26/JS_OOP/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -556,7 +614,7 @@
     </div>
       
         <p class="article-more-link">
-          <a href="/2017/05/11/JvmGC/#more">more >></a>
+          <a href="/2017/05/11/JvmGC/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -703,55 +761,7 @@
     </div>
       
         <p class="article-more-link">
-          <a href="/2017/04/02/ConCAS/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-  
-    <article id="post-ConcurrentTools" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/04/01/ConcurrentTools/" class="article-date">
-      <time datetime="2017-04-01T12:17:30.000Z" itemprop="datePublished">2017-04-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/01/ConcurrentTools/">concurrent包下的并发工具类</a>
-    </h1>
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JDK1.5，Sun大神（Doug Lea）为我们带来了java.util.concurrent工具包，以简化并发编程。<br>在concurrent包之前，我们要借助join(),wait()/notify()，synchronized等来实现并发编程，难度较大，也容易出现问题，而concurrent包的到来，我们可以使用线程池（ThreadPoolExecutor）、灵活的可重入锁（ReentrantLock）、原子类（AtomicInteger…）、阻塞队列（ArrayBlockingQueue…）、线程安全Map(ConcurrentMap…)、以及本节会介绍的并发工具（CountDownLatch、CyclicBarrier…），使得并发编程变得容易了，也增加了很多灵活性。<br>
-          
-      
-    </p></div>
-    
-    <div class="article-info article-info-index">
-      
-      <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/concurrent/">concurrent</a>
-    </div>
-      <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jdk源码/">jdk源码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
-    </div>
-      
-        <p class="article-more-link">
-          <a href="/2017/04/01/ConcurrentTools/#more">more >></a>
+          <a href="/2017/04/02/ConCAS/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>

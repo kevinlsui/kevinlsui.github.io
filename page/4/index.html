@@ -266,7 +266,50 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
-      <div class="body-wrap"><article id="post-FanXing" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Enum" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/11/Enum/" class="article-date">
+      <time datetime="2016-06-11T13:17:30.000Z" itemprop="datePublished">2016-06-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/11/Enum/">java基础知识——枚举</a>
+    </h1>
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="http://blog.csdn.net/xyang81/article/details/7185428" target="_blank" rel="external">推荐博客一篇，看完基本都懂了</a></p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/java基础/">java基础</a>
+    </div>
+      <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java基础/">java基础</a></li></ul>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+  
+    <article id="post-FanXing" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/06/06/FanXing/" class="article-date">
@@ -1121,7 +1164,7 @@ console.log(s+&quot;::::&quot;+s1);
     </div>
       
         <p class="article-more-link">
-          <a href="/2016/03/18/JdkObserver/#more">more >></a>
+          <a href="/2016/03/18/JdkObserver/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -1229,84 +1272,6 @@ console.log(s+&quot;::::&quot;+s1);
     </div>
       <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-    </div>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-  
-    <article id="post-SqlScript" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/11/SqlScript/" class="article-date">
-      <time datetime="2016-02-11T15:55:30.000Z" itemprop="datePublished">2016-02-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/11/SqlScript/">一个简单的mysql建库脚本</a>
-    </h1>
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <pre><code>create database springtest;
-use springtest;
-
-drop table if exists  student;
-create table student(
-    id int auto_increment primary key,
-    username varchar(100) not null comment &quot;用户名&quot;,
-    telephone varchar(11) comment &quot;电话号码&quot;,
-    myclassid int comment &quot;所属班级id&quot;
-
-)ENGINE = InnoDB auto_increment=10 charset = utf8;
-
-create table myclass(
-    id int auto_increment primary key,
-    classname varchar(100) not null,
-    headmasterid int
-
-)ENGINE = InnoDB auto_increment=0 charset = utf8;
-
-create table headmaster(
-    id int auto_increment primary key,
-    mastername varchar(100) not null,
-    telephone varchar(11)
-)ENGINE= InnoDB auto_increment=0 charset = utf8;
-
-create table course(
-    id int auto_increment primary key,
-    coursename varchar(100) not null
-
-)ENGINE = InnoDB auto_increment=0 charset = utf8;
-
-create table courseStudent(
-    courseStudentid int,
-    studentid int
-)ENGINE =  InnoDB auto_increment=0 charset = utf8;
-</code></pre>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/sql/">sql</a>
-    </div>
-      <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
     </div>
       
       <div class="clearfix"></div>
